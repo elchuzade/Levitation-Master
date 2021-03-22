@@ -22,8 +22,7 @@ public class Server : MonoBehaviour
     {
         public string playerName;
         public int rank;
-        public int currentLaserIndex;
-        public int currentShipIndex;
+        public int currentBallIndex;
     }
 
     // Video Link
@@ -45,15 +44,15 @@ public class Server : MonoBehaviour
 
     // LOCAL TESTING
     //string abboxAdsApi = "http://localhost:5002";
-    string ballAndWallsApi = "http://localhost:5001/galaxyPirates";
+    string levitationMasterApi = "http://localhost:5001/levitationMaster";
 
     // STAGING
     //string abboxAdsApi = "https://staging.ads.abbox.com";
-    //string ballAndWallsApi = "https://staging.api.abboxgames.com/galaxyPirates";
+    //string levitationMasterApi = "https://staging.api.abboxgames.com/levitationMaster";
 
     // PRODUCTION
     string abboxAdsApi = "https://ads.abbox.com";
-    //string ballAndWallsApi = "https://api.abboxgames.com/galaxyPirates";
+    //string levitationMasterApi = "https://api.abboxgames.com/levitationMaster";
 
     List<LeaderboardItem> top = new List<LeaderboardItem>();
     List<LeaderboardItem> before = new List<LeaderboardItem>();
@@ -61,9 +60,9 @@ public class Server : MonoBehaviour
     LeaderboardItem you = new LeaderboardItem();
 
     // To send response to corresponding files
-    //[SerializeField] MainStatus mainStatus;
+    [SerializeField] MainStatus mainStatus;
     // This is to call the functions in leaderboard scene
-    //[SerializeField] LeaderboardStatus leaderboardStatus;
+    [SerializeField] LeaderboardStatus leaderboardStatus;
 
     Header header = new Header();
 
@@ -78,9 +77,9 @@ public class Server : MonoBehaviour
     // CREATE NEW PLAYER
     public void CreatePlayer(Player player)
     {
-        string playerUrl = ballAndWallsApi + "/player";
+        string playerUrl = levitationMasterApi + "/player";
 
-        string playerDataUrl = ballAndWallsApi + "/data";
+        string playerDataUrl = levitationMasterApi + "/data";
 
         PlayerData playerData = new PlayerData();
         playerData.coins = player.coins;
@@ -116,7 +115,7 @@ public class Server : MonoBehaviour
         webRequest.SetRequestHeader("token", headerMessage);
 
         yield return webRequest.SendWebRequest();
-        if (webRequest.isNetworkError)
+        if (webRequest.result == UnityWebRequest.Result.ConnectionError)
         {
             Debug.Log(webRequest.downloadHandler.text);
             // Set the error received from creating a player
@@ -125,7 +124,7 @@ public class Server : MonoBehaviour
         {
             Debug.Log(webRequest.downloadHandler.text);
             // Make the success actions received from creating a player
-            //mainStatus.CreatePlayerSuccess();
+            mainStatus.CreatePlayerSuccess();
         }
     }
 
@@ -134,7 +133,7 @@ public class Server : MonoBehaviour
     // SAVE PLAYER DATA
     public void SavePlayerData(Player player)
     {
-        string playerDataUrl = ballAndWallsApi + "/data";
+        string playerDataUrl = levitationMasterApi + "/data";
 
         PlayerData playerData = new PlayerData();
         playerData.coins = player.coins;
@@ -168,7 +167,7 @@ public class Server : MonoBehaviour
         webRequest.SetRequestHeader("token", headerMessage);
 
         yield return webRequest.SendWebRequest();
-        //if (webRequest.isNetworkError)
+        //if (webRequest.result == UnityWebRequest.Result.ConnectionError)
         //{
         //    Debug.Log(webRequest.downloadHandler.text);
         //    // Set the error received from creating a player
@@ -199,7 +198,7 @@ public class Server : MonoBehaviour
             // Send request and wait for the desired response.
             yield return webRequest.SendWebRequest();
 
-            if (webRequest.isNetworkError)
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError)
             {
                 Debug.Log(webRequest.downloadHandler.text);
                 // Set the error of video link received from the server
@@ -212,7 +211,7 @@ public class Server : MonoBehaviour
                 VideoJson videoInfo = JsonUtility.FromJson<VideoJson>(webRequest.downloadHandler.text);
 
                 // Set the video link received from the server
-                //mainStatus.SetVideoLinkSuccess(videoInfo);
+                mainStatus.SetVideoLinkSuccess(videoInfo);
             }
         }
     }
@@ -222,7 +221,7 @@ public class Server : MonoBehaviour
     // CHANGE PLAYER NAME
     public void ChangePlayerName(string playerName)
     {
-        string nameUrl = ballAndWallsApi + "/name";
+        string nameUrl = levitationMasterApi + "/name";
 
         PlayerName nameObject = new PlayerName();
         nameObject.playerName = playerName;
@@ -249,17 +248,17 @@ public class Server : MonoBehaviour
 
         yield return webRequest.SendWebRequest();
 
-        if (webRequest.isNetworkError)
+        if (webRequest.result == UnityWebRequest.Result.ConnectionError)
         {
             Debug.Log(webRequest.downloadHandler.text);
             // Set the error received from creating a player
-            //leaderboardStatus.ChangeNameError();
+            leaderboardStatus.ChangeNameError();
         }
         else
         {
             Debug.Log(webRequest.downloadHandler.text);
             // Make the success actions received from creating a player
-            //leaderboardStatus.ChangeNameSuccess();
+            leaderboardStatus.ChangeNameSuccess();
         }
     }
 
@@ -267,13 +266,14 @@ public class Server : MonoBehaviour
     // GET LEADERBOARD LIST
     public void GetLeaderboard()
     {
-        string leaderboardUrl = ballAndWallsApi + "/leaderboard";
+        string leaderboardUrl = levitationMasterApi + "/leaderboard";
         StartCoroutine(LeaderboardCoroutine(leaderboardUrl));
     }
 
     // Get leaderboard data and populate it into the scroll list
     private IEnumerator LeaderboardCoroutine(string url)
     {
+        Debug.Log(url);
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
             string message = JsonUtility.ToJson(header);
@@ -283,7 +283,7 @@ public class Server : MonoBehaviour
             // Send request and wait for the desired response.
             yield return webRequest.SendWebRequest();
 
-            if (webRequest.isNetworkError)
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError)
             {
                 // Set the error of leaderboard data received from the server
                 Debug.Log(webRequest.downloadHandler.text);
@@ -343,7 +343,7 @@ public class Server : MonoBehaviour
         }
 
         // Send leaderboard data to leaderboard scene
-        //leaderboardStatus.SetLeaderboardData(top, before, you, after);
+        leaderboardStatus.SetLeaderboardData(top, before, you, after);
     }
 }
 

@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
     public List<int> allBalls = new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     public int currentBallIndex = 0;
     public int redChestCount = 0;
-    public int purpleChestCount = 0;
-    public int blueChestCount = 0;
+    public int goldChestCount = 0;
+    public int silverChestCount = 0;
 
     void Awake()
     {
@@ -46,11 +46,11 @@ public class Player : MonoBehaviour
         playerCreated = false;
         privacyPolicy = false;
         nameChanged = false;
-        allBalls = new List<int>() { 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0 };
+        allBalls = new List<int>() { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         currentBallIndex = 0;
         redChestCount = 1;
-        purpleChestCount = 1;
-        blueChestCount = 1;
+        goldChestCount = 1;
+        silverChestCount = 1;
 
         SaveSystem.SavePlayer(this);
     }
@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         allBalls = data.allBalls;
         currentBallIndex = data.currentBallIndex;
         redChestCount = data.redChestCount;
-        purpleChestCount = data.purpleChestCount;
-        blueChestCount = data.blueChestCount;
+        goldChestCount = data.goldChestCount;
+        silverChestCount = data.silverChestCount;
     }
 }

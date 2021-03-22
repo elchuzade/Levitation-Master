@@ -14,6 +14,7 @@ public class MainStatus : MonoBehaviour
 
     // To run animation and to show notification sign
     [SerializeField] GameObject chestButton;
+    [SerializeField] GameObject chestNotification;
     [SerializeField] GameObject hapticsButton;
     [SerializeField] GameObject privacyWindow;
     [SerializeField] GameObject quitGameWindow;
@@ -26,16 +27,12 @@ public class MainStatus : MonoBehaviour
         tv = FindObjectOfType<TV>();
 
         hapticsButton = GameObject.Find("HapticsButton");
-
-        //privacyWindow.transform.localScale = new Vector3(1, 1, 1);
-        //quitGameWindow.transform.localScale = new Vector3(1, 1, 1);
-        //quitGameWindow.SetActive(false);
     }
 
     void Start()
     {
         player = FindObjectOfType<Player>();
-        player.ResetPlayer();
+        //player.ResetPlayer();
         player.LoadPlayer();
 
         server.GetVideoLink();
@@ -87,23 +84,16 @@ public class MainStatus : MonoBehaviour
         tv.SetAdButton(response.website);
     }
 
-    // Set error actions of video link from server file
-    public void SetVideoLinkError(string response)
-    {
-        tv.SetLightsRed();
-    }
-
     private void SetChestButton()
     {
-        if (player.redChestCount > 0 || player.purpleChestCount > 0 || player.blueChestCount > 0)
+        if (player.redChestCount > 0 || player.goldChestCount > 0 || player.silverChestCount > 0)
         {
-            chestButton.transform.Find("ChestNotification").gameObject.SetActive(true);
-            chestButton.transform.Find("ChestNotification").transform.SetParent(transform.parent);
+            chestNotification.SetActive(true);
             chestButton.GetComponent<Animator>().Play("ChestShake");
         }
         else
         {
-            chestButton.transform.Find("ChestNotification").gameObject.SetActive(false);
+            chestNotification.SetActive(false);
             chestButton.GetComponent<Animator>().enabled = false;
         }
     }
