@@ -32,7 +32,7 @@ public class MainStatus : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<Player>();
-        //player.ResetPlayer();
+        player.ResetPlayer();
         player.LoadPlayer();
 
         server.GetVideoLink();
@@ -53,6 +53,7 @@ public class MainStatus : MonoBehaviour
         }
         else
         {
+            privacyWindow.SetActive(true);
             leaderboardButton.GetComponent<Button>().onClick.AddListener(() => ShowPrivacyPolicy());
             leaderboardButton.GetComponent<Image>().color = new Color32(255, 197, 158, 100);
         }
