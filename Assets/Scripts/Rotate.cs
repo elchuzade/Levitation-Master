@@ -19,8 +19,8 @@ public class Rotate : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.Rotate(Vector3.up, rotateSpeed * angularDirection * Time.deltaTime);
+        transform.Rotate(Vector3.up, rotateSpeed * angularDirection * Time.fixedDeltaTime);
     }
 }

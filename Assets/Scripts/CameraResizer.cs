@@ -5,6 +5,8 @@ public class CameraResizer : MonoBehaviour
 {
     [SerializeField] GameObject canvas;
 
+    bool levelComplete;
+
     void Start()
     {
         //Camera.main.orthographicSize = Screen.height / 2;
@@ -24,5 +26,24 @@ public class CameraResizer : MonoBehaviour
         {
             canvas.GetComponent<CanvasScaler>().matchWidthOrHeight = 1;
         }
+    }
+
+    void Update()
+    {
+        if (levelComplete && Camera.main.fieldOfView > 45)
+        {
+            // Zoom in the camera from 102 to 45 degrees so the ball is close enough
+            Camera.main.fieldOfView--;
+        }
+    }
+
+    public void CameraFollowBall()
+    {
+        GameObject ball = FindObjectOfType<Ball>().gameObject;
+
+        // Set the camera focus to the ball
+        Camera.main.transform.LookAt(ball.transform);
+        levelComplete = true;
+        transform.SetParent(ball.transform);
     }
 }

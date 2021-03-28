@@ -6,7 +6,11 @@ public class GlobalVariables : MonoBehaviour
 
     public enum ChestColors { None, Red, Gold, Silver }
 
-    public enum Rewards { Diamond, Coin }
+    public enum Rewards { Diamond, Coin, RedKey, SilverKey, GoldKey }
 
     public enum Currency { Diamond, Coin }
+
+    public enum Boxes { Lightning, Shield, Diamond, Coin, Question }
+
+    public enum Buff { Lightning, Shield };
 }
