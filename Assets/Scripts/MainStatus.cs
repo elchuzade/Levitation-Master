@@ -11,6 +11,7 @@ public class MainStatus : MonoBehaviour
 
     [SerializeField] Text diamondsText;
     [SerializeField] Text coinsText;
+    [SerializeField] Text levelText;
 
     // To run animation and to show notification sign
     [SerializeField] GameObject chestButton;
@@ -103,6 +104,7 @@ public class MainStatus : MonoBehaviour
     {
         diamondsText.text = player.diamonds.ToString();
         coinsText.text = player.coins.ToString();
+        levelText.text = player.nextLevelIndex.ToString();
     }
 
     public void ClickPlayButton()
