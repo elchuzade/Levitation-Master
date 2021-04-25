@@ -7,9 +7,12 @@ public class ChestUnlock : MonoBehaviour
     [SerializeField] GameObject lockClosed;
     [SerializeField] GameObject lockOpened;
 
+    [SerializeField] GameObject chestOpenParticles;
+    //[SerializeField] GameObject chestOpenRays;
+
     void Start()
     {
-        //StartUnlocking();
+        StartUnlocking();
     }
 
     public void StartUnlocking()
@@ -24,5 +27,8 @@ public class ChestUnlock : MonoBehaviour
 
         chestClosed.SetActive(false);
         chestOpened.SetActive(true);
+
+        //chestOpenRays.SetActive(true);
+        chestOpenParticles.SetActive(true);
     }
 }

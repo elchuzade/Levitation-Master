@@ -124,6 +124,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &253911294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 267824328, guid: ad7860902f9c44eacb32b304d5975ae1,
+    type: 3}
+  m_PrefabInstance: {fileID: 936765333}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &640799598
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,11 +296,44 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 267824328, guid: ad7860902f9c44eacb32b304d5975ae1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 267824331, guid: ad7860902f9c44eacb32b304d5975ae1, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 987169800451999433, guid: ad7860902f9c44eacb32b304d5975ae1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342151905268547849, guid: ad7860902f9c44eacb32b304d5975ae1,
+        type: 3}
+      propertyPath: chestOpenParticles
+      value: 
+      objectReference: {fileID: 253911294}
+    - target: {fileID: 2845372410463394087, guid: ad7860902f9c44eacb32b304d5975ae1,
+        type: 3}
+      propertyPath: chestOpenParticles
+      value: 
+      objectReference: {fileID: 253911294}
+    - target: {fileID: 3050635912922038779, guid: ad7860902f9c44eacb32b304d5975ae1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3901225260900169243, guid: ad7860902f9c44eacb32b304d5975ae1,
         type: 3}
       propertyPath: m_Name
       value: ChestsCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3901225260900169246, guid: ad7860902f9c44eacb32b304d5975ae1,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 3901225260900169247, guid: ad7860902f9c44eacb32b304d5975ae1,
         type: 3}
       propertyPath: m_Pivot.x
@@ -400,6 +439,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4283575077268867851, guid: ad7860902f9c44eacb32b304d5975ae1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6537366324913934258, guid: ad7860902f9c44eacb32b304d5975ae1,
+        type: 3}
+      propertyPath: chestOpenParticles
+      value: 
+      objectReference: {fileID: 253911294}
+    - target: {fileID: 6700584102745697566, guid: ad7860902f9c44eacb32b304d5975ae1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886233764622851566, guid: ad7860902f9c44eacb32b304d5975ae1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8161914256329580043, guid: ad7860902f9c44eacb32b304d5975ae1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237610262470306518, guid: ad7860902f9c44eacb32b304d5975ae1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad7860902f9c44eacb32b304d5975ae1, type: 3}
 --- !u!1 &963194225
@@ -454,7 +523,7 @@ Camera:
     height: 1334
   near clip plane: 0.3
   far clip plane: 5000
-  field of view: 90
+  field of view: 15
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -479,13 +548,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 375, y: 1000, z: -10}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 375, y: 667, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
