@@ -41,6 +41,7 @@ public class ChestsStatus : MonoBehaviour
         SelectSilverChest();
     }
 
+    #region Private Methods
     private void SetScoreboardValues()
     {
         diamondsText.text = player.diamonds.ToString();
@@ -65,6 +66,46 @@ public class ChestsStatus : MonoBehaviour
         redChest.transform.Find("OpenButton").gameObject.SetActive(false);
         goldChest.transform.Find("OpenButton").gameObject.SetActive(false);
         silverChest.transform.Find("OpenButton").gameObject.SetActive(false);
+    }
+
+    private void DeselectChest(ChestColors chestColor)
+    {
+        switch (chestColor)
+        {
+            case ChestColors.Red:
+                redChest.GetComponent<ChestItem>().DeselectChest();
+                break;
+            case ChestColors.Gold:
+                goldChest.GetComponent<ChestItem>().DeselectChest();
+                break;
+            case ChestColors.Silver:
+                silverChest.GetComponent<ChestItem>().DeselectChest();
+                break;
+        }
+    }
+
+    private void SetChestColorInChestOpenView()
+    {
+        switch (selectedChestColor)
+        {
+            case ChestColors.Red:
+                chestOpenWindow.transform.Find("RedChest").gameObject.SetActive(true);
+                break;
+            case ChestColors.Gold:
+                chestOpenWindow.transform.Find("GoldChest").gameObject.SetActive(true);
+                break;
+            case ChestColors.Silver:
+            default:
+                chestOpenWindow.transform.Find("SilverChest").gameObject.SetActive(true);
+                break;
+        }
+    }
+    #endregion
+
+    #region Public Methods
+    public void GiveChestPrize()
+    {
+
     }
 
     public void SelectSilverChest()
@@ -134,22 +175,6 @@ public class ChestsStatus : MonoBehaviour
         }
     }
 
-    private void DeselectChest(ChestColors chestColor)
-    {
-        switch (chestColor)
-        {
-            case ChestColors.Red:
-                redChest.GetComponent<ChestItem>().DeselectChest();
-                break;
-            case ChestColors.Gold:
-                goldChest.GetComponent<ChestItem>().DeselectChest();
-                break;
-            case ChestColors.Silver:
-                silverChest.GetComponent<ChestItem>().DeselectChest();
-                break;
-        }
-    }
-
     public void ClickWatchButton()
     {
         Debug.Log("watching ad, then running these functions");
@@ -206,25 +231,9 @@ public class ChestsStatus : MonoBehaviour
         SetPlayerChests();
     }
 
-    private void SetChestColorInChestOpenView()
-    {
-        switch (selectedChestColor)
-        {
-            case ChestColors.Red:
-                chestOpenWindow.transform.Find("RedChest").gameObject.SetActive(true);
-                break;
-            case ChestColors.Gold:
-                chestOpenWindow.transform.Find("GoldChest").gameObject.SetActive(true);
-                break;
-            case ChestColors.Silver:
-            default:
-                chestOpenWindow.transform.Find("SilverChest").gameObject.SetActive(true);
-                break;
-        }
-    }
-
     public void ClickBackButton()
     {
         navigator.LoadMainScene();
     }
+    #endregion
 }

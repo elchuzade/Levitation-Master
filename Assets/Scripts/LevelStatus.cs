@@ -7,6 +7,8 @@ public class LevelStatus : MonoBehaviour
     Player player;
     Navigator navigator;
 
+    [SerializeField] Text levelText;
+
     [SerializeField] GameObject coinPrefab;
     [SerializeField] GameObject diamondPrefab;
 
@@ -47,6 +49,7 @@ public class LevelStatus : MonoBehaviour
         player.LoadPlayer();
 
         SetScoreboardValues();
+        levelText.text = player.nextLevelIndex.ToString();
     }
 
     private void SetScoreboardValues()
