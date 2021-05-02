@@ -971,7 +971,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 1
+    enabled: 0
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -4835,7 +4835,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3084560828635949912}
   - component: {fileID: 2890458129496985508}
-  - component: {fileID: 3118934036215434272}
   - component: {fileID: 2889870964680687150}
   m_Layer: 0
   m_Name: Stars
@@ -9586,18 +9585,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &3118934036215434272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3088341675000017230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 199e3c49ebcb3fe46997b10cf6a8eb52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!199 &2889870964680687150
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -9691,7 +9678,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3088640186708072394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 375, y: 907, z: 600}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 400, y: 400, z: 400}
   m_Children:
   - {fileID: 4884976585380959869}
@@ -9707,7 +9694,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3088640186708072394}
   serializedVersion: 7
-  lengthInSec: 2
+  lengthInSec: 10000
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 1
@@ -9782,7 +9769,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.2
+      scalar: 100000
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -9951,7 +9938,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.6
       minScalar: 0.8
       maxCurve:
         serializedVersion: 2
@@ -14569,7 +14556,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4884976585380959869}
   - component: {fileID: 4884976585380959870}
-  - component: {fileID: 4884976585380959871}
   - component: {fileID: 4884976585380959868}
   m_Layer: 0
   m_Name: RaisingTail
@@ -14783,7 +14769,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.15566039, g: 1, b: 0.28637397, a: 1}
-      maxColor: {r: 0.2712264, g: 0.46703592, b: 0.5, a: 0.2509804}
+      maxColor: {r: 0.27140442, g: 0.35380405, b: 0.5377358, a: 0.2509804}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19311,18 +19297,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &4884976585380959871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4884976585380959866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 199e3c49ebcb3fe46997b10cf6a8eb52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!199 &4884976585380959868
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -19610,8 +19584,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      minColor: {r: 0.14618193, g: 0.27870023, b: 0.6886792, a: 1}
+      maxColor: {r: 0.6452474, g: 0.7180776, b: 0.9433962, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

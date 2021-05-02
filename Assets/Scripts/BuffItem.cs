@@ -53,11 +53,13 @@ public class BuffItem : MonoBehaviour
         }
     }
 
+    // @access from LevelStatus script
     public Buff GetBuff()
     {
         return buff;
     }
 
+    // @access from LevelStatus script
     public void ResetBuff()
     {
         fill.transform.position = fillMoveInitPos;

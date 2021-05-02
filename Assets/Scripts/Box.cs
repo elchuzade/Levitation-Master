@@ -9,7 +9,7 @@ public class Box : MonoBehaviour
     [SerializeField] int minDropCount;
     [SerializeField] int maxDropCount;
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Ball")
         {

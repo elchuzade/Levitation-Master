@@ -18,6 +18,7 @@ public class Collectable : MonoBehaviour
     // In case the item is dropped from the box
     private Vector3 dropPosition;
 
+    #region Unity methods
     void Awake()
     {
         levelStatus = FindObjectOfType<LevelStatus>();
@@ -35,26 +36,7 @@ public class Collectable : MonoBehaviour
         }
     }
 
-    private void MoveToDropPosition()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, dropPosition, dropSpeed * Time.deltaTime);
-
-        if (transform.position == dropPosition)
-        {
-            moveToCollectPosition = true;
-
-            StartCoroutine(DestroyItem());
-        }
-    }
-
-    // @access from box script when it is opened by a ball
-    public void SetDropPosition(Vector3 pos)
-    {
-        dropPosition = pos;
-        moveToDropPosition = true;
-    }
-
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Ball")
         {
@@ -65,11 +47,37 @@ public class Collectable : MonoBehaviour
             StartCoroutine(DestroyItem());
         }
     }
+    #endregion
 
-    private IEnumerator DestroyItem()
+    #region Private methods
+    void MoveToDropPosition()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, dropPosition, dropSpeed * Time.deltaTime);
+
+        if (transform.position == dropPosition)
+        {
+            moveToCollectPosition = true;
+
+            StartCoroutine(DestroyItem());
+        }
+    }
+    #endregion
+
+    #region Public methods
+    // @access from box script when it is opened by a ball
+    public void SetDropPosition(Vector3 pos)
+    {
+        dropPosition = pos;
+        moveToDropPosition = true;
+    }
+    #endregion
+
+    #region Coroutine
+    IEnumerator DestroyItem()
     {
         yield return new WaitForSeconds(3);
 
         Destroy(transform.gameObject);
     }
+    #endregion
 }

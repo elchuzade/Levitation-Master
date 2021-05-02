@@ -8,7 +8,7 @@ public class Platform : MonoBehaviour
 
     [SerializeField] GameObject items;
 
-    public void FixedUpdate()
+    void FixedUpdate()
     {
         // Rotate the platform based on the joystick
         rb.AddTorque(transform.forward * variableJoystick.Horizontal * -speed * Time.fixedDeltaTime * 10000);

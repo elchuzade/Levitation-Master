@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 185996882469284084}
   - component: {fileID: 24805131122647782}
   - component: {fileID: 26577055126636498}
-  - component: {fileID: 220623563559086152}
   m_Layer: 0
   m_Name: Flares
   m_TagString: Untagged
@@ -972,7 +971,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 1
+    enabled: 0
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -4826,18 +4825,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &220623563559086152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 188076849309163494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 199e3c49ebcb3fe46997b10cf6a8eb52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &188802209453415710
 GameObject:
   m_ObjectHideFlags: 0
@@ -4864,7 +4851,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188802209453415710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 375, y: 907, z: 600}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 200, y: 200, z: 200}
   m_Children:
   - {fileID: 7491349270140007047}
@@ -9724,7 +9711,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7491349270140007047}
   - component: {fileID: 7491349270140007042}
-  - component: {fileID: 7491349270140007041}
   - component: {fileID: 7491349270140007040}
   m_Layer: 0
   m_Name: RaisingTail
@@ -14466,18 +14452,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &7491349270140007041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7491349270140007046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 199e3c49ebcb3fe46997b10cf6a8eb52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!199 &7491349270140007040
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -14765,8 +14739,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      minColor: {r: 0.3679245, g: 0.25172308, b: 0.09545212, a: 1}
+      maxColor: {r: 0.6603774, g: 0.5448022, b: 0.38937345, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

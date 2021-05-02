@@ -4893,7 +4893,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1212121683291362476}
   - component: {fileID: 1305349929790320862}
-  - component: {fileID: 1244542423936389966}
   - component: {fileID: 1304225397500475164}
   m_Layer: 0
   m_Name: RaisingTail
@@ -9635,18 +9634,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &1244542423936389966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1213917436013140686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 199e3c49ebcb3fe46997b10cf6a8eb52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!199 &1304225397500475164
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -24195,7 +24182,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215528645272933824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 375, y: 867, z: 600}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 200, y: 200, z: 200}
   m_Children:
   - {fileID: 1212121683291362476}

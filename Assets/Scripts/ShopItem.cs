@@ -13,7 +13,9 @@ public class ShopItem : MonoBehaviour
     [SerializeField] Text priceText;
     [SerializeField] GameObject diamondIcon;
     [SerializeField] GameObject coinIcon;
-    [SerializeField] GameObject select;
+    [SerializeField] GameObject selectedText;
+    [SerializeField] GameObject selectButton;
+    [SerializeField] GameObject unlockButton;
 
     void Start()
     {
@@ -25,30 +27,51 @@ public class ShopItem : MonoBehaviour
             coinIcon.SetActive(false);
         }
         priceText.text = price.ToString();
+        selectedText.SetActive(false);
+        selectButton.SetActive(false);
     }
 
+    #region Public Methods
+    // @access from ShopStatus
     public void SelectItem()
     {
-        select.SetActive(true);
+        selectedText.SetActive(true);
+        selectButton.SetActive(false);
+        unlockButton.SetActive(false);
     }
 
-    public void BuyItem()
+    // @access from ShopStatus
+    public void UnlockItem()
     {
+        selectedText.SetActive(false);
+        selectButton.SetActive(true);
         priceTag.SetActive(false);
+        unlockButton.SetActive(false);
     }
 
+    // @access from ShopStatus
     public void DeselectItem()
     {
-        select.SetActive(false);
+        selectedText.SetActive(false);
+        selectButton.SetActive(true);
     }
 
+    // @access from ShopStatus
     public Currency GetCurrency()
     {
         return currency;
     }
 
+    // @access from ShopStatus
     public int GetPrice()
     {
         return price;
     }
+
+    // @access from ShopStatus
+    public int GetIndex()
+    {
+        return index;
+    }
+    #endregion
 }

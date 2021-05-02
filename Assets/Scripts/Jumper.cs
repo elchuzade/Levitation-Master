@@ -3,6 +3,7 @@ using UnityEngine;
 public class Jumper : MonoBehaviour
 {
     LevelStatus levelStatus;
+    DirectionArrow directionArrow;
 
     [SerializeField] Transform ballJumpPosition;
 
@@ -12,14 +13,11 @@ public class Jumper : MonoBehaviour
     bool levelComplete;
     int jumperPullSpeed = 200;
 
+    #region Unity Methods
     void Awake()
     {
         levelStatus = FindObjectOfType<LevelStatus>();
-    }
-
-    void Start()
-    {
-        
+        directionArrow = FindObjectOfType<DirectionArrow>();
     }
 
     void Update()
@@ -31,15 +29,17 @@ public class Jumper : MonoBehaviour
             // Got to the center of the jumper, just push up and complete the level
             if (ball.transform.position == ballJumpPosition.position)
             {
-                GetComponent<TriggerAnimation>().Trigger();
+                GetComponent<AnimationTrigger>().Trigger("Start");
                 levelStatus.CompleteLevel();
-                levelComplete = false;
                 ball.GetComponent<Ball>().PushBallUp();
+                directionArrow.gameObject.SetActive(false);
+
+                levelComplete = false;
             }
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Ball")
         {
@@ -48,4 +48,5 @@ public class Jumper : MonoBehaviour
             other.GetComponent<Ball>().StopMovements();
         }
     }
+    #endregion
 }

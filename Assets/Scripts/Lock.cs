@@ -12,6 +12,7 @@ public class Lock : MonoBehaviour
         
     }
 
+    // @access from ChestWindow canvas
     public void OpenLock()
     {
         transform.parent.GetComponent<ChestUnlock>().OpenLock();

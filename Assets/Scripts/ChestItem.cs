@@ -25,7 +25,8 @@ public class ChestItem : MonoBehaviour
         BuildAllRewards();
     }
 
-    private void BuildAllRewards()
+    #region Private Methods
+    void BuildAllRewards()
     {
         // Add all the possible rewards into the basket of all rewards
         for (int i = 0; i < diamondChance; i++)
@@ -37,11 +38,13 @@ public class ChestItem : MonoBehaviour
             allRewards.Add(Rewards.Coin);
         }
     }
+    #endregion
 
+    #region Public Methods
     // @access from ChestsStatus
     public void DeselectChest()
     {
-        transform.Find("ChestSelect").GetComponent<TriggerAnimation>().TriggerSpecificAnimation("Deselect");
+        transform.Find("ChestSelect").GetComponent<AnimationTrigger>().Trigger("Deselect");
     }
 
     // @access from ChestsStatus
@@ -85,4 +88,5 @@ public class ChestItem : MonoBehaviour
         }
         return result;
     }
+    #endregion
 }

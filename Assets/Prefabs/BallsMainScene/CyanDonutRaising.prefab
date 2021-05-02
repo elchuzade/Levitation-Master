@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3545165586502232677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 375, y: 907, z: 600}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 200, y: 200, z: 200}
   m_Children:
   - {fileID: 1733982651956989789}
@@ -4909,7 +4909,6 @@ GameObject:
   - component: {fileID: 3540137899664301063}
   - component: {fileID: 3742598189477251865}
   - component: {fileID: 3743107828923931059}
-  - component: {fileID: 3505153094241122755}
   m_Layer: 0
   m_Name: Sparks
   m_TagString: Untagged
@@ -9724,18 +9723,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &3505153094241122755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3545917909777876881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 199e3c49ebcb3fe46997b10cf6a8eb52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3546020993577550243
 GameObject:
   m_ObjectHideFlags: 0
@@ -9763,7 +9750,7 @@ Transform:
   m_GameObject: {fileID: 3546020993577550243}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3548488369374825949}
   m_RootOrder: 3
@@ -14637,7 +14624,7 @@ Transform:
   m_GameObject: {fileID: 3546109064547297953}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3548488369374825949}
   m_RootOrder: 1
@@ -19511,7 +19498,7 @@ Transform:
   m_GameObject: {fileID: 3546551838441760233}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.1999999, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3548488369374825949}
   m_RootOrder: 2
@@ -24579,8 +24566,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      minColor: {r: 0.23380208, g: 0.6886315, b: 0.6981132, a: 1}
+      maxColor: {r: 0.4764151, g: 0.98963916, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -29184,7 +29171,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1733982651956989789}
   - component: {fileID: 4232478874358962050}
-  - component: {fileID: 848943520460048225}
   - component: {fileID: 1714977798016542852}
   m_Layer: 0
   m_Name: RaisingTail
@@ -33926,18 +33912,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &848943520460048225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8459977728025933013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 199e3c49ebcb3fe46997b10cf6a8eb52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!199 &1714977798016542852
 ParticleSystemRenderer:
   serializedVersion: 6

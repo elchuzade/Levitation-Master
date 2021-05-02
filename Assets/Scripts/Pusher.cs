@@ -17,7 +17,7 @@ public class Pusher : MonoBehaviour
         directionVector = (pusherTip.transform.position - transform.position).normalized * pushSpeed;
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Ball")
         {
@@ -25,7 +25,7 @@ public class Pusher : MonoBehaviour
         }
     }
 
-    private IEnumerator PushBallCoroutine(GameObject ball)
+    IEnumerator PushBallCoroutine(GameObject ball)
     {
         yield return new WaitForSeconds(0.5f);
 

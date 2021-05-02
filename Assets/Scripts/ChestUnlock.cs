@@ -22,11 +22,14 @@ public class ChestUnlock : MonoBehaviour
         StartUnlocking();
     }
 
+    #region Public Methods
+    // @access from ChestUnlockWindow canvas
     public void StartUnlocking()
     {
-        lockClosed.GetComponent<TriggerAnimation>().Trigger();
+        lockClosed.GetComponent<AnimationTrigger>().Trigger("Start");
     }
 
+    // @access from ChestUnlockWindow canvas at the end of animation
     public void OpenLock()
     {
         lockClosed.SetActive(false);
@@ -39,4 +42,5 @@ public class ChestUnlock : MonoBehaviour
         chestOpenParticles.SetActive(true);
         chestsStatus.GiveChestPrize();
     }
+    #endregion
 }
