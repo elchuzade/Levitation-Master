@@ -57,6 +57,7 @@ public class Collectable : MonoBehaviour
         if (transform.position == dropPosition)
         {
             moveToCollectPosition = true;
+            levelStatus.CollectReward(reward);
 
             StartCoroutine(DestroyItem());
         }
@@ -77,7 +78,7 @@ public class Collectable : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
 
-        Destroy(transform.gameObject);
+        Destroy(gameObject);
     }
     #endregion
 }

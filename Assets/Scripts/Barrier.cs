@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class Barrier : MonoBehaviour
 {
+    [SerializeField] GameObject barrierDestroyParticles;
+    [SerializeField] GameObject components;
+    [SerializeField] BoxCollider col;
+
     void OnTriggerEnter(Collider other)
     {
 
@@ -21,6 +25,10 @@ public class Barrier : MonoBehaviour
     public void AttemptDestroyProcess()
     {
         // Add barrier destroy particles
-        Destroy(gameObject);
+        barrierDestroyParticles.SetActive(true);
+        components.SetActive(false);
+        col.enabled = false;
+
+        Destroy(gameObject, 1);
     }
 }

@@ -24,9 +24,13 @@ public class LevelStatus : MonoBehaviour
     Ball ball;
 
     [SerializeField] Text coinsCount;
+    [SerializeField] Text subCoinsCount;
     [SerializeField] Text diamondsCount;
+    [SerializeField] Text subDiamondsCount;
+
     [SerializeField] GameObject coinsIcon;
     [SerializeField] GameObject diamondsIcon;
+
     [SerializeField] GameObject redKeyItem;
     [SerializeField] GameObject goldKeyItem;
     [SerializeField] GameObject silverKeyItem;
@@ -36,6 +40,10 @@ public class LevelStatus : MonoBehaviour
 
     [SerializeField] GameObject shootingButton;
     [SerializeField] GameObject bulletPrefab;
+
+    [SerializeField] GameObject doubleRewardWindow;
+    [SerializeField] GameObject doubleRewardButton;
+    [SerializeField] GameObject levelControlsWindow;
 
     int coins;
     int diamonds;
@@ -62,8 +70,23 @@ public class LevelStatus : MonoBehaviour
     #region Private Methods
     void SetScoreboardValues()
     {
-        coinsCount.text = (player.coins + coins).ToString();
-        diamondsCount.text = (player.diamonds + diamonds).ToString();
+        coinsCount.text = player.coins.ToString();
+        diamondsCount.text = player.diamonds.ToString();
+
+        if (coins > 0)
+        {
+            subCoinsCount.text = "+" + coins.ToString();
+        } else
+        {
+            subCoinsCount.text = "";
+        }
+        if (diamonds > 0)
+        {
+            subDiamondsCount.text = "+" + diamonds.ToString();
+        } else
+        {
+            subDiamondsCount.text = "";
+        }
     }
 
     void ResetBuff(Buff buff)
@@ -84,6 +107,8 @@ public class LevelStatus : MonoBehaviour
     public void SetNextLevelMeter()
     {
         levelText.text = (player.nextLevelIndex + 1).ToString();
+        levelControlsWindow.SetActive(false);
+        doubleRewardWindow.SetActive(true);
     }
 
     // @access from Collectable script
@@ -119,15 +144,15 @@ public class LevelStatus : MonoBehaviour
     }
 
     // @access from Box script
-    public void OpenBox(Boxes box, int amount)
+    public void OpenBox(Boxes box, int amount, Vector3 position)
     {
         switch (box)
         {
             case Boxes.Coin:
-                DropCoins(amount, transform.position);
+                DropCoins(amount, position);
                 break;
             case Boxes.Diamond:
-                DropDiamonds(amount, transform.position);
+                DropDiamonds(amount, position);
                 break;
             case Boxes.Shield:
                 if (ball.GetShield())
@@ -158,7 +183,7 @@ public class LevelStatus : MonoBehaviour
                 }
                 break;
             case Boxes.Question:
-                OpenBox((Boxes)Random.Range(0, 4), amount);
+                OpenBox((Boxes)Random.Range(0, 4), amount, position);
                 break;
         }
     }
@@ -236,6 +261,32 @@ public class LevelStatus : MonoBehaviour
         bulletInstance.transform.SetParent(platformItems.transform);
 
         shootingButton.GetComponent<AnimationTrigger>().Trigger("Start");
+    }
+
+    // @access from Level canvas
+    public void ClickDoubleRewardButton()
+    {
+        coins *= 2;
+        diamonds *= 2;
+
+        doubleRewardButton.GetComponent<AnimationTrigger>().Trigger("Start");
+        doubleRewardButton.GetComponent<Button>().interactable = false;
+
+        subCoinsCount.gameObject.GetComponent<AnimationTrigger>().Trigger("Start");
+        subDiamondsCount.gameObject.GetComponent<AnimationTrigger>().Trigger("Start");
+
+        SetScoreboardValues();
+    }
+
+    // @access from Level canvas
+    public void ClickNextLevelButton()
+    {
+        player.coins += coins;
+        player.diamonds += diamonds;
+
+        player.SavePlayer();
+
+        LoadNextLevel();
     }
     #endregion
 

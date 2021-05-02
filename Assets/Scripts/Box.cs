@@ -16,7 +16,7 @@ public class Box : MonoBehaviour
             LevelStatus levelStatus = FindObjectOfType<LevelStatus>();
 
             int amount = Random.Range(minDropCount, maxDropCount + 1);
-            levelStatus.OpenBox(box, amount);
+            levelStatus.OpenBox(box, amount, transform.position);
 
             Destroy(transform.parent.gameObject);
         }

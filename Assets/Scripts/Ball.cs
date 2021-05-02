@@ -224,7 +224,7 @@ public class Ball : MonoBehaviour
 
     IEnumerator LoadNextLevel()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1000);
 
         // Load next leve only in LevelStatus to keep player data consistent
         levelStatus.LoadNextLevel();

@@ -75,10 +75,6 @@ public class Trap : MonoBehaviour
                 {
                     ball.GetComponent<Ball>().AttemptTrapBall();
                 }
-                if (explosionArea.IsBallDetected())
-                {
-                    ball.GetComponent<Ball>().AttemptTrapBall();
-                }
                 AttemptDestroyProcess();
                 other.gameObject.GetComponent<Ball>().AttemptTrapBall();
             }
