@@ -9,6 +9,8 @@ public class Ball : MonoBehaviour
     LevelStatus levelStatus;
 
     DirectionArrow directionArrow;
+    [SerializeField] GameObject platformItems;
+
     [SerializeField] ExplosionArea explosionArea;
     [SerializeField] VariableJoystick variableJoystick;
     [SerializeField] Rigidbody rb;
@@ -17,11 +19,17 @@ public class Ball : MonoBehaviour
     [SerializeField] GameObject platform;
     [SerializeField] GameObject ballDestroy;
 
+    [SerializeField] GameObject lightningSkill;
+    [SerializeField] GameObject shieldSkill;
+    [SerializeField] GameObject bulletSkillPrefab;
+    [SerializeField] GameObject shieldButton;
+
     [SerializeField] float speed;
 
     int lightningFactor = 1;
-    bool shield;
-    bool lightning;
+    bool shieldBuff;
+    bool shieldSkillStatus;
+    bool lightningBuff;
 
     bool followDirection;
 
@@ -87,15 +95,25 @@ public class Ball : MonoBehaviour
     }
 
     #region Private Methods
+    void DestroyShieldSkill()
+    {
+        shieldSkillStatus = false;
+        shieldSkill.SetActive(false);
+        shieldButton.GetComponent<Skill>().ReloadSkill();
+    }
     #endregion
 
     #region Public Methods
     // @access from trap or enemy
     public void AttemptTrapBall()
     {
-        if (shield)
+        if (shieldBuff)
         {
             DestroyBuff(Buff.Shield);
+        }
+        else if (shieldSkillStatus)
+        {
+            DestroyShieldSkill();
         }
         else
         {
@@ -134,13 +152,13 @@ public class Ball : MonoBehaviour
     // @access from levelStatus to see if there is a need to make a new one
     public bool GetLightning()
     {
-        return lightning;
+        return lightningBuff;
     }
 
     // @access from levelStatus to see if there is a need to make a new one
     public bool GetShield()
     {
-        return shield;
+        return shieldBuff;
     }
 
     // @access from level status when the ball enters a box
@@ -149,11 +167,11 @@ public class Ball : MonoBehaviour
         switch (buff)
         {
             case Buff.Shield:
-                shield = true;
+                shieldBuff = true;
                 transform.Find("Buffs").Find("ShieldBuff").gameObject.SetActive(true);
                 break;
             case Buff.Lightning:
-                lightning = true;
+                lightningBuff = true;
                 lightningFactor = 2;
                 transform.Find("Buffs").Find("LightningBuff").gameObject.SetActive(true);
                 break;
@@ -161,17 +179,17 @@ public class Ball : MonoBehaviour
     }
 
     // @access from buff item in the canvas when time runs out
-    // @access from ball killing item when ball touches it (eg step on a bomb - remove shield)
+    // @access from ball killing item when ball touches it (eg step on a bomb - remove shieldBuff)
     public void DestroyBuff(Buff buff)
     {
         switch (buff)
         {
             case Buff.Shield:
-                shield = false;
+                shieldBuff = false;
                 transform.Find("Buffs").Find("ShieldBuff").gameObject.SetActive(false);
                 break;
             case Buff.Lightning:
-                lightning = false;
+                lightningBuff = false;
                 lightningFactor = 1;
                 transform.Find("Buffs").Find("LightningBuff").gameObject.SetActive(false);
                 break;
@@ -179,32 +197,65 @@ public class Ball : MonoBehaviour
     }
 
     // @access from LevelStatus script
-    public void StrikeLighting()
+    public void UseLightingSkill()
     {
+        // Strike lightning effect on the ball
+        lightningSkill.SetActive(true);
+
         List<GameObject> allEnemies = explosionArea.GetAllDetectedEnemies();
         for (int i = 0; i < allEnemies.Count; i++)
         {
-            allEnemies[i].GetComponent<Enemy>().DestroyEnemy();
+            if (allEnemies[i] != null)
+            {
+                allEnemies[i].GetComponent<Enemy>().DestroyEnemy();
+            }
         }
         explosionArea.ClearAllDetectedEnemies();
 
         List<GameObject> allTraps = explosionArea.GetAllDetectedTraps();
         for (int i = 0; i < allTraps.Count; i++)
         {
-            allTraps[i].GetComponent<Trap>().DestroyTrap();
+            if (allTraps[i] != null)
+            {
+                allTraps[i].GetComponent<Trap>().DestroyTrap();
+            }
         }
         explosionArea.ClearAllDetectedTraps();
 
         List<GameObject> allBarriers = explosionArea.GetAllDetectedBarriers();
         for (int i = 0; i < allBarriers.Count; i++)
         {
-            allBarriers[i].GetComponent<Barrier>().AttemptDestroyProcess();
+            if (allBarriers[i] != null)
+            {
+                allBarriers[i].GetComponent<Barrier>().AttemptDestroyProcess();
+            }
         }
         explosionArea.ClearAllDetectedBarriers();
+        StartCoroutine(StopLightningSkill());
+    }
+
+    // @access from LevelStatus script
+    public void UseShieldSkill()
+    {
+        shieldSkillStatus = true;
+        shieldSkill.SetActive(true);
+    }
+
+    // @access from LevelStatus script
+    public void UseBulletSkill()
+    {
+        GameObject bulletInstance = Instantiate(bulletSkillPrefab, transform.position, Quaternion.identity);
+        bulletInstance.transform.SetParent(platformItems.transform);
     }
     #endregion
 
     #region Coroutine
+    IEnumerator StopLightningSkill()
+    {
+        yield return new WaitForSeconds(0.5f);
+        lightningSkill.SetActive(false);
+    }
+
     IEnumerator StartTrackingBall()
     {
         yield return new WaitForSeconds(3);

@@ -16,6 +16,9 @@ public class PlayerData
     public int redChestCount = 0;
     public int goldChestCount = 0;
     public int silverChestCount = 0;
+    public int bulletCount = 0;
+    public int lightningCount = 0;
+    public int shieldCount = 0;
 
     public PlayerData (Player player)
     {
@@ -31,5 +34,8 @@ public class PlayerData
         redChestCount = player.redChestCount;
         goldChestCount = player.goldChestCount;
         silverChestCount = player.silverChestCount;
+        bulletCount = player.bulletCount;
+        lightningCount = player.lightningCount;
+        shieldCount = player.shieldCount;
     }
 }

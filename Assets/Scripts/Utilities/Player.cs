@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     public int redChestCount = 0;
     public int goldChestCount = 0;
     public int silverChestCount = 0;
+    public int bulletCount = 0;
+    public int lightningCount = 0;
+    public int shieldCount = 0;
 
     void Awake()
     {
@@ -51,6 +54,9 @@ public class Player : MonoBehaviour
         redChestCount = 1;
         goldChestCount = 1;
         silverChestCount = 1;
+        bulletCount = 4;
+        lightningCount = 2;
+        shieldCount = 2;
 
         SaveSystem.SavePlayer(this);
     }
@@ -76,5 +82,8 @@ public class Player : MonoBehaviour
         redChestCount = data.redChestCount;
         goldChestCount = data.goldChestCount;
         silverChestCount = data.silverChestCount;
+        bulletCount = data.bulletCount;
+        lightningCount = data.lightningCount;
+        shieldCount = data.shieldCount;
     }
 }

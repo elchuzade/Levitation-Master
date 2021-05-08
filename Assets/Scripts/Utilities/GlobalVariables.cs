@@ -15,4 +15,6 @@ public class GlobalVariables : MonoBehaviour
     public enum Buff { Lightning, Shield };
 
     public enum TrapType { Bomb, Dynamite, Chainsaw };
+
+    public enum SkillType { Bullet, Lightning, Shield };
 }

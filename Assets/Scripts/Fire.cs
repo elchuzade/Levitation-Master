@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,16 +11,20 @@ public class Fire : MonoBehaviour
 
     [SerializeField] GameObject floor;
 
+    [SerializeField] float delay;
+
     float burnTime = 6;
     float smolderTime = 3;
 
     bool burning;
+    // To not attack player continuously when he stepped on fire
+    bool fireDamageEnabled = true;
 
     float time;
 
     void Start()
     {
-        time = burnTime;
+        time = burnTime + delay;
     }
 
     void Update()
@@ -44,14 +49,14 @@ public class Fire : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Ball" && burning)
+        if (other.gameObject.tag == "Ball" && burning && fireDamageEnabled)
         {
             ball = other.gameObject;
 
             ball.GetComponent<Ball>().AttemptTrapBall();
 
-            time = smolderTime;
-            SetSmoldering();
+            fireDamageEnabled = false;
+            StartCoroutine(EnableFireDamage());
         }
     }
 
@@ -72,5 +77,14 @@ public class Fire : MonoBehaviour
     #endregion
 
     #region Public Methods
+    #endregion
+
+    #region Coroutines
+    IEnumerator EnableFireDamage()
+    {
+        yield return new WaitForSeconds(2);
+
+        fireDamageEnabled = true;
+    }
     #endregion
 }

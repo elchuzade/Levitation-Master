@@ -7,6 +7,7 @@ public class Collectable : MonoBehaviour
     LevelStatus levelStatus;
 
     [SerializeField] Rewards reward;
+    [SerializeField] GameObject collectParticles;
 
     // Speed with which the item will go to canvas location
     [SerializeField] int collectSpeed;
@@ -41,6 +42,7 @@ public class Collectable : MonoBehaviour
         if (other.gameObject.tag == "Ball")
         {
             levelStatus.CollectReward(reward);
+            collectParticles.SetActive(true);
             transform.SetParent(levelStatus.transform);
             moveToCollectPosition = true;
 

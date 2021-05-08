@@ -23,10 +23,13 @@ public class LevelStatus : MonoBehaviour
 
     Ball ball;
 
-    [SerializeField] Text coinsCount;
-    [SerializeField] Text subCoinsCount;
-    [SerializeField] Text diamondsCount;
-    [SerializeField] Text subDiamondsCount;
+    [SerializeField] Text coinCount;
+    [SerializeField] Text subCoinCount;
+    [SerializeField] Text diamondCount;
+    [SerializeField] Text subDiamondCount;
+
+    [SerializeField] Text bulletCount;
+    [SerializeField] Text shieldCount;
 
     [SerializeField] GameObject coinsIcon;
     [SerializeField] GameObject diamondsIcon;
@@ -35,15 +38,17 @@ public class LevelStatus : MonoBehaviour
     [SerializeField] GameObject goldKeyItem;
     [SerializeField] GameObject silverKeyItem;
 
-    [SerializeField] GameObject lightningSkill;
     [SerializeField] GameObject lightningButton;
-
-    [SerializeField] GameObject shootingButton;
-    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] GameObject shieldButton;
+    [SerializeField] GameObject bulletButton;
 
     [SerializeField] GameObject doubleRewardWindow;
     [SerializeField] GameObject doubleRewardButton;
     [SerializeField] GameObject levelControlsWindow;
+
+    [SerializeField] float lightningReloadTime;
+    [SerializeField] float bulletReloadTime;
+    [SerializeField] float shieldReloadTime;
 
     int coins;
     int diamonds;
@@ -60,7 +65,7 @@ public class LevelStatus : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<Player>();
-        //player.ResetPlayer();
+        player.ResetPlayer();
         player.LoadPlayer();
 
         SetScoreboardValues();
@@ -70,22 +75,28 @@ public class LevelStatus : MonoBehaviour
     #region Private Methods
     void SetScoreboardValues()
     {
-        coinsCount.text = player.coins.ToString();
-        diamondsCount.text = player.diamonds.ToString();
+        coinCount.text = player.coins.ToString();
+        diamondCount.text = player.diamonds.ToString();
+
+        bulletButton.GetComponent<Skill>().SetSkillCount(player.bulletCount);
+        lightningButton.GetComponent<Skill>().SetSkillCount(player.lightningCount);
+        shieldButton.GetComponent<Skill>().SetSkillCount(player.shieldCount);
+
+        shieldCount.text = player.shieldCount.ToString();
 
         if (coins > 0)
         {
-            subCoinsCount.text = "+" + coins.ToString();
+            subCoinCount.text = "+" + coins.ToString();
         } else
         {
-            subCoinsCount.text = "";
+            subCoinCount.text = "";
         }
         if (diamonds > 0)
         {
-            subDiamondsCount.text = "+" + diamonds.ToString();
+            subDiamondCount.text = "+" + diamonds.ToString();
         } else
         {
-            subDiamondsCount.text = "";
+            subDiamondCount.text = "";
         }
     }
 
@@ -245,22 +256,44 @@ public class LevelStatus : MonoBehaviour
     // @access from Level canvas
     public void ClickLightningSkill()
     {
-        // Shoot lightning effect on the ball and stop the ball for a second
-        lightningSkill.transform.position = ball.transform.position;
-        lightningSkill.SetActive(true);
-        lightningButton.GetComponent<AnimationTrigger>().Trigger("Start");
-        ball.StrikeLighting();
-        StartCoroutine(StopLightningSkill());
+        if (player.lightningCount > 0)
+        {
+            player.lightningCount--;
+            player.SavePlayer();
+            SetScoreboardValues();
+
+            lightningButton.GetComponent<Skill>().ClickSkill(lightningReloadTime);
+
+            ball.UseLightingSkill();
+        }
     }
 
     // @access from Level canvas
-    public void ClickShootingSkill()
+    public void ClickBulletSkill()
     {
-        // Shoot lightning effect on the ball and stop the ball for a second
-        GameObject bulletInstance = Instantiate(bulletPrefab, ball.transform.position, Quaternion.identity);
-        bulletInstance.transform.SetParent(platformItems.transform);
+        if (player.bulletCount > 0)
+        {
+            player.bulletCount--;
+            player.SavePlayer();
+            SetScoreboardValues();
 
-        shootingButton.GetComponent<AnimationTrigger>().Trigger("Start");
+            ball.UseBulletSkill();
+            bulletButton.GetComponent<Skill>().ClickSkill(bulletReloadTime);
+        }
+    }
+
+    // @access from Level canvas
+    public void ClickShieldSkill()
+    {
+        if (player.shieldCount > 0)
+        {
+            player.shieldCount--;
+            player.SavePlayer();
+            SetScoreboardValues();
+
+            ball.UseShieldSkill();
+            shieldButton.GetComponent<Skill>().ClickSkill(shieldReloadTime);
+        }
     }
 
     // @access from Level canvas
@@ -272,8 +305,8 @@ public class LevelStatus : MonoBehaviour
         doubleRewardButton.GetComponent<AnimationTrigger>().Trigger("Start");
         doubleRewardButton.GetComponent<Button>().interactable = false;
 
-        subCoinsCount.gameObject.GetComponent<AnimationTrigger>().Trigger("Start");
-        subDiamondsCount.gameObject.GetComponent<AnimationTrigger>().Trigger("Start");
+        subCoinCount.gameObject.GetComponent<AnimationTrigger>().Trigger("Start");
+        subDiamondCount.gameObject.GetComponent<AnimationTrigger>().Trigger("Start");
 
         SetScoreboardValues();
     }
@@ -291,10 +324,5 @@ public class LevelStatus : MonoBehaviour
     #endregion
 
     #region Coroutines
-    IEnumerator StopLightningSkill()
-    {
-        yield return new WaitForSeconds(0.5f);
-        lightningSkill.SetActive(false);
-    }
     #endregion
 }
