@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static GlobalVariables;
@@ -56,6 +57,10 @@ public class LevelStatus : MonoBehaviour
     int silverKeys;
     int goldKeys;
 
+    List<string> spinnerItems = new List<string>();
+    [SerializeField] GameObject giftWindow;
+    [SerializeField] GameObject giftButton;
+
     void Awake()
     {
         ball = FindObjectOfType<Ball>();
@@ -68,11 +73,27 @@ public class LevelStatus : MonoBehaviour
         player.ResetPlayer();
         player.LoadPlayer();
 
+        EnableGiftButton();
+
         SetScoreboardValues();
         levelText.text = player.nextLevelIndex.ToString();
     }
 
     #region Private Methods
+    void EnableGiftButton()
+    {
+        giftButton.GetComponent<Button>().interactable = true;
+        giftButton.transform.GetChild(0).gameObject.SetActive(true);
+        giftButton.GetComponent<Animator>().enabled = true;
+    }
+
+    void DisableGiftButton()
+    {
+        giftButton.GetComponent<Button>().interactable = false;
+        giftButton.transform.GetChild(0).gameObject.SetActive(false);
+        giftButton.GetComponent<Animator>().enabled = false;
+    }
+
     void SetScoreboardValues()
     {
         coinCount.text = player.coins.ToString();
@@ -114,6 +135,46 @@ public class LevelStatus : MonoBehaviour
     #endregion
 
     #region Public Methods
+    // @access from gift window
+    public void SetSpinnerGiftCounts(GameObject spinner)
+    {
+        switch (spinner.GetComponent<Spinner>().GetGiftName())
+        {
+            case "Bullet":
+                int randomBulletsAmount = Random.Range(1, 3);
+                spinner.GetComponent<Spinner>().SetGiftCount(randomBulletsAmount);
+                break;
+            case "Shield":
+                int randomShieldsAmount = Random.Range(1, 2);
+                spinner.GetComponent<Spinner>().SetGiftCount(randomShieldsAmount);
+                break;
+            case "Lightning":
+                int randomLightningsAmount = Random.Range(1, 2);
+                spinner.GetComponent<Spinner>().SetGiftCount(randomLightningsAmount);
+                break;
+            case "SilverKey":
+                int randomSilverKeysAmount = Random.Range(1, 2);
+                spinner.GetComponent<Spinner>().SetGiftCount(randomSilverKeysAmount);
+                break;
+            case "GoldKey":
+                int randomGoldKeysAmount = Random.Range(1, 1);
+                spinner.GetComponent<Spinner>().SetGiftCount(randomGoldKeysAmount);
+                break;
+            case "RedKey":
+                int randomRedKeysAmount = Random.Range(1, 1);
+                spinner.GetComponent<Spinner>().SetGiftCount(randomRedKeysAmount);
+                break;
+            case "Diamond":
+                int randomDiamondsAmount = Random.Range(1, 5);
+                spinner.GetComponent<Spinner>().SetGiftCount(randomDiamondsAmount);
+                break;
+            case "Coin":
+                int randomCoinsAmount = Random.Range(1, 20);
+                spinner.GetComponent<Spinner>().SetGiftCount(randomCoinsAmount);
+                break;
+        }
+    }
+
     // @access from Ball script
     public void SetNextLevelMeter()
     {
@@ -321,8 +382,65 @@ public class LevelStatus : MonoBehaviour
 
         LoadNextLevel();
     }
+
+    // @access from Level canvas
+    public void ClickGiftButton()
+    {
+        giftWindow.GetComponent<GiftWindow>().OpenGiftWindow();
+        DisableGiftButton();
+        StartCoroutine(ResetGiftButton());
+    }
+
+    // @access from Gift Window
+    public void CollectGifts()
+    {
+        List<GameObject> spinners = giftWindow.GetComponent<GiftWindow>().GetCompleteSpinners();
+
+        for (int i = 0; i < spinners.Count; i++)
+        {
+            int count = spinners[i].GetComponent<Spinner>().GetGiftCount();
+            switch (spinners[i].GetComponent<Spinner>().GetGiftName())
+            {
+                case "Bullet":
+                    player.bulletCount += count;
+                    break;
+                case "Shield":
+                    player.shieldCount += count;
+                    break;
+                case "Lightning":
+                    player.lightningCount += count;
+                    break;
+                case "SilverKey":
+                    player.silverKeyCount += count;
+                    break;
+                case "GoldKey":
+                    player.goldKeyCount += count;
+                    break;
+                case "RedKey":
+                    player.redKeyCount += count;
+                    break;
+                case "Diamond":
+                    player.diamonds += count;
+                    break;
+                case "Coin":
+                    player.coins += count;
+                    break;
+            }
+        }
+
+        player.SavePlayer();
+
+        giftWindow.GetComponent<GiftWindow>().CloseGiftWindow();
+
+        SetScoreboardValues();
+    }
     #endregion
 
     #region Coroutines
+    IEnumerator ResetGiftButton()
+    {
+        yield return new WaitForSeconds(5);
+        EnableGiftButton();
+    }
     #endregion
 }

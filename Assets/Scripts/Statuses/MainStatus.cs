@@ -15,7 +15,7 @@ public class MainStatus : MonoBehaviour
 
     // To run animation and to show notification sign
     [SerializeField] GameObject chestButton;
-    [SerializeField] GameObject chestNotification;
+    [SerializeField] GameObject giftButton;
     [SerializeField] GameObject hapticsButton;
     [SerializeField] GameObject privacyWindow;
     [SerializeField] GameObject quitGameWindow;
@@ -23,6 +23,8 @@ public class MainStatus : MonoBehaviour
 
     [SerializeField] GameObject ballParent;
     [SerializeField] GameObject[] allBalls;
+
+    bool giftReady;
 
     void Awake()
     {
@@ -65,6 +67,7 @@ public class MainStatus : MonoBehaviour
         SetScoreboardValues();
         SetButtonInitialState();
         SetChestButton();
+        SetGiftButton();
 
         GameObject ballPrefab = Instantiate(allBalls[player.currentBallIndex], ballParent.transform.position, Quaternion.identity);
         ballPrefab.transform.SetParent(ballParent.transform);
@@ -81,15 +84,27 @@ public class MainStatus : MonoBehaviour
     #region Private Methods
     void SetChestButton()
     {
-        if (player.redChestCount > 0 || player.goldChestCount > 0 || player.silverChestCount > 0)
+        if (player.redKeyCount > 0 || player.goldKeyCount > 0 || player.silverKeyCount > 0)
         {
-            chestNotification.SetActive(true);
-            chestButton.GetComponent<Animator>().Play("ChestShake");
+            chestButton.GetComponent<Animator>().enabled = true;
         }
         else
         {
-            chestNotification.SetActive(false);
             chestButton.GetComponent<Animator>().enabled = false;
+            chestButton.transform.GetChild(0).gameObject.SetActive(false);
+        }
+    }
+
+    void SetGiftButton()
+    {
+        if (giftReady)
+        {
+            giftButton.GetComponent<Animator>().enabled = true;
+        }
+        else
+        {
+            giftButton.GetComponent<Animator>().enabled = false;
+            giftButton.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 

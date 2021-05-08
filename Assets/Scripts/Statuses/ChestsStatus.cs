@@ -56,9 +56,9 @@ public class ChestsStatus : MonoBehaviour
 
     void SetPlayerChests()
     {
-        redChest.GetComponent<ChestItem>().SetCount(player.redChestCount);
-        goldChest.GetComponent<ChestItem>().SetCount(player.goldChestCount);
-        silverChest.GetComponent<ChestItem>().SetCount(player.silverChestCount);
+        redChest.GetComponent<ChestItem>().SetCount(player.redKeyCount);
+        goldChest.GetComponent<ChestItem>().SetCount(player.goldKeyCount);
+        silverChest.GetComponent<ChestItem>().SetCount(player.silverKeyCount);
     }
 
     void ResetAllButtons()
@@ -121,7 +121,7 @@ public class ChestsStatus : MonoBehaviour
         }
 
         ResetAllButtons();
-        if (player.silverChestCount > 0)
+        if (player.silverKeyCount > 0)
         {
             silverChest.transform.Find("OpenButton").gameObject.SetActive(true);
         }
@@ -144,7 +144,7 @@ public class ChestsStatus : MonoBehaviour
         }
 
         ResetAllButtons();
-        if (player.goldChestCount > 0)
+        if (player.goldKeyCount > 0)
         {
             goldChest.transform.Find("OpenButton").gameObject.SetActive(true);
         }
@@ -168,7 +168,7 @@ public class ChestsStatus : MonoBehaviour
         }
 
         ResetAllButtons();
-        if (player.redChestCount > 0)
+        if (player.redKeyCount > 0)
         {
             redChest.transform.Find("OpenButton").gameObject.SetActive(true);
         }
@@ -182,7 +182,7 @@ public class ChestsStatus : MonoBehaviour
     public void ClickWatchButton()
     {
         Debug.Log("watching ad, then running these functions");
-        player.silverChestCount++;
+        player.silverKeyCount++;
         player.SavePlayer();
         SetPlayerChests();
         SelectSilverChest();
@@ -195,13 +195,13 @@ public class ChestsStatus : MonoBehaviour
         {
             case ChestColors.Red:
                 player.diamonds -= redChestPrice;
-                player.redChestCount++;
+                player.redKeyCount++;
                 SelectRedChest();
                 break;
             case ChestColors.Gold:
             default:
                 player.diamonds -= goldChestPrice;
-                player.goldChestCount++;
+                player.goldKeyCount++;
                 SelectGoldChest();
                 break;
         }
@@ -216,16 +216,16 @@ public class ChestsStatus : MonoBehaviour
         switch (selectedChestColor)
         {
             case ChestColors.Red:
-                player.redChestCount--;
+                player.redKeyCount--;
                 SelectRedChest();
                 break;
             case ChestColors.Gold:
-                player.goldChestCount--;
+                player.goldKeyCount--;
                 SelectGoldChest();
                 break;
             case ChestColors.Silver:
             default:
-                player.silverChestCount--;
+                player.silverKeyCount--;
                 SelectSilverChest();
                 break;
         }

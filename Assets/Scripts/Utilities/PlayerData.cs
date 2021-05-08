@@ -13,9 +13,9 @@ public class PlayerData
     public bool nameChanged = false;
     public List<int> allBalls = new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     public int currentBallIndex = 0;
-    public int redChestCount = 0;
-    public int goldChestCount = 0;
-    public int silverChestCount = 0;
+    public int redKeyCount = 0;
+    public int goldKeyCount = 0;
+    public int silverKeyCount = 0;
     public int bulletCount = 0;
     public int lightningCount = 0;
     public int shieldCount = 0;
@@ -31,9 +31,9 @@ public class PlayerData
         nameChanged = player.nameChanged;
         allBalls = player.allBalls;
         currentBallIndex = player.currentBallIndex;
-        redChestCount = player.redChestCount;
-        goldChestCount = player.goldChestCount;
-        silverChestCount = player.silverChestCount;
+        redKeyCount = player.redKeyCount;
+        goldKeyCount = player.goldKeyCount;
+        silverKeyCount = player.silverKeyCount;
         bulletCount = player.bulletCount;
         lightningCount = player.lightningCount;
         shieldCount = player.shieldCount;
