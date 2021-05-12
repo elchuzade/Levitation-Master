@@ -20,17 +20,19 @@ public class Ball : MonoBehaviour
     [SerializeField] GameObject ballDestroy;
 
     [SerializeField] GameObject lightningSkill;
-    [SerializeField] GameObject shieldSkill;
     [SerializeField] GameObject bulletSkillPrefab;
+    [SerializeField] GameObject shieldSkill;
     [SerializeField] GameObject shieldButton;
+
+    [SerializeField] GameObject speedSkill;
+    [SerializeField] GameObject speedButton;
+    [SerializeField] GameObject winParticles;
 
     [SerializeField] float speed;
 
-    int lightningFactor = 1;
-    bool shieldBuff;
-    bool shieldSkillStatus;
-    bool lightningBuff;
-
+    int speedMultiplier = 1;
+    bool shieldStatus;
+    
     bool followDirection;
 
     // To decide whether joystick can move the ball or not
@@ -65,7 +67,7 @@ public class Ball : MonoBehaviour
         if (!idle)
         {
             Vector3 direction = Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
-            rb.AddForce(direction * speed * lightningFactor * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            rb.AddForce(direction * speed * speedMultiplier * Time.fixedDeltaTime, ForceMode.VelocityChange);
             rb.AddForce(Vector3.down * 100 * rb.mass);
         }
 
@@ -97,9 +99,16 @@ public class Ball : MonoBehaviour
     #region Private Methods
     void DestroyShieldSkill()
     {
-        shieldSkillStatus = false;
+        shieldStatus = false;
         shieldSkill.SetActive(false);
         shieldButton.GetComponent<Skill>().ReloadSkill();
+    }
+
+    void DestroySpeedSkill()
+    {
+        speedMultiplier = 1;
+        speedSkill.SetActive(false);
+        speedButton.GetComponent<Skill>().ReloadSkill();
     }
     #endregion
 
@@ -107,11 +116,7 @@ public class Ball : MonoBehaviour
     // @access from trap or enemy
     public void AttemptTrapBall()
     {
-        if (shieldBuff)
-        {
-            DestroyBuff(Buff.Shield);
-        }
-        else if (shieldSkillStatus)
+        if (shieldStatus)
         {
             DestroyShieldSkill();
         }
@@ -147,53 +152,6 @@ public class Ball : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.AddForce(pushDirection);
-    }
-
-    // @access from levelStatus to see if there is a need to make a new one
-    public bool GetLightning()
-    {
-        return lightningBuff;
-    }
-
-    // @access from levelStatus to see if there is a need to make a new one
-    public bool GetShield()
-    {
-        return shieldBuff;
-    }
-
-    // @access from level status when the ball enters a box
-    public void SetBuff(Buff buff)
-    {
-        switch (buff)
-        {
-            case Buff.Shield:
-                shieldBuff = true;
-                transform.Find("Buffs").Find("ShieldBuff").gameObject.SetActive(true);
-                break;
-            case Buff.Lightning:
-                lightningBuff = true;
-                lightningFactor = 2;
-                transform.Find("Buffs").Find("LightningBuff").gameObject.SetActive(true);
-                break;
-        }
-    }
-
-    // @access from buff item in the canvas when time runs out
-    // @access from ball killing item when ball touches it (eg step on a bomb - remove shieldBuff)
-    public void DestroyBuff(Buff buff)
-    {
-        switch (buff)
-        {
-            case Buff.Shield:
-                shieldBuff = false;
-                transform.Find("Buffs").Find("ShieldBuff").gameObject.SetActive(false);
-                break;
-            case Buff.Lightning:
-                lightningBuff = false;
-                lightningFactor = 1;
-                transform.Find("Buffs").Find("LightningBuff").gameObject.SetActive(false);
-                break;
-        }
     }
 
     // @access from LevelStatus script
@@ -237,8 +195,16 @@ public class Ball : MonoBehaviour
     // @access from LevelStatus script
     public void UseShieldSkill()
     {
-        shieldSkillStatus = true;
+        shieldStatus = true;
         shieldSkill.SetActive(true);
+    }
+
+    // @access from LevelStatus script
+    public void UseSpeedSkill()
+    {
+        speedMultiplier = 2;
+        speedSkill.SetActive(true);
+        StartCoroutine(StopSpeedSkill());
     }
 
     // @access from LevelStatus script
@@ -250,6 +216,12 @@ public class Ball : MonoBehaviour
     #endregion
 
     #region Coroutine
+    IEnumerator StopSpeedSkill()
+    {
+        yield return new WaitForSeconds(10f);
+        DestroySpeedSkill();
+    }
+
     IEnumerator StopLightningSkill()
     {
         yield return new WaitForSeconds(0.5f);
@@ -267,8 +239,12 @@ public class Ball : MonoBehaviour
     IEnumerator StopBallPushingUp()
     {
         yield return new WaitForSeconds(3);
-
+        
         pushingUp = false;
+        // Stop from falling down
+        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+
+        winParticles.SetActive(true);
         levelStatus.SetNextLevelMeter();
         StartCoroutine(LoadNextLevel());
     }

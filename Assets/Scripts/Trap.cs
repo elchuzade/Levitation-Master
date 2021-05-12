@@ -19,6 +19,7 @@ public class Trap : MonoBehaviour
     [SerializeField] Text timer;
     [SerializeField] GameObject radius;
     [SerializeField] ExplosionArea explosionArea;
+    float dynamiteExplosionRadius = 200;
 
     [Header("Only For Chainsaw")]
     [SerializeField] GameObject wind;
@@ -29,6 +30,13 @@ public class Trap : MonoBehaviour
     bool threeSeconds;
     bool twoSeconds;
     bool oneSecond;
+
+    bool destroyAttempted;
+
+    void Start()
+    {
+        ball = FindObjectOfType<Ball>().gameObject;    
+    }
 
     void Update()
     {
@@ -55,7 +63,11 @@ public class Trap : MonoBehaviour
                 time -= Time.deltaTime;
             } else
             {
-                AttemptDestroyProcess();
+                if (!destroyAttempted)
+                {
+                    AttemptDestroyProcess();
+                    destroyAttempted = true;
+                }
             }
         }
     }
@@ -64,7 +76,6 @@ public class Trap : MonoBehaviour
     {
         if (other.gameObject.tag == "Ball")
         {
-            ball = other.gameObject;
             if (trapType == TrapType.Dynamite)
             {
                 StartTimer();
@@ -76,7 +87,6 @@ public class Trap : MonoBehaviour
                     ball.GetComponent<Ball>().AttemptTrapBall();
                 }
                 AttemptDestroyProcess();
-                other.gameObject.GetComponent<Ball>().AttemptTrapBall();
             }
         }
         else if (other.gameObject.tag == "Bullet")
@@ -104,6 +114,10 @@ public class Trap : MonoBehaviour
 
         if (trapType == TrapType.Dynamite)
         {
+            if (Vector3.Distance(ball.transform.position, transform.position) < dynamiteExplosionRadius)
+            {
+                ball.GetComponent<Ball>().AttemptTrapBall();
+            }
             radius.SetActive(false);
             timer.gameObject.SetActive(false);
         } else if (trapType == TrapType.Chainsaw)

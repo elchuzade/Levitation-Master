@@ -10,8 +10,19 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject components;
     [SerializeField] GameObject enemyDestroy;
 
+    [SerializeField] GameObject leftBladeIdle;
+    [SerializeField] GameObject rightBladeIdle;
+
+    [SerializeField] GameObject leftBladeHunt;
+    [SerializeField] GameObject rightBladeHunt;
+
+    [SerializeField] GameObject idleParticles;
+    [SerializeField] GameObject huntParticles;
+
     int detectRadius = 250;
     int followSpeed = 50;
+
+    bool following;
 
     #region Unity Methods
     void Awake()
@@ -26,13 +37,13 @@ public class Enemy : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, ball.transform.position) < detectRadius)
             {
-                Vector3 distanceVector = directionArrow.transform.position - transform.position;
-
-                float angle = Mathf.Atan2(distanceVector.x, distanceVector.z) * Mathf.Rad2Deg;
-                transform.localRotation = Quaternion.Euler(0, angle, 0);
-
-                distanceVector = distanceVector.normalized;
-                transform.localPosition += new Vector3(distanceVector.x, 0, distanceVector.z) * followSpeed * Time.deltaTime;
+                FollowPlayer();
+            } else
+            {
+                if (following)
+                {
+                    StopFollowingPlayer();
+                }
             }
         }
     }
@@ -54,6 +65,44 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region Private Methods
+    void FollowPlayer()
+    {
+        Vector3 distanceVector = directionArrow.transform.position - transform.position;
+
+        float angle = Mathf.Atan2(distanceVector.x, distanceVector.z) * Mathf.Rad2Deg;
+        transform.localRotation = Quaternion.Euler(0, angle, 0);
+
+        distanceVector = distanceVector.normalized;
+        transform.localPosition += new Vector3(distanceVector.x, 0, distanceVector.z) * followSpeed * Time.deltaTime;
+
+        if (!following)
+        {
+            idleParticles.SetActive(false);
+            huntParticles.SetActive(true);
+
+            leftBladeIdle.SetActive(false);
+            rightBladeIdle.SetActive(false);
+            leftBladeHunt.SetActive(true);
+            rightBladeHunt.SetActive(true);
+        }
+        following = true;
+    }
+
+    void StopFollowingPlayer()
+    {
+        if (following)
+        {
+            idleParticles.SetActive(true);
+            huntParticles.SetActive(false);
+
+            leftBladeIdle.SetActive(true);
+            rightBladeIdle.SetActive(true);
+            leftBladeHunt.SetActive(false);
+            rightBladeHunt.SetActive(false);
+        }
+        following = false;
+    }
+
     void AttemptDestroyProcess()
     {
         enemyDestroy.SetActive(true);

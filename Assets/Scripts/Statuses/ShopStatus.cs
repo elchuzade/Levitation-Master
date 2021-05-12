@@ -40,6 +40,9 @@ public class ShopStatus : MonoBehaviour
         scrollbar.GetComponent<Scrollbar>().onValueChanged.AddListener(value => SwipeBall(value));
 
         SetBallValues();
+
+        // 0.125 is the step size based on 0,1 and number of balls
+        SwipeBall(0.125f * player.currentBallIndex);
     }
 
     #region Public Methods
@@ -71,7 +74,7 @@ public class ShopStatus : MonoBehaviour
     }
 
     // @access from Shop canvas
-    public void ClickBuyShopItem(int index)
+    public void ClickUnlockShopItem(int index)
     {
         if (player.allBalls[index] == 1)
         {

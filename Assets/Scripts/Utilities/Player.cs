@@ -15,9 +15,11 @@ public class Player : MonoBehaviour
     public int redKeyCount = 0;
     public int goldKeyCount = 0;
     public int silverKeyCount = 0;
+
     public int bulletCount = 0;
     public int lightningCount = 0;
     public int shieldCount = 0;
+    public int speedCount = 0;
 
     void Awake()
     {
@@ -54,9 +56,11 @@ public class Player : MonoBehaviour
         redKeyCount = 1;
         goldKeyCount = 1;
         silverKeyCount = 1;
+
         bulletCount = 4;
         lightningCount = 2;
         shieldCount = 2;
+        speedCount = 2;
 
         SaveSystem.SavePlayer(this);
     }
@@ -82,8 +86,10 @@ public class Player : MonoBehaviour
         redKeyCount = data.redKeyCount;
         goldKeyCount = data.goldKeyCount;
         silverKeyCount = data.silverKeyCount;
+
         bulletCount = data.bulletCount;
         lightningCount = data.lightningCount;
         shieldCount = data.shieldCount;
+        speedCount = data.speedCount;
     }
 }

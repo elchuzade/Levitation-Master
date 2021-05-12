@@ -17,7 +17,6 @@ public class LevelStatus : MonoBehaviour
     [SerializeField] GameObject lightningItem;
     [SerializeField] GameObject shieldItem;
 
-    [SerializeField] GameObject allBuffs;
     [SerializeField] GameObject allKeys;
     // To set parent of coins and diamonds
     [SerializeField] GameObject platformItems;
@@ -42,6 +41,7 @@ public class LevelStatus : MonoBehaviour
     [SerializeField] GameObject lightningButton;
     [SerializeField] GameObject shieldButton;
     [SerializeField] GameObject bulletButton;
+    [SerializeField] GameObject speedButton;
 
     [SerializeField] GameObject doubleRewardWindow;
     [SerializeField] GameObject doubleRewardButton;
@@ -50,6 +50,7 @@ public class LevelStatus : MonoBehaviour
     [SerializeField] float lightningReloadTime;
     [SerializeField] float bulletReloadTime;
     [SerializeField] float shieldReloadTime;
+    [SerializeField] float speedReloadTime;
 
     int coins;
     int diamonds;
@@ -60,7 +61,11 @@ public class LevelStatus : MonoBehaviour
     List<string> spinnerItems = new List<string>();
     [SerializeField] GameObject giftWindow;
     [SerializeField] GameObject giftButton;
-
+    [SerializeField] Image giftLoader;
+    bool giftRelaoding;
+    int giftReloadTime = 5;
+    float time;
+    
     void Awake()
     {
         ball = FindObjectOfType<Ball>();
@@ -73,25 +78,50 @@ public class LevelStatus : MonoBehaviour
         player.ResetPlayer();
         player.LoadPlayer();
 
-        EnableGiftButton();
-
         SetScoreboardValues();
         levelText.text = player.nextLevelIndex.ToString();
+
+        DisableGiftButton();
+        ReloadGiftButton();
+    }
+
+    void Update()
+    {
+        if (giftRelaoding)
+        {
+            if (time > 0)
+            {
+                time -= Time.deltaTime;
+                giftLoader.fillAmount = time / giftReloadTime;
+            }
+            else
+            {
+                EnableGiftButton();
+            }
+        }
     }
 
     #region Private Methods
     void EnableGiftButton()
     {
         giftButton.GetComponent<Button>().interactable = true;
-        giftButton.transform.GetChild(0).gameObject.SetActive(true);
+        giftButton.transform.Find("notification").gameObject.SetActive(true);
         giftButton.GetComponent<Animator>().enabled = true;
+
+        giftRelaoding = false;
     }
 
     void DisableGiftButton()
     {
         giftButton.GetComponent<Button>().interactable = false;
-        giftButton.transform.GetChild(0).gameObject.SetActive(false);
+        giftButton.transform.Find("notification").gameObject.SetActive(false);
         giftButton.GetComponent<Animator>().enabled = false;
+    }
+
+    void ReloadGiftButton()
+    {
+        giftRelaoding = true;
+        time = giftReloadTime;
     }
 
     void SetScoreboardValues()
@@ -102,6 +132,7 @@ public class LevelStatus : MonoBehaviour
         bulletButton.GetComponent<Skill>().SetSkillCount(player.bulletCount);
         lightningButton.GetComponent<Skill>().SetSkillCount(player.lightningCount);
         shieldButton.GetComponent<Skill>().SetSkillCount(player.shieldCount);
+        speedButton.GetComponent<Skill>().SetSkillCount(player.speedCount);
 
         shieldCount.text = player.shieldCount.ToString();
 
@@ -118,18 +149,6 @@ public class LevelStatus : MonoBehaviour
         } else
         {
             subDiamondCount.text = "";
-        }
-    }
-
-    void ResetBuff(Buff buff)
-    {
-        for (int i = 0; i < allBuffs.transform.childCount; i++)
-        {
-            // Loop through all the buffs and find the one that needs to be reset and reset it
-            if (allBuffs.transform.GetChild(i).GetComponent<BuffItem>().GetBuff() == buff)
-            {
-                allBuffs.transform.GetChild(i).GetComponent<BuffItem>().ResetBuff();
-            }
         }
     }
     #endregion
@@ -220,44 +239,33 @@ public class LevelStatus : MonoBehaviour
     {
         switch (box)
         {
+            case Boxes.Shield:
+                player.shieldCount++;
+                player.SavePlayer();
+                break;
+            case Boxes.Lightning:
+                player.lightningCount++;
+                player.SavePlayer();
+                break;
+            case Boxes.Bullet:
+                player.bulletCount++;
+                player.SavePlayer();
+                break;
+            case Boxes.Speed:
+                player.speedCount++;
+                player.SavePlayer();
+                break;
             case Boxes.Coin:
                 DropCoins(amount, position);
                 break;
             case Boxes.Diamond:
                 DropDiamonds(amount, position);
                 break;
-            case Boxes.Shield:
-                if (ball.GetShield())
-                {
-                    ResetBuff(Buff.Shield);
-                    ball.DestroyBuff(Buff.Shield);
-                    ball.SetBuff(Buff.Shield);
-                }
-                else
-                {
-                    GameObject shieldInstance = Instantiate(shieldItem, transform.position, Quaternion.identity);
-                    shieldInstance.transform.SetParent(allBuffs.transform);
-                    ball.SetBuff(Buff.Shield);
-                }
-                break;
-            case Boxes.Lightning:
-                if (ball.GetLightning())
-                {
-                    ResetBuff(Buff.Lightning);
-                    ball.DestroyBuff(Buff.Lightning);
-                    ball.SetBuff(Buff.Lightning);
-                }
-                else
-                {
-                    GameObject lightningInstance = Instantiate(lightningItem, transform.position, Quaternion.identity);
-                    lightningInstance.transform.SetParent(allBuffs.transform);
-                    ball.SetBuff(Buff.Lightning);
-                }
-                break;
             case Boxes.Question:
-                OpenBox((Boxes)Random.Range(0, 4), amount, position);
+                OpenBox((Boxes)Random.Range(0, 5), amount, position);
                 break;
         }
+        SetScoreboardValues();
     }
 
     // @access from box when it is hit by the ball
@@ -268,7 +276,7 @@ public class LevelStatus : MonoBehaviour
             Vector3 coordShift = new Vector3(Random.Range(-30, 30), 0, Random.Range(-30, 30));
             GameObject coinInstance = Instantiate(coinPrefab, position, Quaternion.identity);
             coinInstance.transform.SetParent(platformItems.transform);
-            coinInstance.transform.GetComponent<Collectable>().SetDropPosition(position + coordShift);
+            coinInstance.transform.GetComponent<Collectible>().SetDropPosition(position + coordShift);
         }
     }
 
@@ -280,7 +288,7 @@ public class LevelStatus : MonoBehaviour
             Vector3 coordShift = new Vector3(Random.Range(-30, 30), 0, Random.Range(-30, 30));
             GameObject diamondInstance = Instantiate(diamondPrefab, position, Quaternion.identity);
             diamondInstance.transform.SetParent(platformItems.transform);
-            diamondInstance.transform.GetComponent<Collectable>().SetDropPosition(position + coordShift);
+            diamondInstance.transform.GetComponent<Collectible>().SetDropPosition(position + coordShift);
         }
     }
 
@@ -358,6 +366,20 @@ public class LevelStatus : MonoBehaviour
     }
 
     // @access from Level canvas
+    public void ClickSpeedSkill()
+    {
+        if (player.speedCount > 0)
+        {
+            player.speedCount--;
+            player.SavePlayer();
+            SetScoreboardValues();
+
+            ball.UseSpeedSkill();
+            speedButton.GetComponent<Skill>().ClickSkill(speedReloadTime);
+        }
+    }
+
+    // @access from Level canvas
     public void ClickDoubleRewardButton()
     {
         coins *= 2;
@@ -388,7 +410,6 @@ public class LevelStatus : MonoBehaviour
     {
         giftWindow.GetComponent<GiftWindow>().OpenGiftWindow();
         DisableGiftButton();
-        StartCoroutine(ResetGiftButton());
     }
 
     // @access from Gift Window
@@ -429,18 +450,15 @@ public class LevelStatus : MonoBehaviour
         }
 
         player.SavePlayer();
-
-        giftWindow.GetComponent<GiftWindow>().CloseGiftWindow();
-
         SetScoreboardValues();
-    }
-    #endregion
 
-    #region Coroutines
-    IEnumerator ResetGiftButton()
+        CloseGiftWindow();
+    }
+
+    public void CloseGiftWindow()
     {
-        yield return new WaitForSeconds(5);
-        EnableGiftButton();
+        giftWindow.GetComponent<GiftWindow>().CloseGiftWindow();
+        ReloadGiftButton();
     }
     #endregion
 }

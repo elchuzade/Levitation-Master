@@ -16,9 +16,11 @@ public class PlayerData
     public int redKeyCount = 0;
     public int goldKeyCount = 0;
     public int silverKeyCount = 0;
+
     public int bulletCount = 0;
     public int lightningCount = 0;
     public int shieldCount = 0;
+    public int speedCount = 0;
 
     public PlayerData (Player player)
     {
@@ -34,8 +36,10 @@ public class PlayerData
         redKeyCount = player.redKeyCount;
         goldKeyCount = player.goldKeyCount;
         silverKeyCount = player.silverKeyCount;
+
         bulletCount = player.bulletCount;
         lightningCount = player.lightningCount;
         shieldCount = player.shieldCount;
+        speedCount = player.speedCount;
     }
 }
