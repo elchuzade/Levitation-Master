@@ -36,7 +36,8 @@ public class ShopStatus : MonoBehaviour
         SetScoreboardValues();
         SetPlayerBalls();
 
-        scrollbar.GetComponent<Scrollbar>().value = (float)player.currentBallIndex / 8;
+        scrollbar.GetComponent<Scrollbar>().numberOfSteps = 14;
+        scrollbar.GetComponent<Scrollbar>().value = (float)player.currentBallIndex / 13;
         scrollbar.GetComponent<Scrollbar>().onValueChanged.AddListener(value => SwipeBall(value));
 
         SetBallValues();
@@ -49,7 +50,7 @@ public class ShopStatus : MonoBehaviour
     // @access from Shop canvas
     public void SwipeBall(float value)
     {
-        ballIndex = (int)(value * 8);
+        ballIndex = (int)(value * 13);
         SetBallValues();
     }
 
@@ -130,7 +131,7 @@ public class ShopStatus : MonoBehaviour
         if (ballIndex > 0)
         {
             ballIndex--;
-            scrollbar.GetComponent<Scrollbar>().value = (float)ballIndex / 8;
+            scrollbar.GetComponent<Scrollbar>().value = (float)ballIndex / 13;
             SetBallValues();
         }
     }
@@ -142,7 +143,7 @@ public class ShopStatus : MonoBehaviour
         if (ballIndex < allBalls.Length - 1)
         {
             ballIndex++;
-            scrollbar.GetComponent<Scrollbar>().value = (float)ballIndex / 8;
+            scrollbar.GetComponent<Scrollbar>().value = (float)ballIndex / 13;
             SetBallValues();
         }
     }

@@ -103,10 +103,11 @@ public class ChestsStatus : MonoBehaviour
     #endregion
 
     #region Public Methods
-    public void GiveChestPrize()
-    {
+    // @access from ChestUnlock script
+    //public void GiveChestPrize()
+    //{
 
-    }
+    //}
 
     // @access from Chest canvas
     public void SelectSilverChest()

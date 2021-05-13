@@ -22,6 +22,11 @@ public class PlayerData
     public int shieldCount = 0;
     public int speedCount = 0;
 
+    public List<int> levelSpinClick = new List<int>();
+    public List<int> homeSpinClick = new List<int>();
+    public List<int> shopClick = new List<int>();
+    public List<int> chestClick = new List<int>();
+
     public PlayerData (Player player)
     {
         coins = player.coins;
@@ -41,5 +46,10 @@ public class PlayerData
         lightningCount = player.lightningCount;
         shieldCount = player.shieldCount;
         speedCount = player.speedCount;
+
+        levelSpinClick = player.levelSpinClick;
+        homeSpinClick = player.homeSpinClick;
+        shopClick = player.shopClick;
+        chestClick = player.chestClick;
     }
 }

@@ -342,15 +342,20 @@ MonoBehaviour:
   leaderboardButton: {fileID: 1239576116}
   ballParent: {fileID: 2014609901}
   allBalls:
-  - {fileID: 1839052806453286967, guid: 883e0ab6657c04fc4a84347a304cb15b, type: 3}
-  - {fileID: 3088640186708072394, guid: 6b68c5aa383f84a259bb1c351a0e431a, type: 3}
-  - {fileID: 3493358793468647699, guid: ddd74e0ea2cdf49959d015975fb3ca81, type: 3}
-  - {fileID: 3545165586502232677, guid: 4d27dbc80fba84248b677a1525c3b65a, type: 3}
-  - {fileID: 7456783276778880674, guid: b3140749bf2c144f6aa1a48dae3a5fd1, type: 3}
-  - {fileID: 442796074847407273, guid: 8c7615090e23d45ddabb4546f4c1cfe5, type: 3}
-  - {fileID: 1215528645272933824, guid: cc7707f55d2634eb18e820551eba86eb, type: 3}
-  - {fileID: 3520194227820698857, guid: c049a1e5da6c849bcb83ca0571f97260, type: 3}
-  - {fileID: 188802209453415710, guid: 85bfe8f3be6244011ba8384f7286862c, type: 3}
+  - {fileID: 1839052806453286967, guid: 09a497e8eb57c45a586dbce57c535a61, type: 3}
+  - {fileID: 5222308465243356212, guid: 19fc3016b27b8455fbf710b1608a42ea, type: 3}
+  - {fileID: 8006710721204067173, guid: 1a296d0fc3071420499763634f83a98e, type: 3}
+  - {fileID: 4943245701022362101, guid: b2f5e4c1cac3046ec860b127a7157e8d, type: 3}
+  - {fileID: 8732690960873282312, guid: bd9afbde7003247dab3ffab088e523d3, type: 3}
+  - {fileID: 3610131359642704619, guid: 79fef33f0e630463a81b9d4775dfa18b, type: 3}
+  - {fileID: 8732690960873282312, guid: c8ea1f13ff6cc4c9dacffc1417beabe7, type: 3}
+  - {fileID: 6077730922625021557, guid: beb072919c07b4870a9ae8daf166e537, type: 3}
+  - {fileID: 6077730922625021557, guid: 69a8ee41bd7994ddea8671627c76add5, type: 3}
+  - {fileID: 6077730922625021557, guid: 0846ff9517be84ff7983a84e50cae1f7, type: 3}
+  - {fileID: 4884581681096061068, guid: 3b467bf39320e40e2aebacfdc1bbf23a, type: 3}
+  - {fileID: 5244871864806452798, guid: 9bf0c9ee3909e4da4b28affc20c4920d, type: 3}
+  - {fileID: 4884581681096061068, guid: 63eb4ce8912ce405cb3e169e5965e3e2, type: 3}
+  - {fileID: 3610131359642704619, guid: 2bc1a924cbafa4c2dbf2bf0a353339a2, type: 3}
 --- !u!1 &640799598
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +849,7 @@ Camera:
     height: 1334
   near clip plane: 0.3
   far clip plane: 5000
-  field of view: 90
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1220,7 +1225,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014609901}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 375, y: 907, z: 600}
+  m_LocalPosition: {x: 375, y: 800, z: 600}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1277,7 +1282,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 750, y: 1334}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1695,12 +1700,17 @@ MonoBehaviour:
   privacyPolicy: 0
   allBalls: 0100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   currentBallIndex: 0
-  redChestCount: 0
-  goldChestCount: 0
-  silverChestCount: 0
+  redKeyCount: 0
+  goldKeyCount: 0
+  silverKeyCount: 0
   bulletCount: 0
   lightningCount: 0
   shieldCount: 0
+  speedCount: 0
+  levelSpinClick: 
+  homeSpinClick: 
+  shopClick: 
+  chestClick: 
 --- !u!114 &528137425372163417
 MonoBehaviour:
   m_ObjectHideFlags: 0

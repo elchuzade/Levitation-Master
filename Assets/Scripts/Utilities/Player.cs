@@ -21,6 +21,11 @@ public class Player : MonoBehaviour
     public int shieldCount = 0;
     public int speedCount = 0;
 
+    public List<int> levelSpinClick = new List<int>();
+    public List<int> homeSpinClick = new List<int>();
+    public List<int> shopClick = new List<int>();
+    public List<int> chestClick = new List<int>();
+
     void Awake()
     {
         transform.SetParent(transform.parent.parent);
@@ -62,7 +67,12 @@ public class Player : MonoBehaviour
         shieldCount = 2;
         speedCount = 2;
 
-        SaveSystem.SavePlayer(this);
+        levelSpinClick = new List<int>();
+        homeSpinClick = new List<int>();
+        shopClick = new List<int>();
+        chestClick = new List<int>();
+
+    SaveSystem.SavePlayer(this);
     }
 
     public void LoadPlayer()
@@ -91,5 +101,10 @@ public class Player : MonoBehaviour
         lightningCount = data.lightningCount;
         shieldCount = data.shieldCount;
         speedCount = data.speedCount;
+
+        levelSpinClick = data.levelSpinClick;
+        homeSpinClick = data.homeSpinClick;
+        shopClick = data.shopClick;
+        chestClick = data.chestClick;
     }
 }
