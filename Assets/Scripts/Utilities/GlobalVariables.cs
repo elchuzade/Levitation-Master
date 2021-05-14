@@ -13,4 +13,6 @@ public class GlobalVariables : MonoBehaviour
     public enum Boxes { Lightning, Shield, Bullet, Speed, Diamond, Coin, Question }
 
     public enum TrapType { Bomb, Dynamite, Chainsaw };
+
+    public enum ChestPrizeTypes { Coin, Diamond, Box, Ball };
 }
