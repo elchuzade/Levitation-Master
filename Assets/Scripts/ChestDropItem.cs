@@ -18,7 +18,7 @@ public class ChestDropItem : MonoBehaviour
 
     void Start()
     {
-        pushX = Random.Range(-170, 170);
+        pushX = Random.Range(-160, 160);
         pushZ = Random.Range(-180, -50);
     }
 

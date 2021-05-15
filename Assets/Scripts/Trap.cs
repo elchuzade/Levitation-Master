@@ -6,7 +6,7 @@ public class Trap : MonoBehaviour
 {
     GameObject ball;
 
-    [SerializeField] TrapType trapType;
+    [SerializeField] TrapTypes trapType;
 
     [SerializeField] GameObject explosionParticles;
     [SerializeField] SphereCollider trapCollider;
@@ -40,7 +40,7 @@ public class Trap : MonoBehaviour
 
     void Update()
     {
-        if (trapType == TrapType.Dynamite && timerStarted)
+        if (trapType == TrapTypes.Dynamite && timerStarted)
         {
             if (time > 0)
             {
@@ -76,7 +76,7 @@ public class Trap : MonoBehaviour
     {
         if (other.gameObject.tag == "Ball")
         {
-            if (trapType == TrapType.Dynamite)
+            if (trapType == TrapTypes.Dynamite)
             {
                 StartTimer();
             }
@@ -112,7 +112,7 @@ public class Trap : MonoBehaviour
         explosionParticles.SetActive(true);
         trapDestroy.SetActive(true);
 
-        if (trapType == TrapType.Dynamite)
+        if (trapType == TrapTypes.Dynamite)
         {
             if (Vector3.Distance(ball.transform.position, transform.position) < dynamiteExplosionRadius)
             {
@@ -120,7 +120,7 @@ public class Trap : MonoBehaviour
             }
             radius.SetActive(false);
             timer.gameObject.SetActive(false);
-        } else if (trapType == TrapType.Chainsaw)
+        } else if (trapType == TrapTypes.Chainsaw)
         {
             wind.SetActive(false);
         }

@@ -1,7 +1,11 @@
 using UnityEngine;
+using static GlobalVariables;
 
-public class ChestBallItem : MonoBehaviour
+public class BallItem : MonoBehaviour
 {
+    [SerializeField] int ballIndex;
+    [SerializeField] BallTypes ballType;
+
     bool movingUp;
     float time = 0.5f;
 
@@ -23,5 +27,15 @@ public class ChestBallItem : MonoBehaviour
     public void MoveUp()
     {
         movingUp = true;
+    }
+
+    public BallTypes GetBallType()
+    {
+        return ballType;
+    }
+
+    public int GetBallIndex()
+    {
+        return ballIndex;
     }
 }

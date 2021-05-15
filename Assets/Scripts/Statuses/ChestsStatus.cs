@@ -83,32 +83,9 @@ public class ChestsStatus : MonoBehaviour
                 break;
         }
     }
-
-    void SetChestColorInChestOpenView()
-    {
-        switch (selectedChestColor)
-        {
-            case ChestColors.Red:
-                chestOpenWindow.transform.Find("RedChest").gameObject.SetActive(true);
-                break;
-            case ChestColors.Gold:
-                chestOpenWindow.transform.Find("GoldChest").gameObject.SetActive(true);
-                break;
-            case ChestColors.Silver:
-            default:
-                chestOpenWindow.transform.Find("SilverChest").gameObject.SetActive(true);
-                break;
-        }
-    }
     #endregion
 
     #region Public Methods
-    // @access from ChestUnlock script
-    //public void GiveChestPrize()
-    //{
-
-    //}
-
     // @access from Chest canvas
     public void SelectSilverChest()
     {
@@ -225,7 +202,6 @@ public class ChestsStatus : MonoBehaviour
                 SelectGoldChest();
                 break;
             case ChestColors.Silver:
-            default:
                 player.silverKeyCount--;
                 SelectSilverChest();
                 break;
@@ -233,7 +209,7 @@ public class ChestsStatus : MonoBehaviour
 
         chestOpenWindow.SetActive(true);
         // Show only selected chest instead of all three chests
-        SetChestColorInChestOpenView();
+        chestOpenWindow.GetComponent<ChestWindow>().OpenChest(selectedChestColor);
         player.SavePlayer();
         SetPlayerChests();
     }

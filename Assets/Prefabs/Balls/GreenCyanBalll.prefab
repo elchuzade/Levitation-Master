@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7224092443647040597
 Transform:
   m_ObjectHideFlags: 0
@@ -4833,7 +4833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5980593906905337394
 Transform:
   m_ObjectHideFlags: 0
@@ -14466,7 +14466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4295176039672698847
 Transform:
   m_ObjectHideFlags: 0
@@ -19496,7 +19496,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      maxColor: {r: 1, g: 0.99296916, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -24160,6 +24160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe490f3993e314ee99817d9b060aa46c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballIndex: 4
+  ballType: 1
 --- !u!1 &8732746903027257252
 GameObject:
   m_ObjectHideFlags: 0
@@ -53532,7 +53534,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.15566039, g: 1, b: 0.28637397, a: 1}
-      maxColor: {r: 0.5647059, g: 0, b: 0, a: 0.2509804}
+      maxColor: {r: 0, g: 0.5647059, b: 0.11977347, a: 0.2509804}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
