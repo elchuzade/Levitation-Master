@@ -14,6 +14,14 @@ public class ChestWindow : MonoBehaviour
     [SerializeField] GameObject goldChest;
     [SerializeField] GameObject silverChest;
 
+    [SerializeField] GameObject coinsIconPrefab;
+    [SerializeField] GameObject diamondsIconPrefab;
+    [SerializeField] GameObject bulletIconPrefab;
+    [SerializeField] GameObject speedIconPrefab;
+    [SerializeField] GameObject lightningIconPrefab;
+    [SerializeField] GameObject shieldIconPrefab;
+    [SerializeField] GameObject iconsParent;
+
     [SerializeField] GameObject coinPrefab;
     [SerializeField] GameObject diamondPrefab;
 
@@ -105,10 +113,10 @@ public class ChestWindow : MonoBehaviour
         List<GameObject> allBalls = new List<GameObject>();
 
         ChestUnlock chestUnlock = openedChest.GetComponent<ChestUnlock>();
-        int spawnCoinAmount = Random.Range(chestUnlock.coinMin, chestUnlock.coinMax);
-        int spawnDiamondAmount = Random.Range(chestUnlock.diamondMin, chestUnlock.diamondMax);
-        int spawnSkillAmount = Random.Range(chestUnlock.skillMin, chestUnlock.skillMax);
-        int spawnBallAmount = Random.Range(chestUnlock.ballMin, chestUnlock.ballMax);
+        int spawnCoinAmount = Random.Range(chestUnlock.coinMin, chestUnlock.coinMax + 1);
+        int spawnDiamondAmount = Random.Range(chestUnlock.diamondMin, chestUnlock.diamondMax + 1);
+        int spawnSkillAmount = Random.Range(chestUnlock.skillMin, chestUnlock.skillMax + 1);
+        int spawnBallAmount = Random.Range(chestUnlock.ballMin, chestUnlock.ballMax + 1);
 
         coinAmount = spawnCoinAmount;
         diamondAmount = spawnDiamondAmount;
@@ -124,7 +132,7 @@ public class ChestWindow : MonoBehaviour
         for (int i = 0; i < spawnSkillAmount; i++)
         {
             GameObject[] skillPool = new GameObject[] { speedPrefab, bulletPrefab, lightningPrefab, shieldPrefab };
-            int randomSkillIndex = Random.Range(0, 3);
+            int randomSkillIndex = Random.Range(0, 4);
             allSkills.Add(skillPool[randomSkillIndex]);
             // Add counts to player data
             if (randomSkillIndex == 0)
@@ -213,20 +221,20 @@ public class ChestWindow : MonoBehaviour
                 }
             }
             // Pick one ball randomly from the selected ball type list and add it to allBalls
-            BallTypes randomBallType = ballPrizePool[Random.Range(0, ballPrizePool.Count - 1)];
+            BallTypes randomBallType = ballPrizePool[Random.Range(0, ballPrizePool.Count)];
             if (randomBallType == BallTypes.Common)
             {
-                GameObject randomCommonBall = possibleCommonBalls[Random.Range(0, possibleCommonBalls.Count - 1)];
+                GameObject randomCommonBall = possibleCommonBalls[Random.Range(0, possibleCommonBalls.Count)];
                 possibleCommonBalls.Remove(randomCommonBall);
                 allBalls.Add(randomCommonBall);
             } else if (randomBallType == BallTypes.Rare)
             {
-                GameObject randomRareBall = possibleRareBalls[Random.Range(0, possibleRareBalls.Count - 1)];
+                GameObject randomRareBall = possibleRareBalls[Random.Range(0, possibleRareBalls.Count)];
                 possibleRareBalls.Remove(randomRareBall);
                 allBalls.Add(randomRareBall);
             } else
             {
-                GameObject randomLegendaryBall = possibleLegendaryBalls[Random.Range(0, possibleLegendaryBalls.Count - 1)];
+                GameObject randomLegendaryBall = possibleLegendaryBalls[Random.Range(0, possibleLegendaryBalls.Count)];
                 possibleLegendaryBalls.Remove(randomLegendaryBall);
                 allBalls.Add(randomLegendaryBall);
             }
@@ -308,6 +316,10 @@ public class ChestWindow : MonoBehaviour
         }
         else
         {
+            if (prizeType == ChestPrizeTypes.Skill)
+            {
+                prizeCount.SetActive(false);
+            }
             for (int i = 0; i < prefabs.Count; i++)
             {
                 yield return new WaitForSeconds(interval);
@@ -315,27 +327,80 @@ public class ChestWindow : MonoBehaviour
 
                 GameObject prize = Instantiate(prefabs[i], transform.position + new Vector3(0, 0, -10), Quaternion.identity);
                 prize.transform.SetParent(allPrizes.transform);
-                prize.GetComponent<ChestDropItem>().lastPrize = lastPrize;
             }
             if (prizeType == ChestPrizeTypes.Coin)
             {
                 prizeCount.SetActive(true);
                 prizeCount.GetComponent<Text>().text = coinAmount.ToString();
+                StartCoroutine(SetCollectedCoinsIcon());
             }
             else if (prizeType == ChestPrizeTypes.Diamond)
             {
+                StartCoroutine(SetCollectedDiamondsIcon());
                 prizeCount.SetActive(true);
                 prizeCount.GetComponent<Text>().text = diamondAmount.ToString();
             }
-            else
+            else if (prizeType == ChestPrizeTypes.Skill)
             {
-                prizeCount.SetActive(false);
+                StartCoroutine(SetCollectedSkillsIcon());
             }
         }
 
         if (lastPrize)
         {
             StartCoroutine(ActivateCollectButton());
+        }
+    }
+
+    IEnumerator SetCollectedCoinsIcon()
+    {
+        yield return new WaitForSeconds(2);
+        GameObject coinsIcon = Instantiate(coinsIconPrefab, transform.position, Quaternion.identity);
+        coinsIcon.transform.SetParent(iconsParent.transform);
+        coinsIcon.transform.localScale = Vector3.one;
+        coinsIcon.transform.Find("Count").GetComponent<Text>().text = coinAmount.ToString();
+    }
+
+    IEnumerator SetCollectedDiamondsIcon()
+    {
+        yield return new WaitForSeconds(2);
+        GameObject diamondsIcon = Instantiate(diamondsIconPrefab, transform.position, Quaternion.identity);
+        diamondsIcon.transform.SetParent(iconsParent.transform);
+        diamondsIcon.transform.localScale = Vector3.one;
+        diamondsIcon.transform.Find("Count").GetComponent<Text>().text = diamondAmount.ToString();
+    }
+
+    IEnumerator SetCollectedSkillsIcon()
+    {
+        yield return new WaitForSeconds(2);
+
+        if (bulletAmount > 0)
+        {
+            GameObject bulletIcon = Instantiate(bulletIconPrefab, transform.position, Quaternion.identity);
+            bulletIcon.transform.SetParent(iconsParent.transform);
+            bulletIcon.transform.localScale = Vector3.one;
+            bulletIcon.transform.Find("Count").GetComponent<Text>().text = bulletAmount.ToString();
+        }
+        if (speedAmount > 0)
+        {
+            GameObject speedIcon = Instantiate(speedIconPrefab, transform.position, Quaternion.identity);
+            speedIcon.transform.SetParent(iconsParent.transform);
+            speedIcon.transform.localScale = Vector3.one;
+            speedIcon.transform.Find("Count").GetComponent<Text>().text = speedAmount.ToString();
+        }
+        if (shieldAmount > 0)
+        {
+            GameObject shieldIcon = Instantiate(shieldIconPrefab, transform.position, Quaternion.identity);
+            shieldIcon.transform.SetParent(iconsParent.transform);
+            shieldIcon.transform.localScale = Vector3.one;
+            shieldIcon.transform.Find("Count").GetComponent<Text>().text = shieldAmount.ToString();
+        }
+        if (lightningAmount > 0)
+        {
+            GameObject lightningIcon = Instantiate(lightningIconPrefab, transform.position, Quaternion.identity);
+            lightningIcon.transform.SetParent(iconsParent.transform);
+            lightningIcon.transform.localScale = Vector3.one;
+            lightningIcon.transform.Find("Count").GetComponent<Text>().text = lightningAmount.ToString();
         }
     }
 

@@ -57,6 +57,7 @@ public class Ball : MonoBehaviour
 
         ballPrefab = Instantiate(allBalls[player.currentBallIndex], transform.position, Quaternion.identity);
         ballPrefab.transform.SetParent(transform);
+        ballPrefab.transform.Find("RaisingTail").gameObject.SetActive(false);
 
         pushingDown = true;
         rb.AddForce(Vector3.down * 10000 * rb.mass);
@@ -155,7 +156,7 @@ public class Ball : MonoBehaviour
     }
 
     // @access from LevelStatus script
-    public void UseLightingSkill()
+    public void UseLightningSkill()
     {
         // Strike lightning effect on the ball
         lightningSkill.SetActive(true);

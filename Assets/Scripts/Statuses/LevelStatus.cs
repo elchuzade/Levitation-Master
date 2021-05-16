@@ -200,6 +200,9 @@ public class LevelStatus : MonoBehaviour
         levelText.text = (player.nextLevelIndex + 1).ToString();
         levelControlsWindow.SetActive(false);
         doubleRewardWindow.SetActive(true);
+        // Add reward for passing level
+        coins += Random.Range(5, 15);
+        SetScoreboardValues();
     }
 
     // @access from Collectable script
@@ -333,7 +336,7 @@ public class LevelStatus : MonoBehaviour
 
             lightningButton.GetComponent<Skill>().ClickSkill(lightningReloadTime);
 
-            ball.UseLightingSkill();
+            ball.UseLightningSkill();
         }
     }
 
@@ -399,6 +402,9 @@ public class LevelStatus : MonoBehaviour
     {
         player.coins += coins;
         player.diamonds += diamonds;
+        player.redKeyCount += redKeys;
+        player.goldKeyCount += goldKeys;
+        player.silverKeyCount += silverKeys;
 
         player.SavePlayer();
 

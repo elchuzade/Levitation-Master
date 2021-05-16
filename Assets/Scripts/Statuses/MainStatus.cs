@@ -15,7 +15,6 @@ public class MainStatus : MonoBehaviour
 
     // To run animation and to show notification sign
     [SerializeField] GameObject chestButton;
-    [SerializeField] GameObject giftButton;
     [SerializeField] GameObject hapticsButton;
     [SerializeField] GameObject privacyWindow;
     [SerializeField] GameObject quitGameWindow;
@@ -67,7 +66,6 @@ public class MainStatus : MonoBehaviour
         SetScoreboardValues();
         SetButtonInitialState();
         SetChestButton();
-        SetGiftButton();
 
         GameObject ballPrefab = Instantiate(allBalls[player.currentBallIndex], ballParent.transform.position, Quaternion.identity);
         ballPrefab.transform.SetParent(ballParent.transform);
@@ -92,19 +90,6 @@ public class MainStatus : MonoBehaviour
         {
             chestButton.GetComponent<Animator>().enabled = false;
             chestButton.transform.GetChild(0).gameObject.SetActive(false);
-        }
-    }
-
-    void SetGiftButton()
-    {
-        if (giftReady)
-        {
-            giftButton.GetComponent<Animator>().enabled = true;
-        }
-        else
-        {
-            giftButton.GetComponent<Animator>().enabled = false;
-            giftButton.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 

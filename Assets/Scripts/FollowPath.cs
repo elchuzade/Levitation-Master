@@ -42,7 +42,6 @@ public class FollowPath : MonoBehaviour
             {
                 if (wayPoints.transform.GetChild(currentWaypointIndex).position != transform.position)
                 {
-                    Debug.Log(transform.position + " - " + wayPoints.transform.GetChild(currentWaypointIndex).position);
                     transform.position = Vector3.MoveTowards(transform.position, wayPoints.transform.GetChild(currentWaypointIndex).position, speed * Time.deltaTime);
                 }
                 else
