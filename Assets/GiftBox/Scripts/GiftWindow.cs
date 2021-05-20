@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GiftWindow : MonoBehaviour
 {
+    Player player;
     [Header("Where the logic for setting counts is")]
     [SerializeField] LevelStatus levelStatus;
 
@@ -19,6 +20,12 @@ public class GiftWindow : MonoBehaviour
     List<bool> readySpinners = new List<bool>();
 
     List<GameObject> completeSpinners = new List<GameObject>();
+
+    void Start()
+    {
+        player = FindObjectOfType<Player>();
+        player.LoadPlayer();
+    }
 
     #region Public Methods
     public void OpenGiftWindow()
@@ -60,6 +67,12 @@ public class GiftWindow : MonoBehaviour
 
     public void ClickSpinButton()
     {
+        // Save click
+        System.DateTimeOffset now = System.DateTimeOffset.UtcNow;
+        long date = now.ToUnixTimeMilliseconds();
+        player.spinnerClicks.Add(date);
+        player.SavePlayer();
+
         spinButton.SetActive(false);
         freeButtonDisabled.SetActive(true);
         StartSpinning();

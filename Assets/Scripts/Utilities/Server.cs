@@ -22,15 +22,17 @@ public class Server : MonoBehaviour
     {
         public string playerName;
         public int rank;
-        public int currentBallIndex;
     }
 
     // Video Link
     public class VideoJson
     {
+        public string id; // link id to measure clicks
         public string video; // link to video
         public string name; // product title
         public string website; // link to follow on click
+        public string playMarket; // link to follow on click
+        public string appStore; // link to follow on click
     }
 
     public class PlayerData
@@ -39,12 +41,34 @@ public class Server : MonoBehaviour
         public int diamonds;
         public int nextLevelIndex;
         public int currentBallIndex;
+        public bool maxLevelReached;
+
         public List<int> allBalls;
+        public List<int> levelsAfterMaxReached;
+
+        public int redKeyCount;
+        public int goldKeyCount;
+        public int silverKeyCount;
+
+        public int bulletCount;
+        public int lightningCount;
+        public int shieldCount;
+        public int speedCount;
+
+        public List<long> redChestBuys;
+        public List<long> goldChestBuys;
+        public List<long> silverChestBuys;
+
+        public List<long> spinnerClicks;
+        public List<long> spinnerCollects;
+        public List<long> shopClicks;
+        public List<long> leaderboardClicks;
+        public List<long> chestClicks;
     }
 
     // LOCAL TESTING
     //string abboxAdsApi = "http://localhost:5002";
-    string levitationMasterApi = "http://localhost:5001/levitationMaster";
+    //string levitationMasterApi = "http://localhost:5001/v1/levitationMaster";
 
     // STAGING
     //string abboxAdsApi = "https://staging.ads.abbox.com";
@@ -52,7 +76,7 @@ public class Server : MonoBehaviour
 
     // PRODUCTION
     string abboxAdsApi = "https://ads.abbox.com";
-    //string levitationMasterApi = "https://api.abboxgames.com/levitationMaster";
+    string levitationMasterApi = "https://api.abboxgames.com/v1/levitationMaster";
 
     List<LeaderboardItem> top = new List<LeaderboardItem>();
     List<LeaderboardItem> before = new List<LeaderboardItem>();
@@ -79,19 +103,48 @@ public class Server : MonoBehaviour
     {
         string playerUrl = levitationMasterApi + "/player";
 
-        string playerDataUrl = levitationMasterApi + "/data";
-
         PlayerData playerData = new PlayerData();
         playerData.coins = player.coins;
         playerData.diamonds = player.diamonds;
         playerData.nextLevelIndex = player.nextLevelIndex;
         playerData.currentBallIndex = player.currentBallIndex;
-        playerData.allBalls = new List<int>();
 
-        player.allBalls.ForEach(l =>
-        {
-            playerData.allBalls.Add(l);
-        });
+        playerData.allBalls = new List<int>();
+        player.allBalls.ForEach(l => { playerData.allBalls.Add(l); });
+
+        playerData.redKeyCount = player.redKeyCount;
+        playerData.goldKeyCount = player.goldKeyCount;
+        playerData.silverKeyCount = player.silverKeyCount;
+
+        playerData.bulletCount = player.bulletCount;
+        playerData.lightningCount = player.lightningCount;
+        playerData.shieldCount = player.shieldCount;
+        playerData.speedCount = player.speedCount;
+
+        // Clicks
+        playerData.redChestBuys = new List<long>();
+        player.redChestBuys.ForEach(l => { playerData.redChestBuys.Add(l); });
+
+        playerData.goldChestBuys = new List<long>();
+        player.goldChestBuys.ForEach(l => { playerData.goldChestBuys.Add(l); });
+
+        playerData.silverChestBuys = new List<long>();
+        player.silverChestBuys.ForEach(l => { playerData.silverChestBuys.Add(l); });
+
+        playerData.spinnerClicks = new List<long>();
+        player.spinnerClicks.ForEach(l => { playerData.spinnerClicks.Add(l); });
+
+        playerData.spinnerCollects = new List<long>();
+        player.spinnerCollects.ForEach(l => { playerData.spinnerCollects.Add(l); });
+
+        playerData.shopClicks = new List<long>();
+        player.shopClicks.ForEach(l => { playerData.shopClicks.Add(l); });
+
+        playerData.leaderboardClicks = new List<long>();
+        player.leaderboardClicks.ForEach(l => { playerData.leaderboardClicks.Add(l); });
+
+        playerData.chestClicks = new List<long>();
+        player.chestClicks.ForEach(l => { playerData.chestClicks.Add(l); });
 
         string playerDataJson = JsonUtility.ToJson(playerData);
 
@@ -140,12 +193,43 @@ public class Server : MonoBehaviour
         playerData.diamonds = player.diamonds;
         playerData.nextLevelIndex = player.nextLevelIndex;
         playerData.currentBallIndex = player.currentBallIndex;
-        playerData.allBalls = new List<int>();
 
-        player.allBalls.ForEach(l =>
-        {
-            playerData.allBalls.Add(l);
-        });
+        playerData.allBalls = new List<int>();
+        player.allBalls.ForEach(l => { playerData.allBalls.Add(l); });
+
+        playerData.redKeyCount = player.redKeyCount;
+        playerData.goldKeyCount = player.goldKeyCount;
+        playerData.silverKeyCount = player.silverKeyCount;
+
+        playerData.bulletCount = player.bulletCount;
+        playerData.lightningCount = player.lightningCount;
+        playerData.shieldCount = player.shieldCount;
+        playerData.speedCount = player.speedCount;
+
+        // Clicks
+        playerData.redChestBuys = new List<long>();
+        player.redChestBuys.ForEach(l => { playerData.redChestBuys.Add(l); });
+
+        playerData.goldChestBuys = new List<long>();
+        player.goldChestBuys.ForEach(l => { playerData.goldChestBuys.Add(l); });
+
+        playerData.silverChestBuys = new List<long>();
+        player.silverChestBuys.ForEach(l => { playerData.silverChestBuys.Add(l); });
+
+        playerData.spinnerClicks = new List<long>();
+        player.spinnerClicks.ForEach(l => { playerData.spinnerClicks.Add(l); });
+
+        playerData.spinnerCollects = new List<long>();
+        player.spinnerCollects.ForEach(l => { playerData.spinnerCollects.Add(l); });
+
+        playerData.shopClicks = new List<long>();
+        player.shopClicks.ForEach(l => { playerData.shopClicks.Add(l); });
+
+        playerData.leaderboardClicks = new List<long>();
+        player.leaderboardClicks.ForEach(l => { playerData.leaderboardClicks.Add(l); });
+
+        playerData.chestClicks = new List<long>();
+        player.chestClicks.ForEach(l => { playerData.chestClicks.Add(l); });
 
         string playerDataJson = JsonUtility.ToJson(playerData);
 
@@ -177,6 +261,30 @@ public class Server : MonoBehaviour
         //    Debug.Log(webRequest.downloadHandler.text);
         //    // Make the success actions received from creating a player
         //}
+    }
+
+    public void SendVideoClick(bool privacy, string videoId, string link)
+    {
+        string videoUrl = abboxAdsApi + "/api/v1/clicks/" + videoId;
+        StartCoroutine(SendClickCoroutine(videoUrl, privacy, link));
+    }
+
+    private IEnumerator SendClickCoroutine(string url, bool privacy, string link)
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
+        {
+            string message = JsonUtility.ToJson(header);
+            string headerMessage = BuildHeaders(message);
+
+            if (privacy)
+            {
+                webRequest.SetRequestHeader("token", headerMessage);
+            }
+            webRequest.SetRequestHeader("link", link);
+
+            // Send request and wait for the desired response.
+            yield return webRequest.SendWebRequest();
+        }
     }
 
     public void GetVideoLink()

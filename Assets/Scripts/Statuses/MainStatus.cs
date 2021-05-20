@@ -23,8 +23,6 @@ public class MainStatus : MonoBehaviour
     [SerializeField] GameObject ballParent;
     [SerializeField] GameObject[] allBalls;
 
-    bool giftReady;
-
     void Awake()
     {
         navigator = FindObjectOfType<Navigator>();
@@ -37,7 +35,10 @@ public class MainStatus : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<Player>();
+
         //player.ResetPlayer();
+        //return;
+
         player.LoadPlayer();
 
         server.GetVideoLink();
@@ -138,6 +139,7 @@ public class MainStatus : MonoBehaviour
     // @access from MainStatus canvas
     public void ClickChestButton()
     {
+
         navigator.LoadChests();
     }
 

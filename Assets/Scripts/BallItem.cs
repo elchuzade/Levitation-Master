@@ -7,7 +7,7 @@ public class BallItem : MonoBehaviour
     [SerializeField] BallTypes ballType;
 
     bool movingUp;
-    float time = 0.5f;
+    float time = 0.3f;
 
     void Update()
     {

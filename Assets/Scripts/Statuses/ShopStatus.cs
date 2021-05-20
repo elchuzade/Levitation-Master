@@ -44,6 +44,12 @@ public class ShopStatus : MonoBehaviour
 
         // 0.125 is the step size based on 0,1 and number of balls
         SwipeBall(0.125f * player.currentBallIndex);
+
+        // Save click
+        System.DateTimeOffset now = System.DateTimeOffset.UtcNow;
+        long date = now.ToUnixTimeMilliseconds();
+        player.shopClicks.Add(date);
+        player.SavePlayer();
     }
 
     #region Public Methods

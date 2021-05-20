@@ -13,6 +13,7 @@ public class PlayerData
     public bool nameChanged = false;
     public List<int> allBalls = new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     public int currentBallIndex = 0;
+
     public int redKeyCount = 0;
     public int goldKeyCount = 0;
     public int silverKeyCount = 0;
@@ -22,10 +23,15 @@ public class PlayerData
     public int shieldCount = 0;
     public int speedCount = 0;
 
-    public List<int> levelSpinClick = new List<int>();
-    public List<int> homeSpinClick = new List<int>();
-    public List<int> shopClick = new List<int>();
-    public List<int> chestClick = new List<int>();
+    public List<long> redChestBuys = new List<long>();
+    public List<long> goldChestBuys = new List<long>();
+    public List<long> silverChestBuys = new List<long>();
+
+    public List<long> spinnerClicks = new List<long>();
+    public List<long> spinnerCollects = new List<long>();
+    public List<long> shopClicks = new List<long>();
+    public List<long> leaderboardClicks = new List<long>();
+    public List<long> chestClicks = new List<long>();
 
     public PlayerData (Player player)
     {
@@ -38,6 +44,7 @@ public class PlayerData
         nameChanged = player.nameChanged;
         allBalls = player.allBalls;
         currentBallIndex = player.currentBallIndex;
+
         redKeyCount = player.redKeyCount;
         goldKeyCount = player.goldKeyCount;
         silverKeyCount = player.silverKeyCount;
@@ -47,9 +54,14 @@ public class PlayerData
         shieldCount = player.shieldCount;
         speedCount = player.speedCount;
 
-        levelSpinClick = player.levelSpinClick;
-        homeSpinClick = player.homeSpinClick;
-        shopClick = player.shopClick;
-        chestClick = player.chestClick;
+        redChestBuys = player.redChestBuys;
+        goldChestBuys = player.goldChestBuys;
+        silverChestBuys = player.silverChestBuys;
+
+        spinnerClicks = player.spinnerClicks;
+        spinnerCollects = player.spinnerCollects;
+        shopClicks = player.shopClicks;
+        leaderboardClicks = player.leaderboardClicks;
+        chestClicks = player.chestClicks;
     }
 }

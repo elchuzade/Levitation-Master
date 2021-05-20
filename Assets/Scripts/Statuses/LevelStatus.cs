@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -58,7 +57,6 @@ public class LevelStatus : MonoBehaviour
     int silverKeys;
     int goldKeys;
 
-    List<string> spinnerItems = new List<string>();
     [SerializeField] GameObject giftWindow;
     [SerializeField] GameObject giftButton;
     [SerializeField] Image giftLoader;
@@ -75,7 +73,7 @@ public class LevelStatus : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<Player>();
-        player.ResetPlayer();
+        //player.ResetPlayer();
         player.LoadPlayer();
 
         SetScoreboardValues();
@@ -454,6 +452,11 @@ public class LevelStatus : MonoBehaviour
                     break;
             }
         }
+
+        // Save click
+        System.DateTimeOffset now = System.DateTimeOffset.UtcNow;
+        long date = now.ToUnixTimeMilliseconds();
+        player.spinnerCollects.Add(date);
 
         player.SavePlayer();
         SetScoreboardValues();

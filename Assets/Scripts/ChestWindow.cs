@@ -7,6 +7,7 @@ using static GlobalVariables;
 public class ChestWindow : MonoBehaviour
 {
     Player player;
+    ChestStatus chestStatus;
 
     [SerializeField] ParticleSystem prizeParticles;
 
@@ -49,8 +50,9 @@ public class ChestWindow : MonoBehaviour
 
     void Start()
     {
+        chestStatus = FindObjectOfType<ChestStatus>();
         player = FindObjectOfType<Player>();
-
+        
         player.LoadPlayer();
     }
 
@@ -73,6 +75,7 @@ public class ChestWindow : MonoBehaviour
                 openedChest = silverChest;
                 break;
         }
+        ResetChestWindow();
     }
 
     // @access from ChestWindow canvas
@@ -101,7 +104,13 @@ public class ChestWindow : MonoBehaviour
         player.shieldCount += shieldAmount;
 
         player.SavePlayer();
+        chestStatus.SetScoreboardValues();
         StartCoroutine(HideChestWindow());
+        // Clear out icons of chest prizes so next chest starts with clear screen
+        for (int i = 0; i < iconsParent.transform.childCount; i++)
+        {
+            Destroy(iconsParent.transform.GetChild(i).gameObject);
+        }
     }
 
     // @access from Chest animation
@@ -275,6 +284,24 @@ public class ChestWindow : MonoBehaviour
     #endregion
 
     #region Private Methods
+    void ResetChestWindow()
+    {
+        coinAmount = 0;
+        diamondAmount = 0;
+        speedAmount = 0;
+        bulletAmount = 0;
+        lightningAmount = 0;
+        shieldAmount = 0;
+
+        // Incase previous chest has made it go off
+        allPrizes.SetActive(true);
+        // Return chest and lock icons to default to run animation over again when clicked
+        openedChest.transform.Find("ChestClosed").gameObject.SetActive(true);
+        openedChest.transform.Find("LockClosed").gameObject.SetActive(true);
+        openedChest.transform.Find("ChestOpened").gameObject.SetActive(false);
+        openedChest.transform.Find("LockOpened").gameObject.SetActive(false);
+    }
+
     void EmitPrizeParticles(ChestPrizeTypes prizeType)
     {
         ParticleSystem.EmitParams emitOverride = new ParticleSystem.EmitParams();
@@ -416,7 +443,7 @@ public class ChestWindow : MonoBehaviour
         prizeCount.SetActive(false);
         collectButton.SetActive(false);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.25f);
         allPrizes.SetActive(false);
         gameObject.SetActive(false);
     }

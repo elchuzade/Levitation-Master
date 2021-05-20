@@ -10,8 +10,9 @@ public class Player : MonoBehaviour
     public bool nameChanged = false;
     public bool playerCreated = false;
     public bool privacyPolicy = false;
-    public List<int> allBalls = new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public List<int> allBalls = new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     public int currentBallIndex = 0;
+
     public int redKeyCount = 0;
     public int goldKeyCount = 0;
     public int silverKeyCount = 0;
@@ -21,10 +22,15 @@ public class Player : MonoBehaviour
     public int shieldCount = 0;
     public int speedCount = 0;
 
-    public List<int> levelSpinClick = new List<int>();
-    public List<int> homeSpinClick = new List<int>();
-    public List<int> shopClick = new List<int>();
-    public List<int> chestClick = new List<int>();
+    public List<long> redChestBuys = new List<long>();
+    public List<long> goldChestBuys = new List<long>();
+    public List<long> silverChestBuys = new List<long>();
+
+    public List<long> spinnerClicks = new List<long>();
+    public List<long> spinnerCollects = new List<long>();
+    public List<long> shopClicks = new List<long>();
+    public List<long> leaderboardClicks = new List<long>();
+    public List<long> chestClicks = new List<long>();
 
     void Awake()
     {
@@ -48,31 +54,37 @@ public class Player : MonoBehaviour
 
     public void ResetPlayer()
     {
-        coins = 44444;
+        coins = 0;
         playerName = "";
-        diamonds = 555;
+        diamonds = 400;
         nextLevelIndex = 1;
         playerName = "";
         playerCreated = false;
         privacyPolicy = false;
         nameChanged = false;
-        allBalls = new List<int>() { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        allBalls = new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         currentBallIndex = 0;
-        redKeyCount = 1;
-        goldKeyCount = 1;
-        silverKeyCount = 1;
 
-        bulletCount = 4;
-        lightningCount = 2;
-        shieldCount = 2;
-        speedCount = 2;
+        redKeyCount = 2;
+        goldKeyCount = 2;
+        silverKeyCount = 2;
 
-        levelSpinClick = new List<int>();
-        homeSpinClick = new List<int>();
-        shopClick = new List<int>();
-        chestClick = new List<int>();
+        bulletCount = 0;
+        lightningCount = 0;
+        shieldCount = 0;
+        speedCount = 0;
 
-    SaveSystem.SavePlayer(this);
+        redChestBuys = new List<long>();
+        goldChestBuys = new List<long>();
+        silverChestBuys = new List<long>();
+
+        spinnerClicks = new List<long>();
+        spinnerCollects = new List<long>();
+        shopClicks = new List<long>();
+        leaderboardClicks = new List<long>();
+        chestClicks = new List<long>();
+
+        SaveSystem.SavePlayer(this);
     }
 
     public void LoadPlayer()
@@ -102,9 +114,14 @@ public class Player : MonoBehaviour
         shieldCount = data.shieldCount;
         speedCount = data.speedCount;
 
-        levelSpinClick = data.levelSpinClick;
-        homeSpinClick = data.homeSpinClick;
-        shopClick = data.shopClick;
-        chestClick = data.chestClick;
+        redChestBuys = data.redChestBuys;
+        goldChestBuys = data.goldChestBuys;
+        silverChestBuys = data.silverChestBuys;
+
+        spinnerClicks = data.spinnerClicks;
+        spinnerCollects = data.spinnerCollects;
+        shopClicks = data.shopClicks;
+        leaderboardClicks = data.leaderboardClicks;
+        chestClicks = data.chestClicks;
     }
 }

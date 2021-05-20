@@ -16,16 +16,12 @@ public class LeaderboardStatus : MonoBehaviour
     Navigator navigator;
     Server server;
 
-    // This one should be based on indexes
-    [SerializeField] Sprite[] ballSprites;
-
     [SerializeField] Text diamondsText;
     [SerializeField] Text coinsText;
     [SerializeField] GameObject diamondIcon;
 
     // Single line of leadersboard
     [SerializeField] GameObject leaderboardItemPrefab;
-    [SerializeField] GameObject leaderboardItemRevertPrefab;
     [SerializeField] GameObject leaderboardItemTrippleDots;
 
     // This is for saving the name before it has been changed, so receive diamonds
@@ -48,6 +44,10 @@ public class LeaderboardStatus : MonoBehaviour
     List<LeaderboardItem> top = new List<LeaderboardItem>();
     LeaderboardItem you = new LeaderboardItem();
 
+    Color32 goldColor = new Color32(255, 215, 0, 255);
+    Color32 silverColor = new Color32(192, 192, 192, 255);
+    Color32 bronzeColor = new Color32(205, 127, 50, 255);
+
     void Awake()
     {
         server = FindObjectOfType<Server>();
@@ -64,6 +64,12 @@ public class LeaderboardStatus : MonoBehaviour
         SwapSaveButton();
 
         server.GetLeaderboard();
+
+        // Save click
+        System.DateTimeOffset now = System.DateTimeOffset.UtcNow;
+        long date = now.ToUnixTimeMilliseconds();
+        player.leaderboardClicks.Add(date);
+        player.SavePlayer();
     }
 
     #region Private Methods
@@ -161,16 +167,8 @@ public class LeaderboardStatus : MonoBehaviour
 
     GameObject InstantiateLeaderboardItem(int rank)
     {
-        if (rank % 2 == 0)
-        {
-            GameObject leaderboardItem = Instantiate(leaderboardItemRevertPrefab, transform.position, Quaternion.identity);
-            return leaderboardItem;
-        }
-        else
-        {
-            GameObject leaderboardItem = Instantiate(leaderboardItemPrefab, transform.position, Quaternion.identity);
-            return leaderboardItem;
-        }
+        GameObject leaderboardItem = Instantiate(leaderboardItemPrefab, transform.position, Quaternion.identity);
+        return leaderboardItem;
     }
 
     void BuildUpList()
@@ -183,24 +181,19 @@ public class LeaderboardStatus : MonoBehaviour
             
             // Set its parent to be scroll content, for scroll functionality to work properly
             leaderboardItem.transform.SetParent(leaderboardScrollContent.transform);
+            leaderboardItem.transform.localScale = Vector3.one;
 
             if (item.rank == 1)
             {
-                // Hide default frame and show golden frame
-                leaderboardItem.transform.Find("Content").Find("DefaultFrame").gameObject.SetActive(false);
-                leaderboardItem.transform.Find("Content").Find("Frame").GetComponent<Image>().color = new Color32(254, 209, 0, 255);
+                leaderboardItem.transform.Find("Background").GetComponent<Image>().color = goldColor;
             }
             else if (item.rank == 2)
             {
-                // Hide default frame and show golden frame
-                leaderboardItem.transform.Find("Content").Find("DefaultFrame").gameObject.SetActive(false);
-                leaderboardItem.transform.Find("Content").Find("Frame").GetComponent<Image>().color = new Color32(211, 211, 211, 255);
+                leaderboardItem.transform.Find("Background").GetComponent<Image>().color = silverColor;
             }
             else if (item.rank == 3)
             {
-                // Hide default frame and show golden frame
-                leaderboardItem.transform.Find("Content").Find("DefaultFrame").gameObject.SetActive(false);
-                leaderboardItem.transform.Find("Content").Find("Frame").GetComponent<Image>().color = new Color32(205, 127, 50, 255);
+                leaderboardItem.transform.Find("Background").GetComponent<Image>().color = bronzeColor;
             }
 
             // Compare item from top ten with your rank incase you are in top ten
@@ -211,11 +204,9 @@ public class LeaderboardStatus : MonoBehaviour
             }
 
             // Set its name component text mesh pro value to name from top list
-            leaderboardItem.transform.Find("Content").Find("Name").GetComponent<Text>().text = item.playerName;
+            leaderboardItem.transform.Find("Name").GetComponent<Text>().text = item.playerName;
             // Set its rank component text to rank from top list converted to string
-            leaderboardItem.transform.Find("Content").Find("Rank").GetComponent<Text>().text = item.rank.ToString();
-            // Set its ball icon based on data from server and indexes of balls
-            leaderboardItem.transform.Find("Content").Find("Ball").GetComponent<Image>().sprite = GetBallSprite(item.currentBallIndex);
+            leaderboardItem.transform.Find("Rank").GetComponent<Text>().text = item.rank.ToString();
         });
 
         // Add tripple dots after top ten only if your rank is > 14,
@@ -233,6 +224,8 @@ public class LeaderboardStatus : MonoBehaviour
             
             // Set its parent to be scroll content, for scroll functionality to work properly
             leaderboardItem.transform.SetParent(leaderboardScrollContent.transform);
+            leaderboardItem.transform.localScale = Vector3.one;
+
             SetItemEntry(leaderboardItem, item);
         });
 
@@ -252,6 +245,8 @@ public class LeaderboardStatus : MonoBehaviour
             
             // Set its parent to be scroll content, for scroll functionality to work properly
             leaderboardItem.transform.SetParent(leaderboardScrollContent.transform);
+            leaderboardItem.transform.localScale = Vector3.one;
+
             SetItemEntry(leaderboardItem, item);
         });
 
@@ -259,11 +254,6 @@ public class LeaderboardStatus : MonoBehaviour
 
         // Add the scroll value after all the data is populated
         ScrollListToPlayer();
-    }
-
-    Sprite GetBallSprite(int ballIndex)
-    {
-        return ballSprites[ballIndex];
     }
 
     void CreateTrippleDotsEntry()
@@ -289,17 +279,15 @@ public class LeaderboardStatus : MonoBehaviour
     void SetItemEntry(GameObject item, LeaderboardItem value)
     {
         // Set its name component text mesh pro value to your name
-        item.transform.Find("Content").Find("Name").GetComponent<Text>().text = value.playerName;
+        item.transform.Find("Name").GetComponent<Text>().text = value.playerName;
         // Set its rank component text mesh pro value to your rank
-        item.transform.Find("Content").Find("Rank").GetComponent<Text>().text = value.rank.ToString();
-        // Set its ball icon based on data from server and indexes of balls
-        item.transform.Find("Content").Find("Ball").GetComponent<Image>().sprite = GetBallSprite(value.currentBallIndex);
+        item.transform.Find("Rank").GetComponent<Text>().text = value.rank.ToString();
     }
 
     void ShowYourEntryFrame(GameObject item)
     {
         // Show leaderboard frame for your entry
-        item.transform.Find("Content").Find("Frame").gameObject.SetActive(true);
+        item.transform.Find("Frame").gameObject.SetActive(true);
     }
 
     // Loop through the list of players ranked after you and see if iven data exists
