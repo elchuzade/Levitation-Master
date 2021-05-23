@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 7f318b6a879c57b45a4ee8db91c88453, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.64927304, g: 0.61927176, b: 0.69752884, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -188,7 +188,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -283,12 +283,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1628225521 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4944413284914191198, guid: 0559e96d027404158a31dab5da1229fc,
-    type: 3}
-  m_PrefabInstance: {fileID: 287374045726314623}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &287374045726314623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -296,25 +290,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1456349574167030955, guid: 0559e96d027404158a31dab5da1229fc,
-        type: 3}
-      propertyPath: currentBallIndex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1456349574167030955, guid: 0559e96d027404158a31dab5da1229fc,
-        type: 3}
-      propertyPath: allBalls.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1456349574167030955, guid: 0559e96d027404158a31dab5da1229fc,
-        type: 3}
-      propertyPath: allBalls.Array.data[6]
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2796983081633997056, guid: 0559e96d027404158a31dab5da1229fc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2796983081633997056, guid: 0559e96d027404158a31dab5da1229fc,
         type: 3}
@@ -371,15 +350,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelPrefab
       objectReference: {fileID: 0}
-    - target: {fileID: 4944413284708675974, guid: 0559e96d027404158a31dab5da1229fc,
-        type: 3}
-      propertyPath: ball
-      value: 
-      objectReference: {fileID: 1628225521}
     - target: {fileID: 4944413284914191168, guid: 0559e96d027404158a31dab5da1229fc,
         type: 3}
       propertyPath: speed
-      value: 300
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 4944413284914191168, guid: 0559e96d027404158a31dab5da1229fc,
         type: 3}
@@ -387,10 +361,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1839052806453286967, guid: 3a15a58d38af18d48a994dff3b655cd9,
         type: 3}
-    - target: {fileID: 4944413284914191198, guid: 0559e96d027404158a31dab5da1229fc,
+    - target: {fileID: 4944413284914191170, guid: 0559e96d027404158a31dab5da1229fc,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_LocalPosition.y
+      value: 2100
       objectReference: {fileID: 0}
     - target: {fileID: 4944413284991300012, guid: 0559e96d027404158a31dab5da1229fc,
         type: 3}
