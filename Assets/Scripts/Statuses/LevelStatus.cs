@@ -75,7 +75,7 @@ public class LevelStatus : MonoBehaviour
         player = FindObjectOfType<Player>();
         //player.ResetPlayer();
         player.LoadPlayer();
-
+        //player.SavePlayer();
         SetScoreboardValues();
         levelText.text = player.nextLevelIndex.ToString();
 
