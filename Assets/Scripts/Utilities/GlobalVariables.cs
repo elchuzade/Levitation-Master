@@ -16,5 +16,5 @@ public class GlobalVariables : MonoBehaviour
 
     public enum ChestPrizeTypes { Coin, Diamond, Skill, Ball };
 
-    public enum BallTypes { Common, Rare, Legendary };
+    public enum BallTypes { Common, Uncommon, Rare, Legendary, Special };
 }
