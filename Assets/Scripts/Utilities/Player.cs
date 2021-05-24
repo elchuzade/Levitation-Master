@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public bool nameChanged = false;
     public bool playerCreated = false;
     public bool privacyPolicy = false;
-    public List<int> allBalls = new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public List<int> allBalls = new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     public int currentBallIndex = 0;
 
     public int redKeyCount = 0;
@@ -62,17 +62,17 @@ public class Player : MonoBehaviour
         playerCreated = false;
         privacyPolicy = false;
         nameChanged = false;
-        allBalls = new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        allBalls = new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         currentBallIndex = 0;
 
         redKeyCount = 2;
         goldKeyCount = 2;
         silverKeyCount = 2;
 
-        bulletCount = 0;
-        lightningCount = 0;
-        shieldCount = 0;
-        speedCount = 0;
+        bulletCount = 4;
+        lightningCount = 4;
+        shieldCount = 4;
+        speedCount = 4;
 
         redChestBuys = new List<long>();
         goldChestBuys = new List<long>();

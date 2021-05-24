@@ -30,14 +30,14 @@ public class ShopStatus : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<Player>();
-        //player.ResetPlayer();
+        player.ResetPlayer();
         player.LoadPlayer();
 
         SetScoreboardValues();
         SetPlayerBalls();
 
-        scrollbar.GetComponent<Scrollbar>().numberOfSteps = 14;
-        scrollbar.GetComponent<Scrollbar>().value = (float)player.currentBallIndex / 13;
+        scrollbar.GetComponent<Scrollbar>().numberOfSteps = 25;
+        scrollbar.GetComponent<Scrollbar>().value = (float)player.currentBallIndex / 24;
         scrollbar.GetComponent<Scrollbar>().onValueChanged.AddListener(value => SwipeBall(value));
 
         SetBallValues();
@@ -56,7 +56,7 @@ public class ShopStatus : MonoBehaviour
     // @access from Shop canvas
     public void SwipeBall(float value)
     {
-        ballIndex = (int)(value * 13);
+        ballIndex = (int)(value * 24);
         SetBallValues();
     }
 
@@ -137,7 +137,7 @@ public class ShopStatus : MonoBehaviour
         if (ballIndex > 0)
         {
             ballIndex--;
-            scrollbar.GetComponent<Scrollbar>().value = (float)ballIndex / 13;
+            scrollbar.GetComponent<Scrollbar>().value = (float)ballIndex / 24;
             SetBallValues();
         }
     }
@@ -149,7 +149,7 @@ public class ShopStatus : MonoBehaviour
         if (ballIndex < allBalls.Length - 1)
         {
             ballIndex++;
-            scrollbar.GetComponent<Scrollbar>().value = (float)ballIndex / 13;
+            scrollbar.GetComponent<Scrollbar>().value = (float)ballIndex / 24;
             SetBallValues();
         }
     }

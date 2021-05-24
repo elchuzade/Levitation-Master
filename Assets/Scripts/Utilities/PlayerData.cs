@@ -11,7 +11,7 @@ public class PlayerData
     public bool playerCreated = false;
     public bool privacyPolicy = false;
     public bool nameChanged = false;
-    public List<int> allBalls = new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public List<int> allBalls = new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     public int currentBallIndex = 0;
 
     public int redKeyCount = 0;

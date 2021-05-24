@@ -13,9 +13,6 @@ public class LevelStatus : MonoBehaviour
     [SerializeField] GameObject coinPrefab;
     [SerializeField] GameObject diamondPrefab;
 
-    [SerializeField] GameObject lightningItem;
-    [SerializeField] GameObject shieldItem;
-
     [SerializeField] GameObject allKeys;
     // To set parent of coins and diamonds
     [SerializeField] GameObject platformItems;
@@ -26,9 +23,6 @@ public class LevelStatus : MonoBehaviour
     [SerializeField] Text subCoinCount;
     [SerializeField] Text diamondCount;
     [SerializeField] Text subDiamondCount;
-
-    //[SerializeField] Text bulletCount;
-    //[SerializeField] Text shieldCount;
 
     [SerializeField] GameObject coinsIcon;
     [SerializeField] GameObject diamondsIcon;
@@ -73,9 +67,10 @@ public class LevelStatus : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<Player>();
-        //player.ResetPlayer();
+        player.ResetPlayer();
         player.LoadPlayer();
-        //player.SavePlayer();
+
+
         SetScoreboardValues();
         levelText.text = player.nextLevelIndex.ToString();
 
@@ -164,6 +159,10 @@ public class LevelStatus : MonoBehaviour
             case "Shield":
                 int randomShieldsAmount = Random.Range(1, 2);
                 spinner.GetComponent<Spinner>().SetGiftCount(randomShieldsAmount);
+                break;
+            case "Speed":
+                int randomSpeedAmount = Random.Range(1, 2);
+                spinner.GetComponent<Spinner>().SetGiftCount(randomSpeedAmount);
                 break;
             case "Lightning":
                 int randomLightningsAmount = Random.Range(1, 2);
@@ -428,6 +427,9 @@ public class LevelStatus : MonoBehaviour
             {
                 case "Bullet":
                     player.bulletCount += count;
+                    break;
+                case "Speed":
+                    player.speedCount += count;
                     break;
                 case "Shield":
                     player.shieldCount += count;

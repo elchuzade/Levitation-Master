@@ -22,7 +22,14 @@ public class DirectionArrow : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(90, 0, angle - 90);
             }
 
-            transform.position = ball.transform.position - new Vector3(0, 25, 0);
+            if (ball != null)
+            {
+                transform.position = ball.transform.position - new Vector3(0, 25, 0);
+            } else
+            {
+                // Ball is destroyed so destroy the arrow too
+                Destroy(gameObject);
+            }
         }
     }
 

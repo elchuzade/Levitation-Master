@@ -35,7 +35,10 @@ public class Skill : MonoBehaviour
     {
         if (skillCount > 0)
         {
-            loader.fillAmount = 0;
+            if (!infinity)
+            {
+               loader.fillAmount = 0;
+            }
         }
         else
         {

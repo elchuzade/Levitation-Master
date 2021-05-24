@@ -97,6 +97,14 @@ public class Ball : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "MapLimit")
+        {
+            StartCoroutine(GameOver(0));
+        }
+    }
+
     #region Private Methods
     void DestroyShieldSkill()
     {
@@ -127,7 +135,7 @@ public class Ball : MonoBehaviour
             ballPrefab.SetActive(false);
             directionArrow.gameObject.SetActive(false);
 
-            Destroy(gameObject, 1);
+            StartCoroutine(GameOver(1));
         }
     }
 
@@ -256,6 +264,14 @@ public class Ball : MonoBehaviour
 
         // Load next leve only in LevelStatus to keep player data consistent
         levelStatus.LoadNextLevel();
+    }
+
+    IEnumerator GameOver(float time)
+    {
+        Debug.Log("lost");
+        yield return new WaitForSeconds(time);
+
+        Destroy(gameObject);
     }
     #endregion
 }
