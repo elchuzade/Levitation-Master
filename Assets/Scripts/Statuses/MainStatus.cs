@@ -16,6 +16,7 @@ public class MainStatus : MonoBehaviour
     // To run animation and to show notification sign
     [SerializeField] GameObject chestButton;
     [SerializeField] GameObject hapticsButton;
+    [SerializeField] GameObject soundsButton;
     [SerializeField] GameObject privacyWindow;
     [SerializeField] GameObject quitGameWindow;
     [SerializeField] GameObject leaderboardButton;
@@ -28,15 +29,13 @@ public class MainStatus : MonoBehaviour
         navigator = FindObjectOfType<Navigator>();
         server = FindObjectOfType<Server>();
         tv = FindObjectOfType<TV>();
-
-        hapticsButton = GameObject.Find("HapticsButton");
     }
 
     void Start()
     {
         player = FindObjectOfType<Player>();
 
-        //player.ResetPlayer();
+        player.ResetPlayer();
         //return;
 
         player.LoadPlayer();
@@ -104,6 +103,7 @@ public class MainStatus : MonoBehaviour
     // Set initial states of haptics button based on player prefs
     void SetButtonInitialState()
     {
+        // Haptics
         if (PlayerPrefs.GetInt("Haptics") == 1)
         {
             hapticsButton.transform.Find("Disabled").gameObject.SetActive(false);
@@ -112,7 +112,17 @@ public class MainStatus : MonoBehaviour
         {
             hapticsButton.transform.Find("Disabled").gameObject.SetActive(true);
         }
+        // Sounds
+        if (PlayerPrefs.GetInt("Sounds") == 1)
+        {
+            soundsButton.transform.Find("Disabled").gameObject.SetActive(false);
+        }
+        else
+        {
+            soundsButton.transform.Find("Disabled").gameObject.SetActive(true);
+        }
     }
+
     #endregion
 
     #region Public Methods
@@ -171,6 +181,25 @@ public class MainStatus : MonoBehaviour
             hapticsButton.transform.Find("Disabled").gameObject.SetActive(false);
             // If haptics are turned off => turn them on
             PlayerPrefs.SetInt("Haptics", 1);
+        }
+    }
+
+    // @access from MainStatus canvas
+    public void ClickSoundsButton()
+    {
+        if (PlayerPrefs.GetInt("Sounds") == 1)
+        {
+            // Set button state to disabled
+            soundsButton.transform.Find("Disabled").gameObject.SetActive(true);
+            // If sounds are turned on => turn them off
+            PlayerPrefs.SetInt("Sounds", 0);
+        }
+        else
+        {
+            // Set button state to enabled
+            soundsButton.transform.Find("Disabled").gameObject.SetActive(false);
+            // If sounds are turned off => turn them on
+            PlayerPrefs.SetInt("Sounds", 1);
         }
     }
 

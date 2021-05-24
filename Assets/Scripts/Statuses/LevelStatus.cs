@@ -27,8 +27,8 @@ public class LevelStatus : MonoBehaviour
     [SerializeField] Text diamondCount;
     [SerializeField] Text subDiamondCount;
 
-    [SerializeField] Text bulletCount;
-    [SerializeField] Text shieldCount;
+    //[SerializeField] Text bulletCount;
+    //[SerializeField] Text shieldCount;
 
     [SerializeField] GameObject coinsIcon;
     [SerializeField] GameObject diamondsIcon;
@@ -132,7 +132,7 @@ public class LevelStatus : MonoBehaviour
         shieldButton.GetComponent<Skill>().SetSkillCount(player.shieldCount);
         speedButton.GetComponent<Skill>().SetSkillCount(player.speedCount);
 
-        shieldCount.text = player.shieldCount.ToString();
+        //shieldCount.text = player.shieldCount.ToString();
 
         if (coins > 0)
         {
