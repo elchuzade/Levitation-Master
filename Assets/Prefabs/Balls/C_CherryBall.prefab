@@ -221,8 +221,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.18039216, g: 0.50980395, b: 0.23344168, a: 1}
-      maxColor: {r: 0.43529412, g: 0.7176471, b: 0.4939789, a: 1}
+      minColor: {r: 0.50980395, g: 0.19814534, b: 0.18039216, a: 1}
+      maxColor: {r: 0.7176471, g: 0.43529412, b: 0.43529412, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5039,7 +5039,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.15566039, g: 1, b: 0.28637397, a: 1}
-      maxColor: {r: 0.3457042, g: 0.8113208, b: 0.3329477, a: 0.2509804}
+      maxColor: {r: 0.764151, g: 0.42508245, b: 0.37126204, a: 0.2509804}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9856,7 +9856,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.15566039, g: 1, b: 0.28637397, a: 1}
-      maxColor: {r: 0.3647059, g: 0.7529412, b: 0.3529412, a: 0.2509804}
+      maxColor: {r: 0.8867924, g: 0.35555357, b: 0.38026237, a: 0.2509804}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14671,8 +14671,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.3803922, g: 0.99215686, b: 0.50872684, a: 1}
-      maxColor: {r: 0.7294118, g: 1, b: 0.7960911, a: 1}
+      minColor: {r: 0.99215686, g: 0.3803922, b: 0.3803922, a: 1}
+      maxColor: {r: 0.9056604, g: 0.42645532, b: 0.35457456, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19279,7 +19279,7 @@ GameObject:
   - component: {fileID: 1964345004872112705}
   - component: {fileID: -3219575231952633175}
   m_Layer: 0
-  m_Name: C_GreenBubbleBall
+  m_Name: C_CherryBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19491,7 +19491,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.22470516, g: 0.8962264, b: 0.21560161, a: 0.19607843}
+      maxColor: {r: 1, g: 0.17015399, b: 0, a: 0.19607843}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -24155,5 +24155,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe490f3993e314ee99817d9b060aa46c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballIndex: 0
+  ballIndex: 2
   ballType: 0
