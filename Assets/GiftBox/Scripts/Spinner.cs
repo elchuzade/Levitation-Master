@@ -26,6 +26,7 @@ public class Spinner : MonoBehaviour
         {
             GameObject item = Instantiate(itemObjects[i].itemPrefab, items.transform.position, Quaternion.identity);
             item.transform.SetParent(items.transform);
+            item.transform.localScale = Vector3.one;
             item.name = itemObjects[i].itemName;
             item.SetActive(false);
         }
