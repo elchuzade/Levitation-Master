@@ -12,8 +12,8 @@ public class Fire : MonoBehaviour
 
     [SerializeField] float delay;
 
-    float burnTime = 6;
-    float smolderTime = 3;
+    float burnTime = 4;
+    float smolderTime = 4;
 
     bool burning;
     // To not attack player continuously when he stepped on fire
@@ -23,7 +23,7 @@ public class Fire : MonoBehaviour
 
     void Start()
     {
-        time = burnTime + delay;
+        time = delay;
     }
 
     void Update()

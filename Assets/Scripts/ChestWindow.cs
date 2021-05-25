@@ -32,8 +32,10 @@ public class ChestWindow : MonoBehaviour
     [SerializeField] GameObject speedPrefab;
 
     [SerializeField] GameObject[] allCommonBallPrefabs;
+    [SerializeField] GameObject[] allUncommonBallPrefabs;
     [SerializeField] GameObject[] allRareBallPrefabs;
     [SerializeField] GameObject[] allLegendaryBallPrefabs;
+    [SerializeField] GameObject[] allSpecialBallPrefabs;
 
     [SerializeField] GameObject prizeCount;
     [SerializeField] GameObject collectButton;
@@ -162,8 +164,10 @@ public class ChestWindow : MonoBehaviour
         {
             // Make three lists out of balls that player does not own based on their rarity
             List<GameObject> possibleCommonBalls = new List<GameObject>();
+            List<GameObject> possibleUncommonBalls = new List<GameObject>();
             List<GameObject> possibleRareBalls = new List<GameObject>();
             List<GameObject> possibleLegendaryBalls = new List<GameObject>();
+            List<GameObject> possibleSpecialBalls = new List<GameObject>();
 
             for (int j = 0; j < player.allBalls.Count; j++)
             {
@@ -177,6 +181,16 @@ public class ChestWindow : MonoBehaviour
                         {
                             // Add this ball to common list
                             possibleCommonBalls.Add(allCommonBallPrefabs[k]);
+                        }
+                    }
+                    // Add this ball as possible gift, as player doesnt have it
+                    for (int k = 0; k < allUncommonBallPrefabs.Length; k++)
+                    {
+                        if (j == allUncommonBallPrefabs[i].GetComponent<BallItem>().GetBallIndex() &&
+                            allUncommonBallPrefabs[i].GetComponent<BallItem>().GetBallType() == BallTypes.Common)
+                        {
+                            // Add this ball to common list
+                            possibleUncommonBalls.Add(allUncommonBallPrefabs[k]);
                         }
                     }
                     // Add this ball as possible gift, as player doesnt have it
@@ -199,6 +213,16 @@ public class ChestWindow : MonoBehaviour
                             possibleLegendaryBalls.Add(allLegendaryBallPrefabs[k]);
                         }
                     }
+                    // Add this ball as possible gift, as player doesnt have it
+                    for (int k = 0; k < allSpecialBallPrefabs.Length; k++)
+                    {
+                        if (j == allSpecialBallPrefabs[i].GetComponent<BallItem>().GetBallIndex() &&
+                            allSpecialBallPrefabs[i].GetComponent<BallItem>().GetBallType() == BallTypes.Legendary)
+                        {
+                            // Add this ball to common list
+                            possibleSpecialBalls.Add(allSpecialBallPrefabs[k]);
+                        }
+                    }
                 }
             }
 
@@ -211,6 +235,14 @@ public class ChestWindow : MonoBehaviour
                 for (int j = 0; j < chestUnlock.commonChance; j++)
                 {
                     ballPrizePool.Add(BallTypes.Common);
+                }
+            }
+            // If player has not unlocked all common balls
+            if (possibleUncommonBalls.Count > 0)
+            {
+                for (int j = 0; j < chestUnlock.uncommonChance; j++)
+                {
+                    ballPrizePool.Add(BallTypes.Uncommon);
                 }
             }
             // If player has not unlocked all rare balls
@@ -229,6 +261,15 @@ public class ChestWindow : MonoBehaviour
                     ballPrizePool.Add(BallTypes.Legendary);
                 }
             }
+            // If player has not unlocked all common balls
+            if (possibleSpecialBalls.Count > 0)
+            {
+                for (int j = 0; j < chestUnlock.specialChance; j++)
+                {
+                    ballPrizePool.Add(BallTypes.Special);
+                }
+            }
+
             // Pick one ball randomly from the selected ball type list and add it to allBalls
             BallTypes randomBallType = ballPrizePool[Random.Range(0, ballPrizePool.Count)];
             if (randomBallType == BallTypes.Common)
@@ -236,16 +277,26 @@ public class ChestWindow : MonoBehaviour
                 GameObject randomCommonBall = possibleCommonBalls[Random.Range(0, possibleCommonBalls.Count)];
                 possibleCommonBalls.Remove(randomCommonBall);
                 allBalls.Add(randomCommonBall);
+            } else if (randomBallType == BallTypes.Uncommon)
+            {
+                GameObject randomUncommonBall = possibleUncommonBalls[Random.Range(0, possibleUncommonBalls.Count)];
+                possibleUncommonBalls.Remove(randomUncommonBall);
+                allBalls.Add(randomUncommonBall);
             } else if (randomBallType == BallTypes.Rare)
             {
                 GameObject randomRareBall = possibleRareBalls[Random.Range(0, possibleRareBalls.Count)];
                 possibleRareBalls.Remove(randomRareBall);
                 allBalls.Add(randomRareBall);
-            } else
+            } else if (randomBallType == BallTypes.Legendary)
             {
                 GameObject randomLegendaryBall = possibleLegendaryBalls[Random.Range(0, possibleLegendaryBalls.Count)];
                 possibleLegendaryBalls.Remove(randomLegendaryBall);
                 allBalls.Add(randomLegendaryBall);
+            } else if (randomBallType == BallTypes.Legendary)
+            {
+                GameObject randomSpecialBall = possibleSpecialBalls[Random.Range(0, possibleSpecialBalls.Count)];
+                possibleSpecialBalls.Remove(randomSpecialBall);
+                allBalls.Add(randomSpecialBall);
             }
         }
 

@@ -49053,6 +49053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints: {fileID: 6221871857680852413}
+  delay: 0
 --- !u!1 &6221871857680852413
 GameObject:
   m_ObjectHideFlags: 0
@@ -53968,7 +53969,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7801219872871583159}
   - component: {fileID: 7966279090840028665}
-  - component: {fileID: 7915439956141186661}
   - component: {fileID: 7965010991852603115}
   m_Layer: 0
   m_Name: Trails
@@ -58718,18 +58718,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &7915439956141186661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7802984610033688583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 199e3c49ebcb3fe46997b10cf6a8eb52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!199 &7965010991852603115
 ParticleSystemRenderer:
   serializedVersion: 6

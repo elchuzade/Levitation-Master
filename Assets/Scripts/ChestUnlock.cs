@@ -20,8 +20,10 @@ public class ChestUnlock : MonoBehaviour
     public int ballMin;
     public int ballMax;
     public int commonChance;
+    public int uncommonChance;
     public int rareChance;
     public int legendaryChance;
+    public int specialChance;
 
     void Start()
     {

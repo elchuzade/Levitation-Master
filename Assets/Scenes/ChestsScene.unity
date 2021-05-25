@@ -746,6 +746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 3901225261817516430}
   ball: {fileID: 0}
+  shopScene: 0
 --- !u!1 &1492213519
 GameObject:
   m_ObjectHideFlags: 0
@@ -5977,20 +5978,33 @@ MonoBehaviour:
   speedPrefab: {fileID: 4501850016540744478, guid: 523e6bda846134782b1464b9797edc73,
     type: 3}
   allCommonBallPrefabs:
-  - {fileID: 1839052806453286967, guid: 09a497e8eb57c45a586dbce57c535a61, type: 3}
-  - {fileID: 5222308465243356212, guid: 19fc3016b27b8455fbf710b1608a42ea, type: 3}
-  - {fileID: 8006710721204067173, guid: 1a296d0fc3071420499763634f83a98e, type: 3}
-  - {fileID: 6077730922625021557, guid: 0846ff9517be84ff7983a84e50cae1f7, type: 3}
+  - {fileID: 1839052806453286967, guid: 1b2064c723c8ca24689578a17ae9402e, type: 3}
+  - {fileID: 1839052806453286967, guid: 0f0e9ac030fb7784992cb787403063ca, type: 3}
+  - {fileID: 1839052806453286967, guid: 8e833d40fb3b0c145bdfaca5a745e9a6, type: 3}
+  - {fileID: 1839052806453286967, guid: 3a15a58d38af18d48a994dff3b655cd9, type: 3}
+  allUncommonBallPrefabs:
+  - {fileID: 1839052806453286967, guid: ccb97e44e80ef41439b8875f6d23dfb6, type: 3}
+  - {fileID: 1839052806453286967, guid: 58bb1e66c15033d4b84a818fd070c6e6, type: 3}
+  - {fileID: 1839052806453286967, guid: db91a6c1efa25d04b8bd867354206bb3, type: 3}
+  - {fileID: 1839052806453286967, guid: 1fa51e38258b0ab47a869e7b3e5bda66, type: 3}
+  - {fileID: 1839052806453286967, guid: fbf5514a55deefa48be15b85d31dce94, type: 3}
   allRareBallPrefabs:
-  - {fileID: 8732690960873282312, guid: c8ea1f13ff6cc4c9dacffc1417beabe7, type: 3}
-  - {fileID: 4884581681096061068, guid: 63eb4ce8912ce405cb3e169e5965e3e2, type: 3}
-  - {fileID: 4884581681096061068, guid: 3b467bf39320e40e2aebacfdc1bbf23a, type: 3}
-  - {fileID: 6077730922625021557, guid: beb072919c07b4870a9ae8daf166e537, type: 3}
-  - {fileID: 5244871864806452798, guid: 9bf0c9ee3909e4da4b28affc20c4920d, type: 3}
-  - {fileID: 4943245701022362101, guid: b2f5e4c1cac3046ec860b127a7157e8d, type: 3}
+  - {fileID: 8006710721204067173, guid: 6e8b7bdc6e7c029489dfc0a3a1d5d80d, type: 3}
+  - {fileID: 8006710721204067173, guid: a4ae0ab08e92d2b45916a1d6a5119cae, type: 3}
+  - {fileID: 4884581681096061068, guid: ec873e721d792944fbecbce746dd14a1, type: 3}
+  - {fileID: 4884581681096061068, guid: b8b55fb2f44ee2a4f9bb1ad3a468c229, type: 3}
+  - {fileID: 5222308465243356212, guid: 19fc3016b27b8455fbf710b1608a42ea, type: 3}
+  - {fileID: 4884581681096061068, guid: 42e62f3a9ba0a434dacb0bf967668b7c, type: 3}
   allLegendaryBallPrefabs:
-  - {fileID: 6077730922625021557, guid: 69a8ee41bd7994ddea8671627c76add5, type: 3}
+  - {fileID: 4943245701022362101, guid: b2f5e4c1cac3046ec860b127a7157e8d, type: 3}
+  - {fileID: 6077730922625021557, guid: 0846ff9517be84ff7983a84e50cae1f7, type: 3}
+  - {fileID: 6077730922625021557, guid: beb072919c07b4870a9ae8daf166e537, type: 3}
+  - {fileID: 4884581681096061068, guid: b742022d81c40014e8c97245e4e99385, type: 3}
+  - {fileID: 8732690960873282312, guid: c8ea1f13ff6cc4c9dacffc1417beabe7, type: 3}
+  - {fileID: 5244871864806452798, guid: 9bf0c9ee3909e4da4b28affc20c4920d, type: 3}
+  allSpecialBallPrefabs:
   - {fileID: 8732690960873282312, guid: bd9afbde7003247dab3ffab088e523d3, type: 3}
+  - {fileID: 6077730922625021557, guid: 69a8ee41bd7994ddea8671627c76add5, type: 3}
   - {fileID: 3610131359642704619, guid: 79fef33f0e630463a81b9d4775dfa18b, type: 3}
   - {fileID: 3610131359642704619, guid: 2bc1a924cbafa4c2dbf2bf0a353339a2, type: 3}
   prizeCount: {fileID: 1492213519}
@@ -6673,8 +6687,10 @@ MonoBehaviour:
   ballMin: 1
   ballMax: 1
   commonChance: 1
+  uncommonChance: 1
   rareChance: 1
   legendaryChance: 1
+  specialChance: 1
 --- !u!1 &1344994781130061942
 GameObject:
   m_ObjectHideFlags: 0
@@ -7407,8 +7423,10 @@ MonoBehaviour:
   ballMin: 0
   ballMax: 0
   commonChance: 0
+  uncommonChance: 0
   rareChance: 0
   legendaryChance: 0
+  specialChance: 0
 --- !u!224 &2872548007169154802
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9630,8 +9648,10 @@ MonoBehaviour:
   ballMin: 0
   ballMax: 0
   commonChance: 0
+  uncommonChance: 0
   rareChance: 0
   legendaryChance: 0
+  specialChance: 0
 --- !u!222 &6556079387730787253
 CanvasRenderer:
   m_ObjectHideFlags: 0

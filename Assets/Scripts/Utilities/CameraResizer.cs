@@ -10,6 +10,8 @@ public class CameraResizer : MonoBehaviour
     Vector3 cameraInitPosition = new Vector3(375, 1380, -125);
     Vector3 cameraInitRotation = new Vector3(50, 0, 0);
 
+    [SerializeField] bool shopScene;
+
     bool levelComplete;
     bool levelStarted;
     float cameraRotateSpeed = 1;
@@ -20,19 +22,28 @@ public class CameraResizer : MonoBehaviour
         //transform.position = new Vector3((float)Screen.width / 2, (float)Screen.height / 2, -10);
 
         //Change the camera zoom based on the screen ratio, for very tall or very wide screens
+        Debug.Log(Screen.width);
         if ((float)Screen.height / Screen.width > 2)
         {
             Camera.main.orthographicSize = 800;
         }
         else
         {
-            Camera.main.orthographicSize = 667;
+            if (shopScene)
+            {
+                Camera.main.orthographicSize = Screen.width / 2;
+            } else
+            {
+                Camera.main.orthographicSize = 667;
+            }
         }
 
         if ((float)Screen.width / Screen.height > 0.7)
         {
             canvas.GetComponent<CanvasScaler>().matchWidthOrHeight = 1;
         }
+
+        transform.position = new Vector3(Screen.width / 2, Screen.height / 2 - 100, -600);
     }
 
     void Update()

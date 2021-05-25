@@ -16,11 +16,13 @@ public class ShopStatus : MonoBehaviour
     [SerializeField] GameObject scrollbar;
 
     [SerializeField] GameObject[] allBalls;
-    [SerializeField] GameObject[] allBallsRising;
+    [SerializeField] GameObject scrollContent;
+
+    [SerializeField] GameObject canvas;
 
     int ballIndex;
 
-    GameObject ballRising;
+    //GameObject ballRising;
 
     void Awake()
     {
@@ -29,8 +31,20 @@ public class ShopStatus : MonoBehaviour
 
     void Start()
     {
+        for (int i = 0; i < scrollContent.transform.childCount; i++)
+        {
+            RectTransform rt = (RectTransform)scrollContent.transform.GetChild(i).transform;
+            float height = rt.rect.height;
+
+            RectTransform canvasRt = (RectTransform)canvas.transform;
+            float width = canvasRt.rect.width;
+
+            scrollContent.transform.GetChild(i).GetComponent<RectTransform>().sizeDelta = new Vector2(width - 200, height);
+            Debug.Log(Screen.width);
+        }
+
         player = FindObjectOfType<Player>();
-        player.ResetPlayer();
+        //player.ResetPlayer();
         player.LoadPlayer();
 
         SetScoreboardValues();
@@ -38,12 +52,13 @@ public class ShopStatus : MonoBehaviour
 
         scrollbar.GetComponent<Scrollbar>().numberOfSteps = 25;
         scrollbar.GetComponent<Scrollbar>().value = (float)player.currentBallIndex / 24;
-        scrollbar.GetComponent<Scrollbar>().onValueChanged.AddListener(value => SwipeBall(value));
 
-        SetBallValues();
+        //scrollbar.GetComponent<Scrollbar>().onValueChanged.AddListener(value => SwipeBall(value));
 
-        // 0.125 is the step size based on 0,1 and number of balls
-        SwipeBall(0.125f * player.currentBallIndex);
+        SetBallValues(player.currentBallIndex);
+
+        // 0.125 is the step size based on 0 - 1 and number of transitions between balls 1 / 24
+        SwipeBall((float)1 / 24 * player.currentBallIndex);
 
         // Save click
         System.DateTimeOffset now = System.DateTimeOffset.UtcNow;
@@ -57,7 +72,7 @@ public class ShopStatus : MonoBehaviour
     public void SwipeBall(float value)
     {
         ballIndex = (int)(value * 24);
-        SetBallValues();
+        SetBallValues(ballIndex);
     }
 
     // @access from Shop canvas
@@ -137,8 +152,9 @@ public class ShopStatus : MonoBehaviour
         if (ballIndex > 0)
         {
             ballIndex--;
+            //Debug.Log(ballIndex);
             scrollbar.GetComponent<Scrollbar>().value = (float)ballIndex / 24;
-            SetBallValues();
+            SetBallValues(ballIndex);
         }
     }
 
@@ -149,21 +165,23 @@ public class ShopStatus : MonoBehaviour
         if (ballIndex < allBalls.Length - 1)
         {
             ballIndex++;
+            //Debug.Log(ballIndex);
             scrollbar.GetComponent<Scrollbar>().value = (float)ballIndex / 24;
-            SetBallValues();
+            SetBallValues(ballIndex);
         }
     }
     #endregion
 
     #region Private Methods
-    void SetBallValues()
+    void SetBallValues(int ballIndex)
     {
-        if (ballRising)
-        {
-            Destroy(ballRising);
-        }
-        ballRising = Instantiate(allBallsRising[ballIndex], new Vector3(375, 907, 600
-            ), Quaternion.identity);
+        //if (ballRising)
+        //{
+        //    Destroy(ballRising);
+        //}
+        ////Debug.Log("instantiating " + ballIndex);
+        //ballRising = Instantiate(allBallsRising[ballIndex], new Vector3(375, 907, 600
+        //    ), Quaternion.identity);
 
         // Set arrows
         leftArrowButton.GetComponent<Button>().interactable = true;
