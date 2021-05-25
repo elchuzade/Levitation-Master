@@ -22,7 +22,6 @@ public class CameraResizer : MonoBehaviour
         //transform.position = new Vector3((float)Screen.width / 2, (float)Screen.height / 2, -10);
 
         //Change the camera zoom based on the screen ratio, for very tall or very wide screens
-        Debug.Log(Screen.width);
         if ((float)Screen.height / Screen.width > 2)
         {
             Camera.main.orthographicSize = 800;
@@ -38,12 +37,21 @@ public class CameraResizer : MonoBehaviour
             }
         }
 
-        if ((float)Screen.width / Screen.height > 0.7)
+        // Tablet screens
+        if ((float)Screen.width / Screen.height > 0.7  || (float)Screen.width / Screen.height < 0.5)
         {
             canvas.GetComponent<CanvasScaler>().matchWidthOrHeight = 1;
+        } else
+        {
+            // Phone screens
+            canvas.GetComponent<CanvasScaler>().matchWidthOrHeight = 0;
         }
 
-        transform.position = new Vector3(Screen.width / 2, Screen.height / 2 - 100, -600);
+        // Place a camera in the center of the shop scene so the ball is rendered correctly
+        if (shopScene)
+        {
+            transform.position = new Vector3(Screen.width / 2, Screen.height / 2 - 100, -600);
+        }
     }
 
     void Update()
