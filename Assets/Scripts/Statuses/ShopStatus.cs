@@ -40,7 +40,6 @@ public class ShopStatus : MonoBehaviour
             float width = canvasRt.rect.width;
 
             scrollContent.transform.GetChild(i).GetComponent<RectTransform>().sizeDelta = new Vector2(width - 200, height);
-            Debug.Log(Screen.width);
         }
 
         player = FindObjectOfType<Player>();
