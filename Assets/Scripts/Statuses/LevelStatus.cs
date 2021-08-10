@@ -301,6 +301,7 @@ public class LevelStatus : MonoBehaviour
     public void CompleteLevel()
     {
         Camera.main.GetComponent<CameraResizer>().CameraFollowBall();
+        levelControlsWindow.SetActive(false);
     }
 
     // @access from Ball script
