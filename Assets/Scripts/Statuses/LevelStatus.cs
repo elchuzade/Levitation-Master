@@ -320,6 +320,7 @@ public class LevelStatus : MonoBehaviour
     public void LoadNextLevel()
     {
         navigator.LoadNextLevel(player.nextLevelIndex);
+        //navigator.LoadNextLevel(2);
     }
 
     // @access from Level canvas
