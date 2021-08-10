@@ -191,6 +191,14 @@ public class LevelStatus : MonoBehaviour
     }
 
     // @access from Ball script
+    // Only one place to save the level and load the next level to keep player data consistent
+    public void LoadNextLevel()
+    {
+        //navigator.LoadNextLevel(player.nextLevelIndex);
+        navigator.LoadNextLevel(2);
+    }
+
+    // @access from Ball script
     public void SetNextLevelMeter()
     {
         // += to increment levels while transitioning to the next level
@@ -315,15 +323,7 @@ public class LevelStatus : MonoBehaviour
     {
         navigator.LoadMainScene();
     }
-
-    // @access from Ball script
-    // Only one place to save the level and load the next level to keep player data consistent
-    public void LoadNextLevel()
-    {
-        navigator.LoadNextLevel(player.nextLevelIndex);
-        //navigator.LoadNextLevel(2);
-    }
-
+  
     // @access from Level canvas
     public void ClickLightningSkill()
     {
