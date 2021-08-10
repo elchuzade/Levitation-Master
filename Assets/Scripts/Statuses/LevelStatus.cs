@@ -67,9 +67,8 @@ public class LevelStatus : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<Player>();
-        player.ResetPlayer();
+        //player.ResetPlayer();
         player.LoadPlayer();
-
 
         SetScoreboardValues();
         levelText.text = player.nextLevelIndex.ToString();
@@ -319,7 +318,7 @@ public class LevelStatus : MonoBehaviour
     // Only one place to save the level and load the next level to keep player data consistent
     public void LoadNextLevel()
     {
-        navigator.LoadNextLevel(2);
+        navigator.LoadNextLevel(player.nextLevelIndex);
     }
 
     // @access from Level canvas
