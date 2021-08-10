@@ -35,7 +35,7 @@ public class MainStatus : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
 
-        player.ResetPlayer();
+        //player.ResetPlayer();
         //return;
 
         player.LoadPlayer();

@@ -67,9 +67,8 @@ public class LevelStatus : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<Player>();
-        player.ResetPlayer();
+        //player.ResetPlayer();
         player.LoadPlayer();
-
 
         SetScoreboardValues();
         levelText.text = player.nextLevelIndex.ToString();
@@ -194,7 +193,8 @@ public class LevelStatus : MonoBehaviour
     // @access from Ball script
     public void SetNextLevelMeter()
     {
-        levelText.text = (player.nextLevelIndex + 1).ToString();
+        // += to increment levels while transitioning to the next level
+        levelText.text = (player.nextLevelIndex += 1).ToString();
         levelControlsWindow.SetActive(false);
         doubleRewardWindow.SetActive(true);
         // Add reward for passing level
@@ -301,6 +301,7 @@ public class LevelStatus : MonoBehaviour
     public void CompleteLevel()
     {
         Camera.main.GetComponent<CameraResizer>().CameraFollowBall();
+        levelControlsWindow.SetActive(false);
     }
 
     // @access from Ball script
@@ -319,7 +320,8 @@ public class LevelStatus : MonoBehaviour
     // Only one place to save the level and load the next level to keep player data consistent
     public void LoadNextLevel()
     {
-        navigator.LoadNextLevel(2);
+        navigator.LoadNextLevel(player.nextLevelIndex);
+        //navigator.LoadNextLevel(2);
     }
 
     // @access from Level canvas

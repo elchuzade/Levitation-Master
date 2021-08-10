@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
     {
         coins = 0;
         playerName = "";
-        diamonds = 400;
+        diamonds = 4000;
         nextLevelIndex = 1;
         playerName = "";
         playerCreated = false;

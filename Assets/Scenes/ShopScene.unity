@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.62665844, g: 0.59091324, b: 0.6668063, a: 1}
+  m_IndirectSpecularColor: {r: 0.6266588, g: 0.590914, b: 0.6668068, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2078,10 +2078,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6565569353489905070, guid: a6bda84c4647347f58cfe7443768c60c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8119775197977226812, guid: a6bda84c4647347f58cfe7443768c60c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119775197977226812, guid: a6bda84c4647347f58cfe7443768c60c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 520
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6bda84c4647347f58cfe7443768c60c, type: 3}
@@ -3439,7 +3449,7 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -7911,7 +7921,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8627082619425918359}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -8306,7 +8316,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5152031807294056371}
   m_Direction: 0
   m_Value: 0.5
-  m_Size: 0.023967067
+  m_Size: 0.014311567
   m_NumberOfSteps: 11
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8854,8 +8864,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 3340269419039687890}
-  - {fileID: 612825246}
   - {fileID: 4239684889897592659}
+  - {fileID: 612825246}
   - {fileID: 2096398298656392783}
   - {fileID: 2246366535245923372}
   - {fileID: 5152031806808965308}
