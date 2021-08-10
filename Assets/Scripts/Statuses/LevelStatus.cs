@@ -193,7 +193,8 @@ public class LevelStatus : MonoBehaviour
     // @access from Ball script
     public void SetNextLevelMeter()
     {
-        levelText.text = (player.nextLevelIndex + 1).ToString();
+        // += to increment levels while transitioning to the next level
+        levelText.text = (player.nextLevelIndex += 1).ToString();
         levelControlsWindow.SetActive(false);
         doubleRewardWindow.SetActive(true);
         // Add reward for passing level
