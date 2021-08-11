@@ -16,18 +16,27 @@ public class CameraResizer : MonoBehaviour
     bool levelStarted;
     float cameraRotateSpeed = 1;
 
+    int cameraCloseDistance = 45;
+    int cameraFarDistance = 80;
+
     void Start()
     {
         //Camera.main.orthographicSize = Screen.height / 2;
         //transform.position = new Vector3((float)Screen.width / 2, (float)Screen.height / 2, -10);
 
-        //Change the camera zoom based on the screen ratio, for very tall or very wide screens
-        if ((float)Screen.height / Screen.width > 2)
+        //Change the camera zoom based on the screen ratio for very tall or very wide screens
+        if ((float)Screen.height / Screen.width >= 2)
         {
+            // In the level scene the camera will zoom out more, so that all disc is visible
+            cameraFarDistance = 90;
+            // Tall phone
             Camera.main.orthographicSize = 800;
         }
         else
         {
+            // In the level scene the camera will zoom out less, so that all disc fits perfectly the screen width
+            cameraFarDistance = 80;
+            // Wide phone (+tablet)
             if (shopScene)
             {
                 Camera.main.orthographicSize = Screen.width / 2;
@@ -38,7 +47,7 @@ public class CameraResizer : MonoBehaviour
         }
 
         // Tablet screens
-        if ((float)Screen.width / Screen.height > 0.7  || (float)Screen.width / Screen.height < 0.5)
+        if ((float)Screen.width / Screen.height > 0.6)
         {
             canvas.GetComponent<CanvasScaler>().matchWidthOrHeight = 1;
         } else
@@ -56,11 +65,11 @@ public class CameraResizer : MonoBehaviour
 
     void Update()
     {
-        if (levelComplete && Camera.main.fieldOfView > 45)
+        if (levelComplete && Camera.main.fieldOfView > cameraCloseDistance)
         {
             // Zoom in the camera from 80 to 45 degrees so the ball is close enough
             Camera.main.fieldOfView--;
-        } else if (levelStarted && Camera.main.fieldOfView < 80)
+        } else if (levelStarted && Camera.main.fieldOfView < cameraFarDistance)
         {
             // Zoom out the camera from 45 to 102 degrees so the ball is far enough
             Camera.main.fieldOfView++;

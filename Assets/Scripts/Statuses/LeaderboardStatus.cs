@@ -262,6 +262,7 @@ public class LeaderboardStatus : MonoBehaviour
         GameObject leaderboardItem = Instantiate(leaderboardItemTrippleDots, transform.position, Quaternion.identity);
         // Set its parent to be scroll content, for scroll functionality to work properly
         leaderboardItem.transform.SetParent(leaderboardScrollContent.transform);
+        leaderboardItem.transform.localScale = Vector3.one;
     }
 
     void CreateYourEntry()

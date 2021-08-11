@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.6266588, g: 0.590914, b: 0.6668068, a: 1}
+  m_IndirectSpecularColor: {r: 0.62665844, g: 0.59091324, b: 0.6668063, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -627,6 +627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 2137778347}
   ball: {fileID: 0}
+  shopScene: 0
 --- !u!114 &1113945848 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4421802349199306536, guid: 69b27ff543c024baabf31014f947d806,
@@ -749,8 +750,8 @@ Canvas:
   m_GameObject: {fileID: 2137778347}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 963194227}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
