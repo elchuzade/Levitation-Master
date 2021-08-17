@@ -19,6 +19,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject idleParticles;
     [SerializeField] GameObject huntParticles;
 
+    [SerializeField] Material EnemyBodyMaterial;
+    [SerializeField] Material EnemyBladeMaterial;
+    [SerializeField] Material EnemyBodyMaterialTransparent;
+    [SerializeField] Material EnemyBladeMaterialTransparent;
+    [SerializeField] GameObject[] Bodies;
+    [SerializeField] GameObject[] Blades;
+
+
+
     int detectRadius = 250;
     int followSpeed = 50;
 
@@ -48,6 +57,32 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void SetVisibleMaterialToEnemy()
+    {
+        for (int i = 0; i < Bodies.Length; i++)
+        {
+            Bodies[i].GetComponent<MeshRenderer>().material = EnemyBodyMaterial;
+        }
+
+        for (int i = 0; i < Blades.Length; i++)
+        {
+            Blades[i].GetComponent<MeshRenderer>().material = EnemyBladeMaterial;
+        }
+    }
+
+    void SetTransparentMaterialToEnemy()
+    {
+        for (int i = 0; i < Bodies.Length; i++)
+        {
+            Bodies[i].GetComponent<MeshRenderer>().material = EnemyBodyMaterialTransparent;
+        }
+
+        for (int i = 0; i < Blades.Length; i++)
+        {
+            Blades[i].GetComponent<MeshRenderer>().material = EnemyBladeMaterialTransparent;
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Ball")
@@ -61,7 +96,20 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject);
             AttemptDestroyProcess();
         }
+        else if (other.gameObject.tag == "Wall")
+        {
+            SetTransparentMaterialToEnemy();
+        }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Wall")
+        {
+            SetVisibleMaterialToEnemy();
+        }
+    }
+
     #endregion
 
     #region Private Methods

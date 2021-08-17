@@ -85,16 +85,19 @@ public class ChestWindow : MonoBehaviour
     { 
         for (int i = 0; i < allPrizes.transform.childCount; i++)
         {
-            ChestDropItem prizeItemScript = allPrizes.transform.GetChild(i).GetComponent<ChestDropItem>();
+            /*ChestDropItem prizeItemScript = allPrizes.transform.GetChild(i).GetComponent<ChestDropItem>();
             if (prizeItemScript != null)
             {
                 prizeItemScript.lastPrize = false;
                 prizeItemScript.MoveUp();
-            }
+            }*/
+
             BallItem ballItemScript = allPrizes.transform.GetChild(i).GetComponent<BallItem>();
             if (ballItemScript != null)
             {
-                ballItemScript.MoveUp();
+                player.allBalls[ballItemScript.GetBallIndex()] = 1;
+                player.currentBallIndex = ballItemScript.GetBallIndex();
+                Destroy(ballItemScript.gameObject);
             }
         }
 
@@ -187,7 +190,7 @@ public class ChestWindow : MonoBehaviour
                     for (int k = 0; k < allUncommonBallPrefabs.Length; k++)
                     {
                         if (j == allUncommonBallPrefabs[i].GetComponent<BallItem>().GetBallIndex() &&
-                            allUncommonBallPrefabs[i].GetComponent<BallItem>().GetBallType() == BallTypes.Common)
+                            allUncommonBallPrefabs[i].GetComponent<BallItem>().GetBallType() == BallTypes.Uncommon)
                         {
                             // Add this ball to common list
                             possibleUncommonBalls.Add(allUncommonBallPrefabs[k]);
@@ -217,7 +220,7 @@ public class ChestWindow : MonoBehaviour
                     for (int k = 0; k < allSpecialBallPrefabs.Length; k++)
                     {
                         if (j == allSpecialBallPrefabs[i].GetComponent<BallItem>().GetBallIndex() &&
-                            allSpecialBallPrefabs[i].GetComponent<BallItem>().GetBallType() == BallTypes.Legendary)
+                            allSpecialBallPrefabs[i].GetComponent<BallItem>().GetBallType() == BallTypes.Special)
                         {
                             // Add this ball to common list
                             possibleSpecialBalls.Add(allSpecialBallPrefabs[k]);

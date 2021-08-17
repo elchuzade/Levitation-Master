@@ -9,7 +9,7 @@ public class BallItem : MonoBehaviour
     bool movingUp;
     float time = 0.3f;
 
-    void Update()
+    void FixedUpdate()
     {
         if (time > 0)
         {

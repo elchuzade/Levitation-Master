@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Pusher : MonoBehaviour
 {
-    [SerializeField] int pushSpeed;
+    [SerializeField] float pushSpeed;
 
     [SerializeField] GameObject pusherTip;
 
@@ -11,7 +11,7 @@ public class Pusher : MonoBehaviour
 
     void Start()
     {
-        pushSpeed *= 100;
+        //pushSpeed *= 100;
 
         // Vector3 between tip and center of the pusher
         directionVector = (pusherTip.transform.position - transform.position).normalized * pushSpeed;

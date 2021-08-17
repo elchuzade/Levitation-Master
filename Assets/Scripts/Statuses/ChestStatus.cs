@@ -31,7 +31,7 @@ public class ChestStatus : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
 
-        player.ResetPlayer();
+        //player.ResetPlayer();
         //return;
 
         player.LoadPlayer();
