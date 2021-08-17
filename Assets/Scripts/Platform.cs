@@ -11,8 +11,8 @@ public class Platform : MonoBehaviour
     void FixedUpdate()
     {
         // Rotate the platform based on the joystick
-        rb.AddTorque(transform.forward * variableJoystick.Horizontal * -speed * Time.fixedDeltaTime * 10000);
-        rb.AddTorque(transform.right * variableJoystick.Vertical * speed * Time.fixedDeltaTime * 10000);
+        rb.AddTorque(transform.forward * variableJoystick.Horizontal * -speed * Time.fixedDeltaTime * 100000);
+        rb.AddTorque(transform.right * variableJoystick.Vertical * speed * Time.fixedDeltaTime * 100000);
 
         // Copy the platform rotation to the items of the platform
         items.transform.rotation = transform.rotation;
