@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Wall")
         {
-            SetTransparentMaterialToEnemy();
+            SetVisibleMaterialToEnemy();
         }
     }
 

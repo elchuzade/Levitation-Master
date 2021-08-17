@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
         goldKeyCount = 2;
         silverKeyCount = 2;
 
-        bulletCount = 40;
+        bulletCount = 400;
         lightningCount = 40;
         shieldCount = 40;
         speedCount = 40;
