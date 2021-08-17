@@ -54,6 +54,7 @@ public class LevelStatus : MonoBehaviour
     [SerializeField] GameObject giftWindow;
     [SerializeField] GameObject giftButton;
     [SerializeField] Image giftLoader;
+
     bool giftRelaoding;
     int giftReloadTime = 5;
     float time;
@@ -194,8 +195,7 @@ public class LevelStatus : MonoBehaviour
     // Only one place to save the level and load the next level to keep player data consistent
     public void LoadNextLevel()
     {
-        //navigator.LoadNextLevel(player.nextLevelIndex);
-        navigator.LoadNextLevel(2);
+        navigator.LoadNextLevel(player.nextLevelIndex);
     }
 
     // @access from Ball script
@@ -472,6 +472,13 @@ public class LevelStatus : MonoBehaviour
     {
         giftWindow.GetComponent<GiftWindow>().CloseGiftWindow();
         ReloadGiftButton();
+    }
+
+    public void LoseLevel()
+    {
+        player = FindObjectOfType<Player>();
+        player.LoadPlayer();
+        navigator.LoadNextLevel(player.nextLevelIndex);
     }
     #endregion
 }

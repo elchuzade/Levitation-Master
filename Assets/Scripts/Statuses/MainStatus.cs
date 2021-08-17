@@ -35,6 +35,13 @@ public class MainStatus : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
 
+        for (int i = 0; i < player.allBalls.Count; i++)
+        {
+            Debug.Log(player.allBalls[i]);
+        }
+
+        Debug.Log(player.currentBallIndex);
+
         //player.ResetPlayer();
         //return;
 

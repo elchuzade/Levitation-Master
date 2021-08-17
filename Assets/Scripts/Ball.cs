@@ -268,10 +268,11 @@ public class Ball : MonoBehaviour
 
     IEnumerator GameOver(float time)
     {
-        Debug.Log("lost");
+        Debug.Log("lost, do some particles");
+
         yield return new WaitForSeconds(time);
 
-        Destroy(gameObject);
+        levelStatus.LoseLevel();
     }
     #endregion
 }
