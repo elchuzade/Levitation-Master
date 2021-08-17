@@ -19,6 +19,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject idleParticles;
     [SerializeField] GameObject huntParticles;
 
+    [SerializeField] Material EnemyBodyMaterial;
+    [SerializeField] Material EnemyBladeMaterial;
+    [SerializeField] Material EnemyBodyMaterialTransparent;
+    [SerializeField] Material EnemyBladeMaterialTransparent;
+
     int detectRadius = 250;
     int followSpeed = 50;
 
@@ -48,6 +53,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void SetMaterialComponents()
+    {
+
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Ball")
@@ -61,7 +71,20 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject);
             AttemptDestroyProcess();
         }
+        else if (other.gameObject.tag == "Wall")
+        {
+            Debug.Log("Transparent");
+        }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Wall")
+        {
+            Debug.Log("Not Transparent");
+        }
+    }
+
     #endregion
 
     #region Private Methods
