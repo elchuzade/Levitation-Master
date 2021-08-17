@@ -85,16 +85,17 @@ public class ChestWindow : MonoBehaviour
     { 
         for (int i = 0; i < allPrizes.transform.childCount; i++)
         {
-            ChestDropItem prizeItemScript = allPrizes.transform.GetChild(i).GetComponent<ChestDropItem>();
+            /*ChestDropItem prizeItemScript = allPrizes.transform.GetChild(i).GetComponent<ChestDropItem>();
             if (prizeItemScript != null)
             {
                 prizeItemScript.lastPrize = false;
                 prizeItemScript.MoveUp();
-            }
+            }*/
+
             BallItem ballItemScript = allPrizes.transform.GetChild(i).GetComponent<BallItem>();
             if (ballItemScript != null)
             {
-                ballItemScript.MoveUp();
+                Destroy(ballItemScript.gameObject);
             }
         }
 

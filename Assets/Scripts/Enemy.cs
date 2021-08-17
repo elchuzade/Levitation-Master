@@ -23,6 +23,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] Material EnemyBladeMaterial;
     [SerializeField] Material EnemyBodyMaterialTransparent;
     [SerializeField] Material EnemyBladeMaterialTransparent;
+    [SerializeField] GameObject[] Bodies;
+    [SerializeField] GameObject[] Blades;
+
+
 
     int detectRadius = 250;
     int followSpeed = 50;
@@ -53,9 +57,30 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void SetMaterialComponents()
+    void SetVisibleMaterialToEnemy()
     {
+        for (int i = 0; i < Bodies.Length; i++)
+        {
+            Bodies[i].GetComponent<MeshRenderer>().material = EnemyBodyMaterial;
+        }
 
+        for (int i = 0; i < Blades.Length; i++)
+        {
+            Blades[i].GetComponent<MeshRenderer>().material = EnemyBladeMaterial;
+        }
+    }
+
+    void SetTransparentMaterialToEnemy()
+    {
+        for (int i = 0; i < Bodies.Length; i++)
+        {
+            Bodies[i].GetComponent<MeshRenderer>().material = EnemyBodyMaterialTransparent;
+        }
+
+        for (int i = 0; i < Blades.Length; i++)
+        {
+            Blades[i].GetComponent<MeshRenderer>().material = EnemyBladeMaterialTransparent;
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -73,7 +98,7 @@ public class Enemy : MonoBehaviour
         }
         else if (other.gameObject.tag == "Wall")
         {
-            Debug.Log("Transparent");
+            SetTransparentMaterialToEnemy();
         }
     }
 
@@ -81,7 +106,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Wall")
         {
-            Debug.Log("Not Transparent");
+            SetTransparentMaterialToEnemy();
         }
     }
 
