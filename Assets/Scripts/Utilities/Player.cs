@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
 
     public void ResetPlayer()
     {
-        coins = 0;
+        coins = 99999;
         playerName = "";
         diamonds = 4000;
         nextLevelIndex = 1;
