@@ -5659,8 +5659,8 @@ MonoBehaviour:
   collectParticles: {fileID: 1244216003179054361}
   components: {fileID: 8865959532117625040}
   col: {fileID: 7196319683286359311}
-  minDropCount: 10
-  maxDropCount: 15
+  minDropCount: 5
+  maxDropCount: 10
 --- !u!114 &1683429099158741737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5754,15 +5754,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24c20a47959d2400d8682a262144f531, type: 3}
---- !u!4 &8089001032374047338 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 24c20a47959d2400d8682a262144f531,
-    type: 3}
-  m_PrefabInstance: {fileID: 8632097468237034881}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8865959532117625040 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 24c20a47959d2400d8682a262144f531,
+    type: 3}
+  m_PrefabInstance: {fileID: 8632097468237034881}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8089001032374047338 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 24c20a47959d2400d8682a262144f531,
     type: 3}
   m_PrefabInstance: {fileID: 8632097468237034881}
   m_PrefabAsset: {fileID: 0}
