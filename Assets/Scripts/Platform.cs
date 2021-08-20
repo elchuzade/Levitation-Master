@@ -5,11 +5,13 @@ public class Platform : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] VariableJoystick variableJoystick;
     [SerializeField] Rigidbody rb;
-
+    [SerializeField] float platformRotation = 0.1f;
     [SerializeField] GameObject items;
 
     void FixedUpdate()
     {
+        // Platform rotation speed
+        transform.Rotate(0, platformRotation * Time.fixedDeltaTime, 0);
         // Rotate the platform based on the joystick
         rb.AddTorque(transform.forward * variableJoystick.Horizontal * -speed * Time.fixedDeltaTime * 50000);
         rb.AddTorque(transform.right * variableJoystick.Vertical * speed * Time.fixedDeltaTime * 50000);
