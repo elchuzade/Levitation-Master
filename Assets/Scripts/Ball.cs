@@ -30,7 +30,7 @@ public class Ball : MonoBehaviour
 
     [SerializeField] float speed;
 
-    int speedMultiplier = 1;
+    float speedMultiplier = 1f;
     bool shieldStatus;
     
     bool followDirection;
@@ -211,7 +211,7 @@ public class Ball : MonoBehaviour
     // @access from LevelStatus script
     public void UseSpeedSkill()
     {
-        speedMultiplier = 2;
+        speedMultiplier = 1.4f;
         speedSkill.SetActive(true);
         StartCoroutine(StopSpeedSkill());
     }
