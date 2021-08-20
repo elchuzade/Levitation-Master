@@ -211,7 +211,7 @@ public class Ball : MonoBehaviour
     // @access from LevelStatus script
     public void UseSpeedSkill()
     {
-        speedMultiplier = 1.4f;
+        speedMultiplier = 1.5f;
         speedSkill.SetActive(true);
         StartCoroutine(StopSpeedSkill());
     }
