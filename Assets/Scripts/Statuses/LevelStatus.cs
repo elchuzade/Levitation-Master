@@ -71,6 +71,19 @@ public class LevelStatus : MonoBehaviour
         //player.ResetPlayer();
         player.LoadPlayer();
 
+        // Enabling sub count text
+        EnableSubText();
+
+        // Disable giftbutton from first 10 levels
+        if (player.nextLevelIndex < 11)
+        {
+            giftButton.SetActive(false);
+        } 
+        else
+        {
+            giftButton.SetActive(true);
+        }
+
         SetScoreboardValues();
         levelText.text = player.nextLevelIndex.ToString();
 
@@ -104,11 +117,18 @@ public class LevelStatus : MonoBehaviour
         giftRelaoding = false;
     }
 
+
     void DisableGiftButton()
     {
         giftButton.GetComponent<Button>().interactable = false;
         giftButton.transform.Find("notification").gameObject.SetActive(false);
         giftButton.GetComponent<Animator>().enabled = false;
+    }
+
+    void EnableSubText()
+    {
+        subCoinCount.gameObject.SetActive(true);
+        subDiamondCount.gameObject.SetActive(true);
     }
 
     void ReloadGiftButton()
