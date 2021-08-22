@@ -4,9 +4,11 @@ public class FollowPath : MonoBehaviour
 {
     [SerializeField] GameObject wayPoints;
     [SerializeField] float delay;
+    [SerializeField] float speed = 50f;
+
+
 
     int currentWaypointIndex = 0;
-    float speed = 50f;
 
     float time;
     bool moving = false;
