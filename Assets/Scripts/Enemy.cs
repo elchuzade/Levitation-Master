@@ -26,10 +26,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject[] Bodies;
     [SerializeField] GameObject[] Blades;
 
+    [SerializeField] int followSpeed = 50;
+
 
 
     int detectRadius = 250;
-    int followSpeed = 50;
+    
 
     bool following;
 
