@@ -13,7 +13,6 @@ public class LevelStatus : MonoBehaviour
     [SerializeField] GameObject coinPrefab;
     [SerializeField] GameObject diamondPrefab;
 
-    [SerializeField] GameObject allKeys;
     // To set parent of coins and diamonds
     [SerializeField] GameObject platformItems;
 
@@ -26,10 +25,6 @@ public class LevelStatus : MonoBehaviour
 
     [SerializeField] GameObject coinsIcon;
     [SerializeField] GameObject diamondsIcon;
-
-    [SerializeField] GameObject redKeyItem;
-    [SerializeField] GameObject goldKeyItem;
-    [SerializeField] GameObject silverKeyItem;
 
     [SerializeField] GameObject lightningButton;
     [SerializeField] GameObject shieldButton;
@@ -243,20 +238,14 @@ public class LevelStatus : MonoBehaviour
                 diamonds++;
                 diamondsIcon.GetComponent<AnimationTrigger>().Trigger("Start");
                 break;
-            case Rewards.RedKey:
-                redKeys++;
-                GameObject redKey = Instantiate(redKeyItem, transform.position, Quaternion.identity);
-                redKey.transform.SetParent(allKeys.transform);
+            case Rewards.SilverKey:
+                silverKeys++;
                 break;
             case Rewards.GoldKey:
                 goldKeys++;
-                GameObject goldKey = Instantiate(goldKeyItem, transform.position, Quaternion.identity);
-                goldKey.transform.SetParent(allKeys.transform);
                 break;
-            case Rewards.SilverKey:
-                silverKeys++;
-                GameObject silverKey = Instantiate(silverKeyItem, transform.position, Quaternion.identity);
-                silverKey.transform.SetParent(allKeys.transform);
+            case Rewards.RedKey:
+                redKeys++;
                 break;
         }
         SetScoreboardValues();
@@ -268,20 +257,16 @@ public class LevelStatus : MonoBehaviour
         switch (box)
         {
             case Boxes.Shield:
-                player.shieldCount++;
-                player.SavePlayer();
+                player.shieldCount++;      
                 break;
             case Boxes.Lightning:
                 player.lightningCount++;
-                player.SavePlayer();
                 break;
             case Boxes.Bullet:
                 player.bulletCount++;
-                player.SavePlayer();
                 break;
             case Boxes.Speed:
                 player.speedCount++;
-                player.SavePlayer();
                 break;
             case Boxes.Coin:
                 DropCoins(amount, position);

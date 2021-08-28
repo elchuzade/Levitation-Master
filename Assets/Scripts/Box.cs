@@ -8,9 +8,13 @@ public class Box : MonoBehaviour
     [SerializeField] GameObject components;
     [SerializeField] BoxCollider col;
 
-    [Header ("For Diamonds and Coins")]
-    [SerializeField] int minDropCount;
-    [SerializeField] int maxDropCount;
+    [Header ("Drop count for Coins")]
+    [SerializeField] int minDropCountCoins;
+    [SerializeField] int maxDropCountCoins;
+
+    [Header("Drop count for Diamonds")]
+    [SerializeField] int minDropCountDiamond;
+    [SerializeField] int maxDropCountDiamond;
 
     void OnTriggerEnter(Collider other)
     {
