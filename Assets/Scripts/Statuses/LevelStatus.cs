@@ -227,7 +227,7 @@ public class LevelStatus : MonoBehaviour
     // @access from Collectable script
     public void CollectReward(Rewards reward, int amount)
     {
-        Debug.Log(amount + " collect Rewards");
+        //Debug.Log(amount + " collect Rewards");
         switch (reward)
         {
             case Rewards.Coin:
@@ -276,7 +276,7 @@ public class LevelStatus : MonoBehaviour
                 DropDiamonds(amount, position);
                 break;
             case Boxes.Question:
-                OpenBox((Boxes)Random.Range(4, 6), amount, position);
+                OpenBox((Boxes)Random.Range(0, 6), amount, position);
                 break;
         }
         SetScoreboardValues();
@@ -285,7 +285,7 @@ public class LevelStatus : MonoBehaviour
     // @access from box when it is hit by the ball
     public void DropCoins(int amount, Vector3 position)
     {
-        Debug.Log(amount + "coins");
+        //Debug.Log(amount + "coins");
         Vector3 coordShift = new Vector3(Random.Range(-30, 30), 0, Random.Range(-30, 30));
         GameObject coinInstance = Instantiate(coinPrefab, position, Quaternion.identity);
         coinInstance.transform.SetParent(platformItems.transform);
@@ -296,7 +296,7 @@ public class LevelStatus : MonoBehaviour
     // @access from box when it is hit by the ball
     public void DropDiamonds(int amount, Vector3 position)
     {
-        Debug.Log(amount + "diamonds");
+        //Debug.Log(amount + "diamonds");
         Vector3 coordShift = new Vector3(Random.Range(-30, 30), 0, Random.Range(-30, 30));
         GameObject diamondInstance = Instantiate(diamondPrefab, position, Quaternion.identity);
         diamondInstance.transform.SetParent(platformItems.transform);
