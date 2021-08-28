@@ -14,8 +14,12 @@ public class Collectible : MonoBehaviour
     [SerializeField] int collectSpeed;
     [SerializeField] int dropSpeed;
 
+    // for collectibles
+    public int amount = 1;
+
     bool moveToCollectPosition;
     bool moveToDropPosition;
+    bool collected;
 
     // In case the item is dropped from the box
     private Vector3 dropPosition;
@@ -40,9 +44,10 @@ public class Collectible : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Ball")
+        if (other.gameObject.tag == "Ball" && !collected)
         {
-            levelStatus.CollectReward(reward);
+            collected = true;
+            levelStatus.CollectReward(reward, amount);
             transform.SetParent(levelStatus.transform);
             // This runs 1 second, so start moving after 1 second
             collectParticles.SetActive(true);
@@ -62,8 +67,10 @@ public class Collectible : MonoBehaviour
         if (transform.position == dropPosition)
         {
             moveToCollectPosition = true;
-            levelStatus.CollectReward(reward);
-
+            if (!collected)
+            {
+                levelStatus.CollectReward(reward, amount);
+            }
             StartCoroutine(DestroyItem());
         }
     }

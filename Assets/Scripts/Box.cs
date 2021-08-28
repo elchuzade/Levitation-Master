@@ -8,18 +8,17 @@ public class Box : MonoBehaviour
     [SerializeField] GameObject components;
     [SerializeField] BoxCollider col;
 
-    [Header ("Drop count for Coins")]
-    [SerializeField] int minDropCountCoins;
-    [SerializeField] int maxDropCountCoins;
+    [Header ("For Diamonds and Coins")]
+    [SerializeField] int minDropCount;
+    [SerializeField] int maxDropCount;
 
-    [Header("Drop count for Diamonds")]
-    [SerializeField] int minDropCountDiamond;
-    [SerializeField] int maxDropCountDiamond;
+    bool opened;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Ball")
+        if (other.gameObject.tag == "Ball" && !opened)
         {
+            opened = true;
             LevelStatus levelStatus = FindObjectOfType<LevelStatus>();
 
             int amount = Random.Range(minDropCount, maxDropCount + 1);
