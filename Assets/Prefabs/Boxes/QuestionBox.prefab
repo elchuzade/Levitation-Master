@@ -5431,8 +5431,10 @@ MonoBehaviour:
   collectParticles: {fileID: 4325276902947937927}
   components: {fileID: 7740559362738264655}
   col: {fileID: 7929228588174327054}
-  minDropCount: 0
-  maxDropCount: 0
+  minDropCountCoins: 1
+  maxDropCountCoins: 25
+  minDropCountDiamond: 1
+  maxDropCountDiamond: 3
 --- !u!114 &4245001245034321657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5754,15 +5756,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24c20a47959d2400d8682a262144f531, type: 3}
---- !u!4 &6926585800220393717 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 24c20a47959d2400d8682a262144f531,
-    type: 3}
-  m_PrefabInstance: {fileID: 7469946120552818462}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7740559362738264655 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 24c20a47959d2400d8682a262144f531,
+    type: 3}
+  m_PrefabInstance: {fileID: 7469946120552818462}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6926585800220393717 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 24c20a47959d2400d8682a262144f531,
     type: 3}
   m_PrefabInstance: {fileID: 7469946120552818462}
   m_PrefabAsset: {fileID: 0}

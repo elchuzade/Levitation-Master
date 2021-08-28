@@ -13,7 +13,6 @@ public class LevelStatus : MonoBehaviour
     [SerializeField] GameObject coinPrefab;
     [SerializeField] GameObject diamondPrefab;
 
-    [SerializeField] GameObject allKeys;
     // To set parent of coins and diamonds
     [SerializeField] GameObject platformItems;
 
@@ -26,10 +25,6 @@ public class LevelStatus : MonoBehaviour
 
     [SerializeField] GameObject coinsIcon;
     [SerializeField] GameObject diamondsIcon;
-
-    [SerializeField] GameObject redKeyItem;
-    [SerializeField] GameObject goldKeyItem;
-    [SerializeField] GameObject silverKeyItem;
 
     [SerializeField] GameObject lightningButton;
     [SerializeField] GameObject shieldButton;
@@ -141,7 +136,6 @@ public class LevelStatus : MonoBehaviour
     {
         coinCount.text = player.coins.ToString();
         diamondCount.text = player.diamonds.ToString();
-
         bulletButton.GetComponent<Skill>().SetSkillCount(player.bulletCount);
         lightningButton.GetComponent<Skill>().SetSkillCount(player.lightningCount);
         shieldButton.GetComponent<Skill>().SetSkillCount(player.shieldCount);
@@ -231,32 +225,27 @@ public class LevelStatus : MonoBehaviour
     }
 
     // @access from Collectable script
-    public void CollectReward(Rewards reward)
+    public void CollectReward(Rewards reward, int amount)
     {
+        //Debug.Log(amount + " collect Rewards");
         switch (reward)
         {
             case Rewards.Coin:
-                coins++;
+                coins += amount;
                 coinsIcon.GetComponent<AnimationTrigger>().Trigger("Start");
                 break;
             case Rewards.Diamond:
-                diamonds++;
+                diamonds +=amount;
                 diamondsIcon.GetComponent<AnimationTrigger>().Trigger("Start");
                 break;
-            case Rewards.RedKey:
-                redKeys++;
-                GameObject redKey = Instantiate(redKeyItem, transform.position, Quaternion.identity);
-                redKey.transform.SetParent(allKeys.transform);
+            case Rewards.SilverKey:
+                silverKeys += amount;
                 break;
             case Rewards.GoldKey:
-                goldKeys++;
-                GameObject goldKey = Instantiate(goldKeyItem, transform.position, Quaternion.identity);
-                goldKey.transform.SetParent(allKeys.transform);
+                goldKeys += amount;
                 break;
-            case Rewards.SilverKey:
-                silverKeys++;
-                GameObject silverKey = Instantiate(silverKeyItem, transform.position, Quaternion.identity);
-                silverKey.transform.SetParent(allKeys.transform);
+            case Rewards.RedKey:
+                redKeys += amount;
                 break;
         }
         SetScoreboardValues();
@@ -265,23 +254,20 @@ public class LevelStatus : MonoBehaviour
     // @access from Box script
     public void OpenBox(Boxes box, int amount, Vector3 position)
     {
+        //Debug.Log(amount);
         switch (box)
         {
             case Boxes.Shield:
-                player.shieldCount++;
-                player.SavePlayer();
+                player.shieldCount++;      
                 break;
             case Boxes.Lightning:
                 player.lightningCount++;
-                player.SavePlayer();
                 break;
             case Boxes.Bullet:
                 player.bulletCount++;
-                player.SavePlayer();
                 break;
             case Boxes.Speed:
                 player.speedCount++;
-                player.SavePlayer();
                 break;
             case Boxes.Coin:
                 DropCoins(amount, position);
@@ -290,7 +276,7 @@ public class LevelStatus : MonoBehaviour
                 DropDiamonds(amount, position);
                 break;
             case Boxes.Question:
-                OpenBox((Boxes)Random.Range(0, 5), amount, position);
+                OpenBox((Boxes)Random.Range(0, 6), amount, position);
                 break;
         }
         SetScoreboardValues();
@@ -299,25 +285,23 @@ public class LevelStatus : MonoBehaviour
     // @access from box when it is hit by the ball
     public void DropCoins(int amount, Vector3 position)
     {
-        for (int i = 0; i < amount; i++)
-        {
-            Vector3 coordShift = new Vector3(Random.Range(-30, 30), 0, Random.Range(-30, 30));
-            GameObject coinInstance = Instantiate(coinPrefab, position, Quaternion.identity);
-            coinInstance.transform.SetParent(platformItems.transform);
-            coinInstance.transform.GetComponent<Collectible>().SetDropPosition(position + coordShift);
-        }
+        //Debug.Log(amount + "coins");
+        Vector3 coordShift = new Vector3(Random.Range(-30, 30), 0, Random.Range(-30, 30));
+        GameObject coinInstance = Instantiate(coinPrefab, position, Quaternion.identity);
+        coinInstance.transform.SetParent(platformItems.transform);
+        coinInstance.GetComponent<Collectible>().SetDropPosition(position + coordShift);
+        coinInstance.GetComponent<Collectible>().amount = amount;
     }
 
     // @access from box when it is hit by the ball
     public void DropDiamonds(int amount, Vector3 position)
     {
-        for (int i = 0; i < amount; i++)
-        {
-            Vector3 coordShift = new Vector3(Random.Range(-30, 30), 0, Random.Range(-30, 30));
-            GameObject diamondInstance = Instantiate(diamondPrefab, position, Quaternion.identity);
-            diamondInstance.transform.SetParent(platformItems.transform);
-            diamondInstance.transform.GetComponent<Collectible>().SetDropPosition(position + coordShift);
-        }
+        //Debug.Log(amount + "diamonds");
+        Vector3 coordShift = new Vector3(Random.Range(-30, 30), 0, Random.Range(-30, 30));
+        GameObject diamondInstance = Instantiate(diamondPrefab, position, Quaternion.identity);
+        diamondInstance.transform.SetParent(platformItems.transform);
+        diamondInstance.transform.GetComponent<Collectible>().SetDropPosition(position + coordShift);
+        diamondInstance.GetComponent<Collectible>().amount = amount;
     }
 
     public void CollectDroppableItem(Rewards reward)

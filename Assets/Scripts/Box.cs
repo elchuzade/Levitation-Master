@@ -12,10 +12,13 @@ public class Box : MonoBehaviour
     [SerializeField] int minDropCount;
     [SerializeField] int maxDropCount;
 
+    bool opened;
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Ball")
+        if (other.gameObject.tag == "Ball" && !opened)
         {
+            opened = true;
             LevelStatus levelStatus = FindObjectOfType<LevelStatus>();
 
             int amount = Random.Range(minDropCount, maxDropCount + 1);
