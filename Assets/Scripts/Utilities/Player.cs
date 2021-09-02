@@ -70,9 +70,9 @@ public class Player : MonoBehaviour
         silverKeyCount = 2;
 
         bulletCount = 400;
-        lightningCount = 40;
-        shieldCount = 40;
-        speedCount = 40;
+        lightningCount = 400;
+        shieldCount = 400;
+        speedCount = 400;
 
         redChestBuys = new List<long>();
         goldChestBuys = new List<long>();
