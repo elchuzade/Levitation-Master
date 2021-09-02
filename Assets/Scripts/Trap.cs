@@ -86,7 +86,11 @@ public class Trap : MonoBehaviour
                 {
                     ball.GetComponent<Ball>().AttemptTrapBall();
                 }
-                AttemptDestroyProcess();
+                
+                if(trapType == TrapTypes.Bomb)
+                {
+                    AttemptDestroyProcess();
+                }
             }
         }
         else if (other.gameObject.tag == "Bullet")

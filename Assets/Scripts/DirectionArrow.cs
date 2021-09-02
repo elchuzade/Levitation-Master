@@ -18,7 +18,6 @@ public class DirectionArrow : MonoBehaviour
             {
                 direction = Vector3.up * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
                 transform.localRotation = Quaternion.Euler(90, 0, angle - 90);
             }
 
