@@ -6,11 +6,14 @@ public class ShopItem : MonoBehaviour
 {
     [SerializeField] int price;
     [SerializeField] int index;
+    [SerializeField] int powerUp;
+
 
     [SerializeField] Currency currency;
 
     [SerializeField] GameObject priceTag;
     [SerializeField] Text priceText;
+    [SerializeField] Text powerUpText;
     [SerializeField] GameObject diamondIcon;
     [SerializeField] GameObject coinIcon;
     [SerializeField] GameObject selectedText;
