@@ -33,6 +33,8 @@ public class PlayerData
     public List<long> leaderboardClicks = new List<long>();
     public List<long> chestClicks = new List<long>();
 
+    public bool maxLevelReached = false;
+
     public PlayerData (Player player)
     {
         coins = player.coins;
@@ -63,5 +65,6 @@ public class PlayerData
         shopClicks = player.shopClicks;
         leaderboardClicks = player.leaderboardClicks;
         chestClicks = player.chestClicks;
+        maxLevelReached = player.maxLevelReached;
     }
 }

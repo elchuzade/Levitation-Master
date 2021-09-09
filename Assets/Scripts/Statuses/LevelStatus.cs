@@ -65,6 +65,8 @@ public class LevelStatus : MonoBehaviour
         player = FindObjectOfType<Player>();
         //player.ResetPlayer();
         player.LoadPlayer();
+        Debug.Log(player.maxLevelReached ? Random.Range(12, 99) : player.nextLevelIndex);
+        Debug.Log(player.maxLevelReached);
 
         // Enabling sub count text
         EnableSubText();
@@ -81,6 +83,11 @@ public class LevelStatus : MonoBehaviour
 
         SetScoreboardValues();
         levelText.text = player.nextLevelIndex.ToString();
+        if(player.nextLevelIndex == 100)
+        {
+            player.maxLevelReached = true;
+            player.SavePlayer();
+        }
 
         DisableGiftButton();
         ReloadGiftButton();
@@ -209,7 +216,7 @@ public class LevelStatus : MonoBehaviour
     // Only one place to save the level and load the next level to keep player data consistent
     public void LoadNextLevel()
     {
-        navigator.LoadNextLevel(player.nextLevelIndex);
+        navigator.LoadNextLevel(player.maxLevelReached ? Random.Range(12, 99) : player.nextLevelIndex);
     }
 
     // @access from Ball script
@@ -217,6 +224,7 @@ public class LevelStatus : MonoBehaviour
     {
         // += to increment levels while transitioning to the next level
         levelText.text = (player.nextLevelIndex += 1).ToString();
+        //levelText.text = "Max";
         levelControlsWindow.SetActive(false);
         doubleRewardWindow.SetActive(true);
         // Add reward for passing level
@@ -482,7 +490,7 @@ public class LevelStatus : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         player.LoadPlayer();
-        navigator.LoadNextLevel(player.nextLevelIndex);
+        navigator.LoadNextLevel(player.maxLevelReached ? Random.Range(12, 99) : player.nextLevelIndex);
     }
     #endregion
 }
