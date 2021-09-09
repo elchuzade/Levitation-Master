@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     public List<long> leaderboardClicks = new List<long>();
     public List<long> chestClicks = new List<long>();
 
+    public bool maxLevelReached = false;
+
     void Awake()
     {
         transform.SetParent(transform.parent.parent);
@@ -64,6 +66,7 @@ public class Player : MonoBehaviour
         nameChanged = false;
         allBalls = new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         currentBallIndex = 0;
+        maxLevelReached = false;
 
         redKeyCount = 2;
         goldKeyCount = 2;
@@ -108,6 +111,7 @@ public class Player : MonoBehaviour
         redKeyCount = data.redKeyCount;
         goldKeyCount = data.goldKeyCount;
         silverKeyCount = data.silverKeyCount;
+        maxLevelReached = data.maxLevelReached;
 
         bulletCount = data.bulletCount;
         lightningCount = data.lightningCount;
