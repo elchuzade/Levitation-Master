@@ -224,11 +224,10 @@ public class LevelStatus : MonoBehaviour
     {
         // += to increment levels while transitioning to the next level
         levelText.text = (player.nextLevelIndex += 1).ToString();
-        //levelText.text = "Max";
         levelControlsWindow.SetActive(false);
         doubleRewardWindow.SetActive(true);
         // Add reward for passing level
-        coins += Random.Range(5, 15);
+        coins += Random.Range(7, 14);
         SetScoreboardValues();
     }
 

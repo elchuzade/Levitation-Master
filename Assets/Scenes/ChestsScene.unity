@@ -7679,11 +7679,11 @@ MonoBehaviour:
   chestCount: {fileID: 2093055506136129417}
   chestPrice: {fileID: 6996379347666522561}
   diamondChance: 1
-  diamondMin: 5
+  diamondMin: 3
   diamondMax: 10
   coinChance: 3
-  coinMin: 20
-  coinMax: 50
+  coinMin: 10
+  coinMax: 30
 --- !u!224 &3202037759614548843
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8971,6 +8971,7 @@ MonoBehaviour:
   shopClicks: 
   leaderboardClicks: 
   chestClicks: 
+  maxLevelReached: 0
 --- !u!224 &5440383050540068267
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9415,9 +9416,9 @@ MonoBehaviour:
   chestPrice: {fileID: 1332544802229768292}
   diamondChance: 1
   diamondMin: 10
-  diamondMax: 20
+  diamondMax: 30
   coinChance: 1
-  coinMin: 50
+  coinMin: 30
   coinMax: 100
 --- !u!114 &6156315178632174802
 MonoBehaviour:
@@ -10663,8 +10664,8 @@ MonoBehaviour:
   diamondMin: 1
   diamondMax: 5
   coinChance: 5
-  coinMin: 10
-  coinMax: 20
+  coinMin: 2
+  coinMax: 10
 --- !u!114 &8528749984906760394
 MonoBehaviour:
   m_ObjectHideFlags: 0

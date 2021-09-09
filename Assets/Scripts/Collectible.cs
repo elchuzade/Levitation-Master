@@ -24,10 +24,22 @@ public class Collectible : MonoBehaviour
     // In case the item is dropped from the box
     private Vector3 dropPosition;
 
+    Player player;
+
     #region Unity methods
     void Awake()
     {
         levelStatus = FindObjectOfType<LevelStatus>();
+    }
+
+    void Start()
+    {
+        player = FindObjectOfType<Player>();
+        player.LoadPlayer();
+        if (player.maxLevelReached && (reward == Rewards.RedKey || reward == Rewards.SilverKey || reward == Rewards.GoldKey))
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Update()
