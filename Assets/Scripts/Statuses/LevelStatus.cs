@@ -67,7 +67,7 @@ public class LevelStatus : MonoBehaviour
         player.LoadPlayer();
         //Debug.Log(player.maxLevelReached ? Random.Range(12, 99) : player.nextLevelIndex);
         //Debug.Log(player.maxLevelReached);
-        Debug.Log(player.nextLevelIndex);
+        //Debug.Log(player.nextLevelIndex);
         // Enabling sub count text
         EnableSubText();
 
@@ -236,7 +236,7 @@ public class LevelStatus : MonoBehaviour
         levelControlsWindow.SetActive(false);
         doubleRewardWindow.SetActive(true);
         // Add reward for passing level
-        coins += Random.Range(7, 14);
+        coins += (int)(Random.Range(7, 14) * (1 + (float) ball.powerUp / 100));
         SetScoreboardValues();
     }
 

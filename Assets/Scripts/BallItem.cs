@@ -5,6 +5,7 @@ public class BallItem : MonoBehaviour
 {
     [SerializeField] int ballIndex;
     [SerializeField] BallTypes ballType;
+    [SerializeField] int powerUp;
 
     bool movingUp;
     float time = 0.3f;
@@ -27,6 +28,11 @@ public class BallItem : MonoBehaviour
     public void MoveUp()
     {
         movingUp = true;
+    }
+
+    public int GetPowerUp()
+    {
+        return powerUp;
     }
 
     public BallTypes GetBallType()
