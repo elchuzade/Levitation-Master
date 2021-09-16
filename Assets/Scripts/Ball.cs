@@ -32,7 +32,8 @@ public class Ball : MonoBehaviour
 
     float speedMultiplier = 1f;
     bool shieldStatus;
-    
+
+    public int powerUp;
     bool followDirection;
 
     // To decide whether joystick can move the ball or not
@@ -56,6 +57,7 @@ public class Ball : MonoBehaviour
         player.LoadPlayer();
 
         ballPrefab = Instantiate(allBalls[player.currentBallIndex], transform.position, Quaternion.identity);
+        powerUp = ballPrefab.GetComponent<BallItem>().GetPowerUp();
         ballPrefab.transform.SetParent(transform);
         ballPrefab.transform.Find("RaisingTail").gameObject.SetActive(false);
 

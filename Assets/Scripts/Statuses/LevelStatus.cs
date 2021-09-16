@@ -65,9 +65,9 @@ public class LevelStatus : MonoBehaviour
         player = FindObjectOfType<Player>();
         //player.ResetPlayer();
         player.LoadPlayer();
-        Debug.Log(player.maxLevelReached ? Random.Range(12, 99) : player.nextLevelIndex);
-        Debug.Log(player.maxLevelReached);
-
+        //Debug.Log(player.maxLevelReached ? Random.Range(12, 99) : player.nextLevelIndex);
+        //Debug.Log(player.maxLevelReached);
+        //Debug.Log(player.nextLevelIndex);
         // Enabling sub count text
         EnableSubText();
 
@@ -83,11 +83,7 @@ public class LevelStatus : MonoBehaviour
 
         SetScoreboardValues();
         levelText.text = player.nextLevelIndex.ToString();
-        if(player.nextLevelIndex == 100)
-        {
-            player.maxLevelReached = true;
-            player.SavePlayer();
-        }
+       
 
         DisableGiftButton();
         ReloadGiftButton();
@@ -165,6 +161,18 @@ public class LevelStatus : MonoBehaviour
             subDiamondCount.text = "";
         }
     }
+
+    void SaveLevelStats()
+    {
+        player.coins += coins;
+        player.diamonds += diamonds;
+        player.redKeyCount += redKeys;
+        player.goldKeyCount += goldKeys;
+        player.silverKeyCount += silverKeys;
+
+        player.SavePlayer();
+    }
+
     #endregion
 
     #region Public Methods
@@ -222,12 +230,13 @@ public class LevelStatus : MonoBehaviour
     // @access from Ball script
     public void SetNextLevelMeter()
     {
+  
         // += to increment levels while transitioning to the next level
-        levelText.text = (player.nextLevelIndex += 1).ToString();
+        levelText.text = player.nextLevelIndex.ToString();
         levelControlsWindow.SetActive(false);
         doubleRewardWindow.SetActive(true);
         // Add reward for passing level
-        coins += Random.Range(7, 14);
+        coins += (int)(Random.Range(7, 14) * (1 + (float) ball.powerUp / 100));
         SetScoreboardValues();
     }
 
@@ -319,6 +328,17 @@ public class LevelStatus : MonoBehaviour
     // @access from Jumper script
     public void CompleteLevel()
     {
+        if (player.nextLevelIndex == 100)
+        {
+            player.maxLevelReached = true;
+            player.SavePlayer();
+        }
+
+        if (!player.maxLevelReached)
+        {
+            player.nextLevelIndex += 1;
+        }
+
         Camera.main.GetComponent<CameraResizer>().CameraFollowBall();
         levelControlsWindow.SetActive(false);
     }
@@ -332,6 +352,7 @@ public class LevelStatus : MonoBehaviour
     // @access from Level canvas
     public void ClickHomeButton()
     {
+        SaveLevelStats();
         navigator.LoadMainScene();
     }
   
@@ -410,14 +431,7 @@ public class LevelStatus : MonoBehaviour
     // @access from Level canvas
     public void ClickNextLevelButton()
     {
-        player.coins += coins;
-        player.diamonds += diamonds;
-        player.redKeyCount += redKeys;
-        player.goldKeyCount += goldKeys;
-        player.silverKeyCount += silverKeys;
-
-        player.SavePlayer();
-
+        SaveLevelStats();
         LoadNextLevel();
     }
 

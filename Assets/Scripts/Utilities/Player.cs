@@ -56,10 +56,10 @@ public class Player : MonoBehaviour
 
     public void ResetPlayer()
     {
-        coins = 99999;
+        coins = 0;
         playerName = "";
-        diamonds = 4000;
-        nextLevelIndex = 1;
+        diamonds = 0;
+        nextLevelIndex = 99;
         playerName = "";
         playerCreated = false;
         privacyPolicy = false;
@@ -72,10 +72,10 @@ public class Player : MonoBehaviour
         goldKeyCount = 2;
         silverKeyCount = 2;
 
-        bulletCount = 400;
-        lightningCount = 400;
-        shieldCount = 400;
-        speedCount = 400;
+        bulletCount = 0;
+        lightningCount = 0;
+        shieldCount = 0;
+        speedCount = 0;
 
         redChestBuys = new List<long>();
         goldChestBuys = new List<long>();

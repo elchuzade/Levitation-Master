@@ -150,7 +150,7 @@ public class MainStatus : MonoBehaviour
     // @access from MainStatus canvas
     public void ClickPlayButton()
     {
-        navigator.LoadNextLevel(player.nextLevelIndex);
+        navigator.LoadNextLevel(player.maxLevelReached ? Random.Range(12, 99) : player.nextLevelIndex);
     }
 
     // @access from MainStatus canvas
