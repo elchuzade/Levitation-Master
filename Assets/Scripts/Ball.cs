@@ -70,6 +70,7 @@ public class Ball : MonoBehaviour
             Vector3 direction = Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
             rb.AddForce(direction * speed * speedMultiplier * Time.fixedDeltaTime, ForceMode.VelocityChange);
             rb.AddForce(Vector3.down * 100 * rb.mass);
+            //rb.velocity = direction * speed * speedMultiplier;
         }
 
         if (pushingUp) {
