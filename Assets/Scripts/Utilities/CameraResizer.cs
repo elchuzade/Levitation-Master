@@ -7,8 +7,8 @@ public class CameraResizer : MonoBehaviour
     [SerializeField] GameObject canvas;
     [SerializeField] GameObject ball;
 
-    Vector3 cameraInitPosition = new Vector3(375, 1380, -125);
-    Vector3 cameraInitRotation = new Vector3(50, 0, 0);
+    Vector3 cameraInitPosition = new Vector3(375, 1550, 200);
+    Vector3 cameraInitRotation = new Vector3(70, 0, 0);
 
     [SerializeField] bool shopScene;
 
