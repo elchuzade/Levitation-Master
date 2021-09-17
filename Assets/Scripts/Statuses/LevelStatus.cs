@@ -236,7 +236,7 @@ public class LevelStatus : MonoBehaviour
         levelControlsWindow.SetActive(false);
         doubleRewardWindow.SetActive(true);
         // Add reward for passing level
-        coins += (int)(Random.Range(7, 14) * (1 + (float) ball.powerUp / 100));
+        coins += (int)(Random.Range(10, 11) * (1 + (float) ball.powerUp / 100));
         SetScoreboardValues();
     }
 
