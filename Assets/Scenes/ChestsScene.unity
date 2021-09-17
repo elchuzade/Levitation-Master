@@ -150,16 +150,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 264771278}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6886233765407931003}
-  m_RootOrder: 1
+  m_Father: {fileID: 1148895249081991124}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -140}
+  m_AnchoredPosition: {x: 0, y: -36.166748}
   m_SizeDelta: {x: 650, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &264771280
@@ -225,7 +225,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6886233765407931003}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -787,7 +787,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6886233765407931003}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -953,7 +953,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6886233765407931003}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -100, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6012,11 +6012,12 @@ MonoBehaviour:
   - {fileID: 4884581681096061068, guid: b742022d81c40014e8c97245e4e99385, type: 3}
   - {fileID: 8732690960873282312, guid: c8ea1f13ff6cc4c9dacffc1417beabe7, type: 3}
   - {fileID: 5244871864806452798, guid: 9bf0c9ee3909e4da4b28affc20c4920d, type: 3}
-  allSpecialBallPrefabs:
-  - {fileID: 8732690960873282312, guid: bd9afbde7003247dab3ffab088e523d3, type: 3}
-  - {fileID: 6077730922625021557, guid: 69a8ee41bd7994ddea8671627c76add5, type: 3}
-  - {fileID: 3610131359642704619, guid: 79fef33f0e630463a81b9d4775dfa18b, type: 3}
-  - {fileID: 3610131359642704619, guid: 2bc1a924cbafa4c2dbf2bf0a353339a2, type: 3}
+  silverKeyPrefab: {fileID: 4049941776972410371, guid: 54d1ccdcf173f014790f16f1415ee93f,
+    type: 3}
+  goldKeyPrefab: {fileID: 4168103147496207509, guid: 3eaa5ccab2e5c424dbb112344c9f6b88,
+    type: 3}
+  redKeyPrefab: {fileID: 1452892073230208886, guid: 59d5dcd4d2f04be4ea47d31229bd63c4,
+    type: 3}
   prizeCount: {fileID: 1492213519}
   collectButton: {fileID: 344924013}
   allPrizes: {fileID: 1783510115}
@@ -6405,7 +6406,7 @@ RectTransform:
   - {fileID: 6592530370292191226}
   - {fileID: 4480408983430654397}
   m_Father: {fileID: 6886233765407931003}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6527,8 +6528,9 @@ RectTransform:
   - {fileID: 6670502090693133070}
   - {fileID: 624956512773760350}
   - {fileID: 237309768991751190}
+  - {fileID: 264771279}
   m_Father: {fileID: 6886233765407931003}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6670,7 +6672,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 999
+  m_Text: 79
 --- !u!114 &1342151904459794076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6694,13 +6696,19 @@ MonoBehaviour:
   diamondMax: 40
   skillMin: 6
   skillMax: 10
+  ballChance: 0
   ballMin: 1
   ballMax: 1
-  commonChance: 1
-  uncommonChance: 1
-  rareChance: 1
-  legendaryChance: 1
-  specialChance: 1
+  commonChance: 5
+  uncommonChance: 4
+  rareChance: 3
+  legendaryChance: 2
+  keyChance: 100
+  keyMin: 1
+  keyMax: 1
+  silverKeyChance: 1
+  goldKeyChance: 1
+  redKeyChance: 1
 --- !u!1 &1344994781130061942
 GameObject:
   m_ObjectHideFlags: 0
@@ -7183,7 +7191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 60, y: 0}
+  m_AnchoredPosition: {x: 70, y: 0}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2458208434282809294
@@ -7430,13 +7438,19 @@ MonoBehaviour:
   diamondMax: 20
   skillMin: 2
   skillMax: 6
-  ballMin: 0
-  ballMax: 0
-  commonChance: 0
-  uncommonChance: 0
-  rareChance: 0
-  legendaryChance: 0
-  specialChance: 0
+  ballChance: 0
+  ballMin: 1
+  ballMax: 1
+  commonChance: 5
+  uncommonChance: 4
+  rareChance: 3
+  legendaryChance: 2
+  keyChance: 100
+  keyMin: 1
+  keyMax: 1
+  silverKeyChance: 1
+  goldKeyChance: 1
+  redKeyChance: 1
 --- !u!224 &2872548007169154802
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8189,7 +8203,7 @@ RectTransform:
   - {fileID: 8909021595386210485}
   - {fileID: 3696996690868477769}
   m_Father: {fileID: 6886233765407931003}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9318,7 +9332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 60, y: 0}
+  m_AnchoredPosition: {x: 80, y: 0}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6102009858439539382
@@ -9493,7 +9507,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -80, y: 0}
+  m_AnchoredPosition: {x: -90, y: 0}
   m_SizeDelta: {x: 100, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6256277835130859984
@@ -9656,13 +9670,19 @@ MonoBehaviour:
   diamondMax: 10
   skillMin: 0
   skillMax: 2
-  ballMin: 0
-  ballMax: 0
-  commonChance: 0
-  uncommonChance: 0
-  rareChance: 0
-  legendaryChance: 0
-  specialChance: 0
+  ballChance: 0
+  ballMin: 1
+  ballMax: 1
+  commonChance: 5
+  uncommonChance: 4
+  rareChance: 3
+  legendaryChance: 2
+  keyChance: 100
+  keyMin: 1
+  keyMax: 1
+  silverKeyChance: 1
+  goldKeyChance: 1
+  redKeyChance: 1
 --- !u!222 &6556079387730787253
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9863,7 +9883,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4866936534137647362}
-  - {fileID: 264771279}
   - {fileID: 1148895249081991124}
   - {fileID: 786589342332370796}
   - {fileID: 4191986076548835161}
@@ -9941,7 +9960,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 999
+  m_Text: 19
 --- !u!222 &7009325441757160655
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10229,7 +10248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -80, y: 0}
+  m_AnchoredPosition: {x: -90, y: 0}
   m_SizeDelta: {x: 100, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7585380854957891894
@@ -10533,8 +10552,8 @@ MonoBehaviour:
   chestOpenWindow: {fileID: 987169801362907484}
   diamondsText: {fileID: 387331128}
   coinsText: {fileID: 387331127}
-  redChestPrice: 399
-  goldChestPrice: 99
+  redChestPrice: 1
+  goldChestPrice: 19
   redChest: {fileID: 8671383655716525796}
   goldChest: {fileID: 3996008091484204066}
   silverChest: {fileID: 8636243652251147315}
