@@ -35,7 +35,10 @@ public class ChestWindow : MonoBehaviour
     [SerializeField] GameObject[] allUncommonBallPrefabs;
     [SerializeField] GameObject[] allRareBallPrefabs;
     [SerializeField] GameObject[] allLegendaryBallPrefabs;
-    [SerializeField] GameObject[] allSpecialBallPrefabs;
+    
+    [SerializeField] GameObject silverKeyPrefab;
+    [SerializeField] GameObject goldKeyPrefab;
+    [SerializeField] GameObject redKeyPrefab;
 
     [SerializeField] GameObject prizeCount;
     [SerializeField] GameObject collectButton;
@@ -54,7 +57,7 @@ public class ChestWindow : MonoBehaviour
     {
         chestStatus = FindObjectOfType<ChestStatus>();
         player = FindObjectOfType<Player>();
-        
+
         player.LoadPlayer();
     }
 
@@ -125,12 +128,14 @@ public class ChestWindow : MonoBehaviour
         List<GameObject> allDiamonds = new List<GameObject>();
         List<GameObject> allSkills = new List<GameObject>();
         List<GameObject> allBalls = new List<GameObject>();
+        List<GameObject> allKeys = new List<GameObject>();
 
         ChestUnlock chestUnlock = openedChest.GetComponent<ChestUnlock>();
         int spawnCoinAmount = Random.Range(chestUnlock.coinMin, chestUnlock.coinMax + 1);
         int spawnDiamondAmount = Random.Range(chestUnlock.diamondMin, chestUnlock.diamondMax + 1);
         int spawnSkillAmount = Random.Range(chestUnlock.skillMin, chestUnlock.skillMax + 1);
         int spawnBallAmount = Random.Range(chestUnlock.ballMin, chestUnlock.ballMax + 1);
+        int spawnKeyAmount = Random.Range(chestUnlock.keyMin, chestUnlock.keyMax + 1);
 
         coinAmount = spawnCoinAmount;
         diamondAmount = spawnDiamondAmount;
@@ -163,6 +168,44 @@ public class ChestWindow : MonoBehaviour
                 shieldAmount++;
             }
         }
+
+        List<Rewards> keyPrizePool = new List<Rewards>();
+
+        if (chestUnlock.keyChance > Random.Range(0, 101))
+        {
+            for (int i = 0; i < spawnKeyAmount; i++)
+            {
+                for (int j = 0; j < chestUnlock.silverKeyChance; j++)
+                {
+                    keyPrizePool.Add(Rewards.SilverKey);
+                }
+                for (int j = 0; j < chestUnlock.goldKeyChance; j++)
+                {
+                    keyPrizePool.Add(Rewards.GoldKey);
+                }
+                for (int j = 0; j < chestUnlock.redKeyChance; j++)
+                {
+                    keyPrizePool.Add(Rewards.RedKey);
+                }
+            }
+
+            Rewards randomKey = keyPrizePool[Random.Range(0, keyPrizePool.Count)];
+
+            if (randomKey == Rewards.SilverKey)
+            {
+                allKeys.Add(silverKeyPrefab);
+            }
+            else if (randomKey == Rewards.GoldKey)
+            {
+                allKeys.Add(goldKeyPrefab);
+            }
+            else if (randomKey == Rewards.RedKey)
+            {
+                allKeys.Add(redKeyPrefab);
+            }
+        }
+
+        
         for (int i = 0; i < spawnBallAmount; i++)
         {
             // Make three lists out of balls that player does not own based on their rarity
@@ -170,7 +213,6 @@ public class ChestWindow : MonoBehaviour
             List<GameObject> possibleUncommonBalls = new List<GameObject>();
             List<GameObject> possibleRareBalls = new List<GameObject>();
             List<GameObject> possibleLegendaryBalls = new List<GameObject>();
-            List<GameObject> possibleSpecialBalls = new List<GameObject>();
 
             for (int j = 0; j < player.allBalls.Count; j++)
             {
@@ -216,16 +258,6 @@ public class ChestWindow : MonoBehaviour
                             possibleLegendaryBalls.Add(allLegendaryBallPrefabs[k]);
                         }
                     }
-                    // Add this ball as possible gift, as player doesnt have it
-                    for (int k = 0; k < allSpecialBallPrefabs.Length; k++)
-                    {
-                        if (j == allSpecialBallPrefabs[i].GetComponent<BallItem>().GetBallIndex() &&
-                            allSpecialBallPrefabs[i].GetComponent<BallItem>().GetBallType() == BallTypes.Special)
-                        {
-                            // Add this ball to common list
-                            possibleSpecialBalls.Add(allSpecialBallPrefabs[k]);
-                        }
-                    }
                 }
             }
 
@@ -264,14 +296,6 @@ public class ChestWindow : MonoBehaviour
                     ballPrizePool.Add(BallTypes.Legendary);
                 }
             }
-            // If player has not unlocked all common balls
-            if (possibleSpecialBalls.Count > 0)
-            {
-                for (int j = 0; j < chestUnlock.specialChance; j++)
-                {
-                    ballPrizePool.Add(BallTypes.Special);
-                }
-            }
 
             // Pick one ball randomly from the selected ball type list and add it to allBalls
             BallTypes randomBallType = ballPrizePool[Random.Range(0, ballPrizePool.Count)];
@@ -295,24 +319,24 @@ public class ChestWindow : MonoBehaviour
                 GameObject randomLegendaryBall = possibleLegendaryBalls[Random.Range(0, possibleLegendaryBalls.Count)];
                 possibleLegendaryBalls.Remove(randomLegendaryBall);
                 allBalls.Add(randomLegendaryBall);
-            } else if (randomBallType == BallTypes.Legendary)
-            {
-                GameObject randomSpecialBall = possibleSpecialBalls[Random.Range(0, possibleSpecialBalls.Count)];
-                possibleSpecialBalls.Remove(randomSpecialBall);
-                allBalls.Add(randomSpecialBall);
             }
         }
 
         float coinsDelay = 0;
         float diamondsDelay = Mathf.Clamp(spawnCoinAmount, 0, 12) * 0.25f + coinsDelay;
         float skillsDelay = Mathf.Clamp(spawnDiamondAmount, 0, 8) * 0.3f + diamondsDelay;
-        float ballsDelay = allSkills.Count * 0.75f + skillsDelay;
+        float keysDelay = allSkills.Count * 0.75f + skillsDelay;
+        float ballsDelay = allKeys.Count * 1.25f + keysDelay;
 
         // Count from end of prizes to find the last prize to show Collect button
         ChestPrizeTypes lastPrize = ChestPrizeTypes.Ball;
         if (allBalls.Count == 0)
         {
             lastPrize = ChestPrizeTypes.Skill;
+        }
+        if (allKeys.Count == 0)
+        {
+            lastPrize = ChestPrizeTypes.Key;
         }
         if (allSkills.Count == 0)
         {
@@ -329,6 +353,10 @@ public class ChestWindow : MonoBehaviour
         if (allSkills.Count > 0)
         {
             StartCoroutine(CreatePrize(skillsDelay, 0.4f, allSkills, lastPrize == ChestPrizeTypes.Skill, ChestPrizeTypes.Skill));
+        }
+        if (allKeys.Count > 0)
+        {
+            StartCoroutine(CreatePrize(keysDelay, 0, allKeys, lastPrize == ChestPrizeTypes.Key, ChestPrizeTypes.Key));
         }
         if (allBalls.Count > 0)
         {
@@ -405,8 +433,15 @@ public class ChestWindow : MonoBehaviour
             {
                 yield return new WaitForSeconds(interval);
                 EmitPrizeParticles(prizeType);
-
+                if (prizeType == ChestPrizeTypes.Key)
+                {
+                    Debug.Log(prefabs[i]);
+                }
                 GameObject prize = Instantiate(prefabs[i], transform.position + new Vector3(0, 0, -10), Quaternion.identity);
+                if (prizeType == ChestPrizeTypes.Key)
+                {
+                    Debug.Log(prize);
+                }
                 prize.transform.SetParent(allPrizes.transform);
             }
             if (prizeType == ChestPrizeTypes.Coin)
@@ -423,6 +458,7 @@ public class ChestWindow : MonoBehaviour
             }
             else if (prizeType == ChestPrizeTypes.Skill)
             {
+                // For loop takes some time that is why we have two similar if conditions
                 StartCoroutine(SetCollectedSkillsIcon());
             }
         }

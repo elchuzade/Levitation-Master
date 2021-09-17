@@ -16,14 +16,22 @@ public class ChestUnlock : MonoBehaviour
     public int skillMin;
     public int skillMax;
 
-    [Header("Legendary")]
+    [Header("Balls")]
+    public int ballChance;
     public int ballMin;
     public int ballMax;
     public int commonChance;
     public int uncommonChance;
     public int rareChance;
     public int legendaryChance;
-    public int specialChance;
+
+    [Header("Keys")]
+    public int keyChance;
+    public int keyMin;
+    public int keyMax;
+    public int silverKeyChance;
+    public int goldKeyChance;
+    public int redKeyChance;
 
     void Start()
     {
@@ -46,7 +54,6 @@ public class ChestUnlock : MonoBehaviour
         chestClosed.SetActive(false);
         chestOpened.SetActive(true);
 
-        //chestsStatus.GiveChestPrize();
         chestWindow.CreatePrize();
     }
     #endregion
