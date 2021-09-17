@@ -58,6 +58,8 @@ public class Ball : MonoBehaviour
 
         ballPrefab = Instantiate(allBalls[player.currentBallIndex], transform.position, Quaternion.identity);
         powerUp = ballPrefab.GetComponent<BallItem>().GetPowerUp();
+        speed = ballPrefab.GetComponent<BallItem>().GetBallSpeed();
+
         ballPrefab.transform.SetParent(transform);
         ballPrefab.transform.Find("RaisingTail").gameObject.SetActive(false);
 
