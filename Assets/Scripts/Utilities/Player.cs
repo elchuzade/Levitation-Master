@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         coins = 0;
         playerName = "";
         diamonds = 0;
-        nextLevelIndex = 99;
+        nextLevelIndex = 1;
         playerName = "";
         playerCreated = false;
         privacyPolicy = false;
