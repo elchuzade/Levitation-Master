@@ -156,7 +156,7 @@ public class Ball : MonoBehaviour
     // @access from Jumper
     public void PushBallUp()
     {
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         pushingUp = true;
         StartCoroutine(StopBallPushingUp());
     }
@@ -164,7 +164,7 @@ public class Ball : MonoBehaviour
     // @access from push arrow object when ball rolls over it
     public void PushBall(Vector3 pushDirection)
     {
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.AddForce(pushDirection);
     }
 
