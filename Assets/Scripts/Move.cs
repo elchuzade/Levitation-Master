@@ -14,7 +14,7 @@ public class Move : MonoBehaviour
     void FixedUpdate()
     {
         // Do not let the force accumulate. Restart it every frame and set again
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         Vector3 directionVector = (transform.position - initPosition.position).normalized;
         rb.AddForce(directionVector * speed * directionFactor * Time.fixedDeltaTime * 1000);
 
